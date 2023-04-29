@@ -4,7 +4,7 @@
     <div class="card p-3">
         <div class="card-body table-responsive">
         <div class="card-body ">
-            <h5 class="card-title">Company List</h5>
+            <h5 class="card-title">Vendor List</h5>
 
             <!-- Table with stripped rows -->
             <table id="example" class="datatable" style="width:100%">
@@ -14,6 +14,7 @@
                         <th scope="col"> Name</th>
                         <th scope="col">user Name</th>
                         <th scope="col">DOB</th>
+                        <th scope="col">Language</th>
                         <th scope="col">passport</th>
                         <th scope="col">Certificate</th>
                       
@@ -33,6 +34,16 @@
                         <td>{{ $vendor->name }}</td>
                         <td>{{ $vendor->username }}</td>
                         <td>{{ $vendor->DOB }}</td>
+                        <td>
+                            @php
+                                $language = json_decode($vendor->language, true);
+                                if (is_array($language)) {
+                                    echo implode(', ', $language);
+                                } else {
+                                    echo $vendor->language;
+                                }
+                            @endphp
+                        </td>
                       
                         <td>
                             {{-- {{dd($product->productimage->count())}} --}}

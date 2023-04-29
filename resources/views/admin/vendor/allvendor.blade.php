@@ -4,7 +4,7 @@
     <div class="card p-3">
         <div class="card-body table-responsive">
         <div class="card-body ">
-            <h5 class="card-title">Company List</h5>
+            <h5 class="card-title">Vendor List</h5>
 
             <!-- Table with stripped rows -->
             <table id="example" class="datatable" style="width:100%">

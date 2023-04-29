@@ -18,11 +18,11 @@ class AuthController extends Controller
         return Api::setResponse('Vendor', $vendor);
 
 
-        
-        // $response = new stdClass;
-        // $response->user = $vendor->withToken();
-        // // $response->otp = $otp;
-        // return response()->json($response);
+
+        $response = new stdClass;
+        $response->vendor = $vendor->withToken();
+        // $response->otp = $otp;
+        return response()->json($response);
     }
     public function vendorlogin(Request $request)
     {

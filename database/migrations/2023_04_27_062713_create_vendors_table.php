@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('passport');
             $table->string('number')->nullable();
             $table->string('profilepic')->nullable();
-            $table->string('certificate');
+            $table->string('certificate')->nullable();;
             $table->string('status')->default(0);
             $table->string('online')->default(0);
             $table->json('language');

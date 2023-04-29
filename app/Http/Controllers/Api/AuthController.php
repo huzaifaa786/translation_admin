@@ -33,7 +33,12 @@ class AuthController extends Controller
         if (Auth::guard('vendor')->attempt($credentials)) {
             $vendor = Vendor::find(Auth::guard('vendor')->vendor()->id);
             if ($vendor->status == 2) {
-                return Api::setError('admin not prove your request');
+                return Api::setError('admin reject your request');
+            }else{
+                if ($vendor->status == 1) {
+                    return Api::setError('admin yet do not prove your request');
+                }
+
             }
            
             return Api::setResponse('vendor', $vendor->withToken());

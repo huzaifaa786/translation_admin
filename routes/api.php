@@ -19,4 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
     Route::any('vendor/register', [AuthController::class, 'vendorregister']);
+    
+    Route::any('vendor/login', [AuthController::class, 'vendorlogin']);
 });

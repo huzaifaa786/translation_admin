@@ -17,7 +17,7 @@ class ApiValidate{
             throw new HttpResponseException(Api::failed($validator));
         else
             return[
-                'email' => $request->email,
+                'username' => $request->username,
                 'password' => $request->password
             ];
     }

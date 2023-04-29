@@ -33,7 +33,16 @@
                             <td>{{ $vendor->name }}</td>
                             <td>{{ $vendor->username }}</td>
                             <td>{{ $vendor->DOB }}</td>
-                            <td>{!! $vendor->language !!}</td>
+                            <td>
+                                @php
+                                    $language = json_decode($vendor->language, true);
+                                    if (is_array($language)) {
+                                        echo implode(', ', $language);
+                                    } else {
+                                        echo $vendor->language;
+                                    }
+                                @endphp
+                            </td>
                           
                             <td>
                                 {{-- {{dd($product->productimage->count())}} --}}

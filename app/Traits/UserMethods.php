@@ -35,7 +35,7 @@ trait UserMethods
          
           
             'username' => 'required|unique:vendors',
-            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password' => 'min:6|required',
          
         ];
     }

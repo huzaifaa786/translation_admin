@@ -34,7 +34,7 @@ trait UserMethods
         return [
          
           
-            'username' => 'username|required|unique:vendors',
+            'username' => 'required|unique:vendors',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
          
         ];

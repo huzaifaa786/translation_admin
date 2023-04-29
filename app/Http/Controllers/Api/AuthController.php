@@ -32,7 +32,7 @@ class AuthController extends Controller
         // $credentials = $request->only('email', 'password');
 
         if (Auth::guard('vendor')->attempt($credentials)) {
-            $vendor = Vendor::find(Auth::guard('vendor')->vendor()->id);
+            $vendor = Vendor::find(Auth::guard('vendor')->user()->id);
             if ($vendor->status == 2) {
                 return Api::setError('admin reject your request');
             }else{

@@ -27,7 +27,6 @@ class AuthController extends Controller
     }
     public function vendorlogin(Request $request)
     {
-
         $credentials = ApiValidate::login($request, Vendor::class);
         // $credentials = $request->only('email', 'password');
 
@@ -35,13 +34,10 @@ class AuthController extends Controller
             $vendor = Vendor::find(Auth::guard('vendor')->user()->id);
             if ($vendor->status == 2) {
                 return Api::setError('admin reject your request');
-            }else{
-                if ($vendor->status == 1) {
-                    return Api::setError('admin yet do not prove your request');
-                }
-
+            } else if ($vendor->status == 0) {
+                return Api::setError('Your account is inactive');
             }
-           
+
             return Api::setResponse('vendor', $vendor->withToken());
         } else {
             return Api::setError('Invalid credentials');

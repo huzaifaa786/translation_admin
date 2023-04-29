@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,7 @@ Route::post('admin/postlogin', [AdminController::class, 'login'])->name('admin-l
 Route::view('admin/layout','admin.layout')->name('admin/layout');
 Route::view('admin/dashboard','admin.dashboard')->name('login.dashboard');
 Route::get('admin/logout', [AdminController::class, 'logout'])->name('admin/logout');
+Route::get('admin/show/vendor', [VendorController::class, 'show'])->name('show-vendor');
+Route::get('admin/reject/vendor/{id}', [VendorController::class, 'reject'])->name('reject/vendor');
+Route::get('admin/approve/{id}', [VendorController::class, 'aprove'])->name('approve/vendor');
+Route::get('admin/all/vendor', [VendorController::class, 'all'])->name('all-vendor');

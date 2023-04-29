@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Klicks</title>
+    <title>Translation</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -40,7 +40,7 @@
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ route('login.dashboard') }}" class="logo d-flex align-items-center">
                 <img src="{{asset('assets/img/logo1.png')}}" alt="" height="90"  width="40">
-                <span class="d-none d-lg-block">Klicks</span>
+                <span class="d-none d-lg-block">Translation</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -258,18 +258,18 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Mall</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-journal-text"></i><span>Vendor</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        {{-- <a href="{{ route('show-city') }}">
-                            <i class="bi bi-circle"></i><span>Add Mall</span>
-                        </a> --}}
+                        <a href="{{ route('show-vendor') }}">
+                            <i class="bi bi-circle"></i><span>New Vendor</span>
+                        </a>
                     </li>
                     <li>
-                        {{-- <a href="{{ route('show-mall') }}">
-                            <i class="bi bi-circle"></i><span>Show Mall</span>
-                        </a> --}}
+                        <a href="{{ route('all-vendor') }}">
+                            <i class="bi bi-circle"></i><span>All Vendor</span>
+                        </a>
                     </li>
 
                 </ul>

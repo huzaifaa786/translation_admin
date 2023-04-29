@@ -32,11 +32,11 @@ trait UserMethods
     public static function VendorRegisterRules()
     {
         return [
-            'address'=>'required',
-            'name' => 'max:255|required',
-            'email' => 'email|required|unique:vendors',
+         
+          
+            'name' => 'name|required|unique:vendors',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'min:6'
+         
         ];
     }
 

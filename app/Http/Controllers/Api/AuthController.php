@@ -16,6 +16,9 @@ class AuthController extends Controller
         $credentials = ApiValidate::register($request, Vendor::class);
         $vendor = Vendor::find(Vendor::create($credentials)->id)->withToken();
         return Api::setResponse('Vendor', $vendor);
+
+
+        
         // $response = new stdClass;
         // $response->user = $vendor->withToken();
         // // $response->otp = $otp;

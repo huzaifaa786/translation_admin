@@ -17,14 +17,14 @@ class ApiValidate{
             throw new HttpResponseException(Api::failed($validator));
         else
             return[
-                'username' => $request->email,
+                'email' => $request->email,
                 'password' => $request->password
             ];
     }
 
     public static function register($request, $model){
 
-        $validator = Validator::make($request->all(),$model::UserRegisterRules());
+        $validator = Validator::make($request->all(),$model::VendorRegisterRules());
         if($validator->fails()){
             throw new HttpResponseException(Api::failed($validator));
         }

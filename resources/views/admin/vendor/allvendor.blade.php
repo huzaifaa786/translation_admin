@@ -33,7 +33,7 @@
                             <td>{{ $vendor->name }}</td>
                             <td>{{ $vendor->username }}</td>
                             <td>{{ $vendor->DOB }}</td>
-                            <td>{{ $vendor->language }}</td>
+                            <td>{!! $vendor->language !!}</td>
                           
                             <td>
                                 {{-- {{dd($product->productimage->count())}} --}}

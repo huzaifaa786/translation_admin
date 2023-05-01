@@ -9,6 +9,7 @@ class VendorController extends Controller
 {
     public function offline(Request $request)
     {
+        dd($request);
 
         $vendor = Vendor::find($request->id);
         $vendor->online = $request->online== 'online' ? true : false;

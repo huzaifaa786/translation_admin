@@ -9,11 +9,11 @@ class VendorController extends Controller
 {
     public function offline(Request $request)
     {
-        
-
+    
         $vendor = Vendor::find($request->id);
         $vendor->online = $request->online== 'online' ? true : false;
         $vendor->save();
+        dd($vendor);
         return Api::setResponse('Vendor', $vendor);
     }
 }

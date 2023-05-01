@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class VendorController extends Controller
@@ -13,7 +14,7 @@ class VendorController extends Controller
         $vendor = Vendor::find($request->id);
         $vendor->online = $request->online== 'online' ? true : false;
         $vendor->save();
-        dd($vendor);
+    
         return Api::setResponse('Vendor', $vendor);
     }
 }

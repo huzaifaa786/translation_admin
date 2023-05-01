@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\VendorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,5 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('vendor/register', [AuthController::class, 'vendorregister']);
     
     Route::any('vendor/login', [AuthController::class, 'vendorlogin']);
+    Route::any('vendor/online', [VendorController::class, 'offline']);
 });

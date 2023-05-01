@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('profilepic')->nullable();
             $table->string('certificate')->nullable();;
             $table->string('status')->default(0);
-            $table->string('online')->default(0);
+            $table->boolean('online')->default(1);
             $table->json('language');
             $table->rememberToken();
             $table->timestamps();

@@ -35,7 +35,7 @@ class AuthController extends Controller
             if ($vendor->status == 2) {
                 return Api::setError('admin reject your request');
             } else if ($vendor->status == 0) {
-                return Api::setError('Your account is inactive');
+                return Api::setError('Your account is inactive yet');
             }
 
             return Api::setResponse('vendor', $vendor->withToken());

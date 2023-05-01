@@ -11,7 +11,7 @@ class VendorController extends Controller
     {
 
         $vendor = Vendor::find($request->id);
-        $vendor->online = $request->u == 'online' ? true : false;
+        $vendor->online = $request->online== 'online' ? true : false;
         $vendor->save();
         return redirect()->back();
     }

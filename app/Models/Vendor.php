@@ -38,10 +38,7 @@ class Vendor extends Authenticatable
     {
         $this->attributes['passport'] = ImageHelper::saveImageFromApi($value, 'images');
     }
-    public function setLanguageAttribute($value)
-    {
-        $this->attributes['language'] = json_encode($value);
-    }
+
    
     public function setProfilepicAttribute($value)
     {

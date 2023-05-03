@@ -11,7 +11,7 @@ class VendorController extends Controller
 {
     public function offline(Request $request)
     {
-        $vendor = Vendor::find($request->id);
+        $vendor = Vendor::where('api_token', $request->api_token)->first();
         $vendor->online = $request->online == 'true' ? true : false;
         $vendor->save();
     

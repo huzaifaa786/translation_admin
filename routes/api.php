@@ -26,5 +26,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::group(['middleware' => 'auth:vendor_api'], function () {
 
     Route::any('vendor/online', [VendorController::class, 'offline']);
+    Route::any('vendor/get', [VendorController::class, 'vendorget']);
     });
 });

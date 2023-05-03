@@ -43,4 +43,37 @@ class AuthController extends Controller
             return Api::setError('Invalid credentials');
         }
     }
+//////////////////user//////////////////////////////////
+    public function userregister(Request $request)
+    {
+
+        $credentials = ApiValidate::userregister($request,  User::class);
+        $User = User::find(User::create($credentials)->id)->withToken();
+        return Api::setResponse('Vendor', $User);
+
+
+
+        $response = new stdClass;
+        $response->vendor = $User->withToken();
+        // $response->otp = $otp;
+        return response()->json($response);
+    }
+    public function userlogin(Request $request)
+    {
+        $credentials = ApiValidate::login($request, User::class);
+        // $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('User')->attempt($credentials)) {
+            $User = User::find(Auth::guard('User')->user()->id);
+         
+
+            return Api::setResponse('User', $User->withToken());
+        } else {
+            return Api::setError('Invalid credentials');
+        }
+    }
+
+
+
+
 }

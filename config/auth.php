@@ -48,6 +48,11 @@ return [
             'driver' => 'session',
             'provider' => 'vendors',
         ],
+        
+        'vendor_api' => [
+            'driver' => 'token',
+            'provider' => 'vendors',
+        ],
     ],
 
     /*
@@ -78,6 +83,10 @@ return [
             'model' => App\Models\Admin::class,
         ],
 
+        'vendors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Vendor::class,
+        ],
         'vendors' => [
             'driver' => 'eloquent',
             'model' => App\Models\Vendor::class,

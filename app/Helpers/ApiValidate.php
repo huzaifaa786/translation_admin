@@ -35,5 +35,18 @@ class ApiValidate{
         }
 
     }
+    public static function userregister($request, $model){
+
+        $validator = Validator::make($request->all(),$model::UserRegisterRules());
+        if($validator->fails()){
+            throw new HttpResponseException(Api::failed($validator));
+        }
+        else{
+            return [
+                'api_token' => Str::random(60)
+            ] + $request->all();
+        }
+
+    }
 
 }

@@ -17,4 +17,11 @@ class VendorController extends Controller
     
         return Api::setResponse('Vendor', $vendor);
     }
+
+    public function all()
+    {
+
+        $data = Vendor::where('status', 1)->get();
+        return Api::setResponse('Vendor', $data);
+    }
 }

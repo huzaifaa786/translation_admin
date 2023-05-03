@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
+    <link href="{{asset('assets/img/favicon.ico')}}" rel="icon">
     <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -39,7 +39,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ route('login.dashboard') }}" class="logo d-flex align-items-center">
-                <img src="{{asset('assets/img/logo1.png')}}" alt="" height="90"  width="40">
+                <img src="{{asset('assets/img/logo2.png')}}" alt="" height="70"  width="30">
                 <span class="d-none d-lg-block">Translation</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -205,13 +205,13 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="{{asset('assets/img/logo1.png')}}" alt="Profile" class="rounded-circle">
+                        <img src="{{asset('assets/img/logo2.png')}}" alt="Profile" class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2">admin</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Klicks wash</h6>
+                            <h6>Translation</h6>
 
                         </li>
 

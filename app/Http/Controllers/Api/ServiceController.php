@@ -12,7 +12,7 @@ class ServiceController extends Controller
     public function store(Request $request)
 
     {
-        dd($request);
+      
        $data= Service::create($request->all());
        return Api::setResponse('services', $data);
     }

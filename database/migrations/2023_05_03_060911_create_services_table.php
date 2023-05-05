@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('vendor_id');
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
-            $table->string('inpersion');
-            $table->string('audio/video');
+
             $table->json('schedual');
-        
+
             $table->timestamps();
         });
     }

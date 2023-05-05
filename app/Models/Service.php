@@ -12,4 +12,8 @@ class Service extends Model
         ' vendor_id', 'schedual'
 
     ];
+    public function vendor()
+    {
+      return $this->hasMany(Vendor::class);
+}
 }

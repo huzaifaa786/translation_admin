@@ -62,4 +62,7 @@ class Vendor extends Authenticatable
         else
             return $value;
     }
+    public function service(){
+        return $this->belongsTo(Service::class);
+    }
 }

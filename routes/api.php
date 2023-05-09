@@ -22,11 +22,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
     Route::any('vendor/register', [AuthController::class, 'vendorregister']);
     Route::any('vendor/login', [AuthController::class, 'vendorlogin']);
-    Route::any('service/store', [ServiceController::class, 'store']);
+
 
     Route::group(['middleware' => 'auth:vendor_api'], function () {
-
-    Route::any('vendor/online', [VendorController::class, 'offline']);
-    Route::any('vendor/get', [VendorController::class, 'vendorget']);
+        Route::any('service/store', [ServiceController::class, 'store']);
+        Route::any('vendor/online', [VendorController::class, 'offline']);
+        Route::any('vendor/get', [VendorController::class, 'vendorget']);
     });
 });

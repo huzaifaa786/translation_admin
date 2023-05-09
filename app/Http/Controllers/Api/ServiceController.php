@@ -17,4 +17,26 @@ class ServiceController extends Controller
        $data= Service::create($request->all());
        return Api::setResponse('services', $data);
     }
+       public function change(Request $request)
+    {
+
+        $data = Vendor::where('username', $request->username)->first();
+
+        $data = $data->withpassword();
+        $previousPassword = $data->password;
+
+        // dd($new,$previousPassword);
+
+        if (Hash::check($request->password, $previousPassword)) {
+            $data->update([
+                'password' => $request->newpassword
+            ]);
+            // Passwords match
+            return Api::setResponse('update', $data);
+        } else {
+            // Passwords do not match
+            return Api::setResponse('error', 'Current password incorrect');
+        }
+
+    }
 }

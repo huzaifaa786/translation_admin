@@ -31,4 +31,15 @@ class VendorController extends Controller
 
         return Api::setResponse('Vendor', $vendor);
     }
+    public function edit(Request $request,)
+    {
+
+
+
+        $data = Vendor::find($request->id);
+
+        $data->update($request->all());
+        // toastr()->success('update successfully ');
+        return Api::setResponse('vendor', $data);
+    }
 }

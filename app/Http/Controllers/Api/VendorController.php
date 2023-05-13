@@ -36,7 +36,7 @@ class VendorController extends Controller
 
 
 
-        $data = Vendor::find($request->id);
+        $data = Vendor::find($request->vendor_id);
 
         $data->profilepic = $request->profilepic;
         $data->save();

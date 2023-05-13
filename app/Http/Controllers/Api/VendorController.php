@@ -38,7 +38,8 @@ class VendorController extends Controller
 
         $data = Vendor::find($request->id);
 
-        $data->update($request->all());
+        $data->profilepic = $request->profilepic;
+        $data->save();
         // toastr()->success('update successfully ');
         return Api::setResponse('vendor', $data);
     }

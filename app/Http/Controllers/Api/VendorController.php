@@ -33,7 +33,7 @@ class VendorController extends Controller
     }
     public function edit(Request $request,)
     {
-dd($request);
+
 
 
         $data = Vendor::find($request->id);

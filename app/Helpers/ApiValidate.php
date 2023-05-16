@@ -21,6 +21,18 @@ class ApiValidate{
                 'password' => $request->password
             ];
     }
+    public static function userlogin($request, $model){
+
+        $validator = Validator::make($request->all(),$model::loginRules());
+
+        if($validator->fails())
+            throw new HttpResponseException(Api::failed($validator));
+        else
+            return[
+                'email' => $request->email,
+                'password' => $request->password
+            ];
+    }
 
     public static function register($request, $model){
 

@@ -61,7 +61,7 @@ class AuthController extends Controller
     }
     public function userlogin(Request $request)
     {
-        $credentials = ApiValidate::login($request, User::class);
+        $credentials = ApiValidate::userlogin($request, User::class);
         // $credentials = $request->only('email', 'password');
 
         if (Auth::guard('User')->attempt($credentials)) {

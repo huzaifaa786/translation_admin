@@ -47,6 +47,13 @@ trait UserMethods
             'password' => 'required'
         ];
     }
+    public static function userloginRules()
+    {
+        return [
+            'email' => 'required',
+            'password' => 'required'
+        ];
+    }
 
     // public function setImageAttribute($value){
     //     if(is_file($value)){

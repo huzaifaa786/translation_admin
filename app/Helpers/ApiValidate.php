@@ -23,7 +23,7 @@ class ApiValidate{
     }
     public static function userlogin($request, $model){
 
-        $validator = Validator::make($request->all(),$model::loginRules());
+        $validator = Validator::make($request->all(),$model::userloginRules());
 
         if($validator->fails())
             throw new HttpResponseException(Api::failed($validator));

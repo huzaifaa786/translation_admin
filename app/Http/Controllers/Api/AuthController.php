@@ -43,7 +43,7 @@ class AuthController extends Controller
             return Api::setError('Invalid credentials');
         }
     }
-//////////////////user//////////////////////////////////
+//////////////////user///////////////////////////////////\\\\\\/////\\\\\////\\\\///\\\//\\/\
     public function userregister(Request $request)
     {
 

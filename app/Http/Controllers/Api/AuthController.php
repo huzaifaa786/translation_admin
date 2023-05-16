@@ -64,8 +64,8 @@ class AuthController extends Controller
         $credentials = ApiValidate::userlogin($request, User::class);
         // $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('User')->attempt($credentials)) {
-            $User = User::find(Auth::guard('User')->user()->id);
+        if (Auth::guard('web')->attempt($credentials)) {
+            $User = User::find(Auth::guard('web')->user()->id);
          
 
             return Api::setResponse('User', $User->withToken());

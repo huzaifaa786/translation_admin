@@ -29,7 +29,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
 
     Route::group(['middleware' => 'auth:vendor_api'], function () {
-        Route::any('vendor/get', [VendorController::class, 'vendorget']);
+      
         Route::any('service/store', [ServiceController::class, 'store']);
         Route::any('vendor/online', [VendorController::class, 'offline']);
         Route::any('vendor/update', [VendorController::class, 'edit']);

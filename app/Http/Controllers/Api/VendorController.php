@@ -43,4 +43,16 @@ class VendorController extends Controller
         // toastr()->success('update successfully ');
         return Api::setResponse('vendor', $data);
     }
+    public function getvendor(Request $request,)
+    {
+
+
+
+
+        $vendors = Vendor::whereJsonContains('language', $request->form[])
+            ->whereJsonContains('language',  $request->to[])
+            ->get();
+        // toastr()->success('update successfully ');
+        return Api::setResponse('vendor', $vendors);
+    }
 }

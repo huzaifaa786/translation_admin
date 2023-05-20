@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('user/register', [AuthController::class, 'userregister']);
     Route::any('vendor/get', [VendorController::class, 'getvendor']);
     Route::any('service/get', [ServiceController::class, 'serviceget']);
+    Route::any('user/get', [UserController::class, 'userget']);
+    Route::any('balance/get', [UserController::class, 'balanceget']);
+
+
 
 
     Route::group(['middleware' => 'auth:vendor_api'], function () {

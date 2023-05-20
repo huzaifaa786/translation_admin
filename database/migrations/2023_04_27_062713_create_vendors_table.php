@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('status')->default(0);
             $table->boolean('online')->default(1);
             $table->json('language');
-            $table->bigInteger('rating')->default(0);
+            $table->bigInteger('rating')->default(0.0);
             $table->rememberToken();
             $table->timestamps();
         });

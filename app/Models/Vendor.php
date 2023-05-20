@@ -62,6 +62,13 @@ class Vendor extends Authenticatable
         else
             return $value;
     }
+    public function getProfilepicAttribute($value)
+    {
+        if ($value)
+            return asset($value);
+        else
+            return $value;
+    }
     public function service(){
         return $this->belongsTo(Service::class);
     }

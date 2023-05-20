@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vendoe_id')->nullable();
-            $table->foreign('vendoe_id')->references('id')->on('vendors')->onDelete('cascade');
+            $table->foreignId('vendor_id')->nullable();
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->bigInteger('balance')->default(0);
             $table->timestamps();
         });

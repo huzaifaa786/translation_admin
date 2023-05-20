@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Api;
 use App\Helpers\ApiValidate;
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;

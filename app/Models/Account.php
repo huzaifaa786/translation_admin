@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
-    protected $fillable =['vendor_id','balance'];
+    protected $fillable =['user_id','balance'];
 
     public function vendor()
     {

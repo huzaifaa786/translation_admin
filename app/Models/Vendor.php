@@ -39,7 +39,7 @@ class Vendor extends Authenticatable
         $this->attributes['passport'] = ImageHelper::saveImageFromApi($value, 'images');
     }
 
-   
+
     public function setProfilepicAttribute($value)
     {
         $this->attributes['profilepic'] = ImageHelper::saveImageFromApi($value, 'images');
@@ -69,7 +69,13 @@ class Vendor extends Authenticatable
         else
             return $value;
     }
-    public function service(){
+
+    public function account()
+    {
+        return $this->hasOne(Account::class);
+    }
+    public function service()
+    {
         return $this->belongsTo(Service::class);
     }
 }

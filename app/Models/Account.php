@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
+    protected $fillable =['vendor_id','balance'];
+
+    public function vendor()
+    {
+      return $this->belongsTo(Vendor::class);
+    }
+
 }

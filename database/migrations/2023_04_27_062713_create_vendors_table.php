@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('certificate')->nullable();;
             $table->string('status')->default(0);
             $table->boolean('online')->default(1);
-            $table->string('language');
+            $table->json('language');
             $table->rememberToken();
             $table->timestamps();
         });

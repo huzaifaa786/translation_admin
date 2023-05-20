@@ -54,4 +54,11 @@ class VendorController extends Controller
         // toastr()->success('update successfully ');
         return Api::setResponse('vendor', $vendors);
     }
+
+
+    public function getservice(Request $request)
+    {
+        $vendor = Service::where('vendor_id', $request->id)->first();
+        return Api::setResponse('service', $vendor);
+    }
 }

@@ -10,11 +10,10 @@ class Service extends Model
     use HasFactory;
     protected $fillable = [
         'vendor_id', 'schedual','urgent','unurgent','inperson','audiovideo'
-
     ];
-    
+
     public function vendor()
     {
-      return $this->belongsTo(Vendor::class);
+      return $this->belongsTo(Vendor::class,'id','vendor_id');
 }
 }

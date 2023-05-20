@@ -39,4 +39,9 @@ class ServiceController extends Controller
         }
 
     }
+    public function serviceget(Request $request)
+    {
+        $vendor = Service::where('vendor_id', $request->id)->first();
+        return Api::setResponse('service', $vendor);
+    }
 }

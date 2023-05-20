@@ -12,6 +12,7 @@ class Service extends Model
         'vendor_id', 'schedual','urgent','unurgent','inperson','audiovideo'
 
     ];
+    
     public function vendor()
     {
       return $this->belongsTo(Vendor::class);

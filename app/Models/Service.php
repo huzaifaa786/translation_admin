@@ -14,6 +14,6 @@ class Service extends Model
     ];
     public function vendor()
     {
-      return $this->hasMany(Vendor::class);
+      return $this->belongsTo(Vendor::class);
 }
 }

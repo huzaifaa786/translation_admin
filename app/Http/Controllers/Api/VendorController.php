@@ -20,41 +20,31 @@ class VendorController extends Controller
 
     public function all()
     {
-
         $data = Vendor::where('status', 1)->get();
         return Api::setResponse('Vendor', $data);
     }
-    public function vendorget(Request $request)
+
+    public function show(Request $request)
     {
         $vendor = Vendor::where('api_token', $request->api_token)->first();
-
-
         return Api::setResponse('Vendor', $vendor);
     }
+
     public function edit(Request $request,)
     {
 
-
-
         $data = Vendor::find($request->vendor_id);
-
         $data->profilepic = $request->profilepic;
         $data->save();
         // toastr()->success('update successfully ');
         return Api::setResponse('vendor', $data);
     }
-    public function getvendor(Request $request,)
+    public function searchedList(Request $request,)
     {
-
-
-
         $vendors = Vendor::whereJsonContains('language', $request->form)
             ->whereJsonContains('language',  $request->to)->with('service')
             ->get();
         // toastr()->success('update successfully ');
         return Api::setResponse('vendor', $vendors);
     }
-
-
-
 }

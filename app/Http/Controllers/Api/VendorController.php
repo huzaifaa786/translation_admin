@@ -27,6 +27,7 @@ class VendorController extends Controller
     public function show(Request $request)
     {
         $vendor = Vendor::where('api_token', $request->api_token)->first();
+    
         return Api::setResponse('Vendor', $vendor);
     }
 

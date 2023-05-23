@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
@@ -30,7 +31,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('service/get', [ServiceController::class, 'serviceget']);
     Route::any('user/get', [UserController::class, 'userget']);
     Route::any('balance/get', [UserController::class, 'balanceget']);
-
+    Route::any('balance/add', [PaymentController::class, 'addbalance']);
+    Route::any('payment/intent', [PaymentController::class, 'createPaymentIntent']);
     Route::group(['middleware' => 'auth:vendor_api'], function () {
       
         Route::any('service/store', [ServiceController::class, 'store']);

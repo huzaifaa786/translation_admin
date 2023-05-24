@@ -51,6 +51,7 @@ class VendorController extends Controller
     }
     public function addbalance(Request $request)
     {
+        
        $data= Account::where('user_id',$request->id)->first();
        $data->update([
         'balance' => $request->balance + $data->balance

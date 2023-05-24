@@ -10,9 +10,9 @@ class Account extends Model
     use HasFactory;
     protected $fillable =['user_id','balance'];
 
-    public function vendor()
+    public function user()
     {
-      return $this->belongsTo(Vendor::class);
+      return $this->belongsTo(User::class);
     }
 
 }

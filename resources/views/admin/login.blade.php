@@ -53,7 +53,7 @@
                             <div class="d-flex justify-content-center py-4">
                                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                                     <img src="{{ asset('assets/img/logo2.png') }}" alt="">
-                                    <span class="d-none d-lg-block">Klicks Admin</span>
+                                    <span class="d-none d-lg-block">Translations Admin</span>
                                 </a>
                             </div><!-- End Logo -->
 

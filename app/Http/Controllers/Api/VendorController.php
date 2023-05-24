@@ -48,4 +48,13 @@ class VendorController extends Controller
         // toastr()->success('update successfully ');
         return Api::setResponse('vendor', $vendors);
     }
+    public function addbalance(Request $request)
+    {
+       $data= Account::where('user_id',$request->id)->first();
+       $data->update([
+        'balance' => $request->balance + $data->balance
+    ]);
+
+        return Api::setResponse('account', $data);
+    }
 }

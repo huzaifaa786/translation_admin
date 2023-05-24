@@ -31,13 +31,16 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('service/get', [ServiceController::class, 'serviceget']);
     Route::any('user/get', [UserController::class, 'userget']);
     Route::any('balance/get', [UserController::class, 'balanceget']);
-    Route::any('balance/add', [PaymentController::class, 'addbalance']);
+  
     Route::any('payment/intent', [PaymentController::class, 'createPaymentIntent']);
+
+    
     Route::group(['middleware' => 'auth:vendor_api'], function () {
       
         Route::any('service/store', [ServiceController::class, 'store']);
         Route::any('vendor/online', [VendorController::class, 'offline']);
         Route::any('vendor/update', [VendorController::class, 'edit']);
+        Route::any('balance/add', [VendorController::class, 'addbalance']);
     });
     Route::group(['middleware' => 'auth:api'], function () {
     });

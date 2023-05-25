@@ -28,8 +28,7 @@ class UserController extends Controller
       $user = user::where('api_token', $request->api_token)->first();
 
       $user->update([
-         'profilepic' => $request->profilepic,
-         'username' => $request->username
+         $request->all()
       ]);
       return Api::setResponse('balance', $user);
    }

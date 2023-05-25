@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\ImageHelper;
 use App\Traits\Notifier;
 use App\Traits\UserMethods;
 

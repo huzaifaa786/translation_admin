@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\Bug;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,12 @@ class UserController extends Controller
          'profilepic' => $request->profilepic,
          'username' => $request->username
       ]);
+      return Api::setResponse('balance', $user);
+   }
+   public function addbug(Request $request)
+   {
+      $user = Bug::create($request->all());
+
       return Api::setResponse('balance', $user);
    }
 }

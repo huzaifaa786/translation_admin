@@ -8,12 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Bug extends Model
 {
     use HasFactory;
-    protected $fillable =[
+    protected $fillable = [
 
         'user_id',
         'bug',
         'picture'
-       
+
 
     ];
+    public function setpictureAttribute($value)
+    {
+        $this->attributes['picture'] = ImageHelper::saveImageFromApi($value, 'images');
+    }
+    public function getpictureAttribute($value)
+    {
+        if ($value)
+            return asset($value);
+        else
+            return $value;
+    }
 }

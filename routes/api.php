@@ -33,7 +33,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('balance/get', [UserController::class, 'balanceget']);
 
     Route::any('payment/intent', [PaymentController::class, 'createPaymentIntent']);
-
+    Route::any('add/bug', [UserController::class, 'addbug']);
 
     Route::group(['middleware' => 'auth:vendor_api'], function () {
 
@@ -46,5 +46,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('user/get', [UserController::class, 'userget']);
         Route::any('user/changepassword', [AuthController::class, 'changeuserpassword']);
         Route::any('user/update', [UserController::class, 'edituser']);
+
     });
 });

@@ -30,7 +30,7 @@ class UserController extends Controller
       $user->update([
          $request->all()
       ]);
-      return Api::setResponse('balance', $user);
+      return Api::setResponse('user', $user);
    }
    public function addbug(Request $request)
    {

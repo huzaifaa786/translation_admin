@@ -27,9 +27,7 @@ class UserController extends Controller
 
       $user = user::where('api_token', $request->api_token)->first();
 
-      $user->update([
-         $request->all()
-      ]);
+      $user->update($request->all());
       return Api::setResponse('user', $user);
    }
    public function addbug(Request $request)

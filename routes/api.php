@@ -44,5 +44,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::any('balance/add', [VendorController::class, 'addbalance']);
         Route::any('user/get', [UserController::class, 'userget']);
+        Route::any('user/changepassword', [AuthController::class, 'changeuserpassword']);
     });
 });

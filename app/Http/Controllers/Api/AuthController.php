@@ -81,7 +81,31 @@ class AuthController extends Controller
         }
     }
 
+    public function changeuserpassword(Request $request)
+    {
 
+        $data = User::where('api_token', $request->api_token)->first();
+
+        $data = $data->withpassword();
+        $previousPassword = $data->password;
+
+        // dd($new,$previousPassword);
+
+        if (Hash::check($request->password, $previousPassword)) {
+            $data->update([
+                'password' => $request->newpassword
+            ]);
+            // Passwords match
+            return Api::setResponse('update', $data);
+        } else {
+            // Passwords do not match
+            return Api::setResponse('error', 'Current password incorrect');
+        }
+
+
+        // toastr()->success('update successfully ');
+
+    }
 
 
 }

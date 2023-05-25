@@ -22,6 +22,7 @@ class User extends Authenticatable
         'phone',
         'api_token',
         'password',
+        'profilepic'
 
 
 

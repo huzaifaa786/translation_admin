@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('api_token');
             $table->string('phone');
+            $table->string('profilepic')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

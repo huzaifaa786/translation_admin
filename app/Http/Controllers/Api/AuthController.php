@@ -103,9 +103,6 @@ class AuthController extends Controller
             return Api::setResponse('error', 'Current password incorrect');
         }
 
-
-        // toastr()->success('update successfully ');
-
     }
 
 

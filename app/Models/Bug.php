@@ -12,6 +12,7 @@ class Bug extends Model
 
         'user_id',
         'bug',
+        'picture'
        
 
     ];

@@ -100,7 +100,7 @@ class AuthController extends Controller
             return Api::setResponse('update', $data);
         } else {
             // Passwords do not match
-            return Api::setError('error', 'Current password incorrect');
+            return Api::setError('Current password incorrect');
         }
 
     }

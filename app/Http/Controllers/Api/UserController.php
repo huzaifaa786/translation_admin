@@ -24,7 +24,7 @@ class UserController extends Controller
    public function edituser(Request $request)
    {
 
-      $user = user::where('user_id', $request->id)->first();
+      $user = user::where('api_token', $request->api_token)->first();
 
       $user->update([
          'profilepic' => $request->profilepic,

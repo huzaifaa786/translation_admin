@@ -47,4 +47,15 @@ class User extends Authenticatable
     {
         return $this->hasOne(Account::class);
     }
+    public function setprofilepicAttribute($value)
+    {
+        $this->attributes['profilepic'] = ImageHelper::saveImageFromApi($value, 'images');
+    }
+    public function getprofilepicAttribute($value)
+    {
+        if ($value)
+            return asset($value);
+        else
+            return $value;
+    }
 }

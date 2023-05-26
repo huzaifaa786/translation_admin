@@ -16,17 +16,17 @@ class OrderController extends Controller
         $order = Order::create([
             'user_id' => Auth::user()->id,
         ] + $request->all());
-    
+
         if ($request->documents && is_array($request->documents)) {
             foreach ($request->documents as $key => $document) {
+                dd($document);
                 Document::create([
                     'order_id' => $order->id,
                     'document' => $document,
                 ]);
             }
         }
-    
+
         return Api::setResponse('order', $order);
     }
-    
 }

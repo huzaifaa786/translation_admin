@@ -17,7 +17,7 @@ class OrderController extends Controller
             'user_id' => Auth::user()->id,
         ] + $request->all());
 
-        if ($request->documents && is_array($request->documents)) {
+        if ($request->documents ) {
           
                 Document::create([
                     'order_id' => $order->id,

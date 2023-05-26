@@ -20,7 +20,7 @@ class Order extends Model
     ];
     public function user()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
     public function document()
     {
@@ -28,6 +28,6 @@ class Order extends Model
     }
     public function vendor()
     {
-        return $this->hasMany(Vendor::class);
+        return $this->belongsTo(Vendor::class);
     }
 }

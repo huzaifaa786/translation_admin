@@ -29,7 +29,7 @@ class OrderController extends Controller
     }
     public function allorder(Request $request)
     {
-        $data = Order::where('user_id', $request->id)->get();
+        $data = Order::where('user_id', $request->id)->with('document')->get();
         return Api::setResponse('order', $data);
     }
 }

@@ -18,13 +18,12 @@ class OrderController extends Controller
         ] + $request->all());
 
         if ($request->documents && is_array($request->documents)) {
-            foreach ($request->documents as $key => $document) {
-                dd($document);
+          
                 Document::create([
                     'order_id' => $order->id,
-                    'document' => $document,
+                    'document' => $request->documents,
                 ]);
-            }
+            
         }
 
         return Api::setResponse('order', $order);

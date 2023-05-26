@@ -26,4 +26,8 @@ class Order extends Model
     {
         return $this->hasOne(Document::class);
     }
+    public function vendor()
+    {
+        return $this->hasMany(Vendor::class);
+    }
 }

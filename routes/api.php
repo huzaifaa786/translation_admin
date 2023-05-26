@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\UserController;
@@ -44,6 +45,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::any('balance/add', [VendorController::class, 'addbalance']);
         Route::any('user/get', [UserController::class, 'userget']);
+        Route::any('user/order', [OrderController::class, 'order']);
         Route::any('user/changepassword', [AuthController::class, 'changeuserpassword']);
         Route::any('user/update', [UserController::class, 'edituser']);
 

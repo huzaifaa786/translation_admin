@@ -31,7 +31,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('vendor/show', [VendorController::class, 'show']);
     Route::any('service/get', [ServiceController::class, 'serviceget']);
 
-    Route::any('balance/get', [UserController::class, 'balanceget']);
+
 
     Route::any('payment/intent', [PaymentController::class, 'createPaymentIntent']);
     Route::any('add/bug', [UserController::class, 'addbug']);
@@ -43,12 +43,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('vendor/update', [VendorController::class, 'edit']);
     });
     Route::group(['middleware' => 'auth:api'], function () {
+        Route::any('balance/get', [UserController::class, 'balanceget']);
         Route::any('balance/add', [VendorController::class, 'addbalance']);
         Route::any('user/get', [UserController::class, 'userget']);
         Route::any('user/order', [OrderController::class, 'order']);
         Route::any('order/get', [OrderController::class, 'allorder']);
         Route::any('user/changepassword', [AuthController::class, 'changeuserpassword']);
         Route::any('user/update', [UserController::class, 'edituser']);
-
     });
 });

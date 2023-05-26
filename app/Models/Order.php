@@ -15,6 +15,7 @@ class Order extends Model
         'price',
         'documenttype',
         'status',
+        'vendor_id'
         
     ];
 }

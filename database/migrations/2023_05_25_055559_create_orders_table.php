@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('vendor_id');
             $table->string('servicetype');
             $table->string('price');
             $table->string('documenttype');
-            $table->string('status');
+            $table->string('status')->default(0);
+         
             $table->timestamps();
         });
     }

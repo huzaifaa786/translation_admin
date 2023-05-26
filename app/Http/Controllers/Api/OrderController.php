@@ -17,15 +17,19 @@ class OrderController extends Controller
             'user_id' => Auth::user()->id,
         ] + $request->all());
 
-        if ($request->documents ) {
-          
-                Document::create([
-                    'order_id' => $order->id,
-                    'document' => $request->documents,
-                ]);
-            
+        if ($request->documents) {
+
+            Document::create([
+                'order_id' => $order->id,
+                'document' => $request->documents,
+            ]);
         }
 
         return Api::setResponse('order', $order);
+    }
+    public function allorder(Request $request)
+    {
+        $data = Order::where('user_id', $request->id)->get();
+        return Api::setResponse('order', $data);
     }
 }

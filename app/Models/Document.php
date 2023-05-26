@@ -12,7 +12,10 @@ class Document extends Model
 
         'order_id',
         'document',
-       
-
     ];
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+    
 }

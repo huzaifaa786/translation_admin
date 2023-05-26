@@ -14,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
 
-  
+
     use HasFactory, UserMethods, Notifiable, Notifier;
     protected $fillable = [
 
@@ -59,4 +59,9 @@ class User extends Authenticatable
         else
             return $value;
     }
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+  
 }

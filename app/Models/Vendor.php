@@ -78,4 +78,12 @@ class Vendor extends Authenticatable
     {
         return $this->hasOne(Service::class,'vendor_id','id');
     }
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+    public function vendor()
+    {
+        return $this->hasMany(Vendor::class);
+    }
 }

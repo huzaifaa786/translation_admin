@@ -18,4 +18,12 @@ class Order extends Model
         'vendor_id'
         
     ];
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
+    public function document()
+    {
+        return $this->hasOne(Document::class);
+    }
 }

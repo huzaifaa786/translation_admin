@@ -14,22 +14,19 @@ class OrderController extends Controller
     public function order(Request $request)
     {
         $order = Order::create([
-            'user_id' => Auth::user()->id
-        ] +
-            $request->all(),
-
-        );
-
-        if ($request->documents) {
+            'user_id' => Auth::user()->id,
+        ] + $request->all());
+    
+        if ($request->documents && is_array($request->documents)) {
             foreach ($request->documents as $key => $document) {
-
                 Document::create([
-
                     'order_id' => $order->id,
-                    'document' => $document
+                    'document' => $document,
                 ]);
             }
         }
+    
         return Api::setResponse('order', $order);
     }
+    
 }

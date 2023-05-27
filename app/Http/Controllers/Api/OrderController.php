@@ -14,9 +14,14 @@ class OrderController extends Controller
     public function order(Request $request)
     {
 
-        
+
+
+
         $order = Order::create([
             'user_id' => Auth::user()->id,
+            'starttime' => strtotime($request->starttime), 
+            'endtime' => strtotime($request->endtime), 
+            
         ] + $request->all());
 
         if ($request->documents) {

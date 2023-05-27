@@ -16,9 +16,14 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('vendor_id');
-            $table->string('servicetype');
-            $table->string('price');
-            $table->string('documenttype');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
+            $table->enum('servicetype', ['audio/video', 'inPerson', 'documentType'])->default('audio/video');      
+            $table->enum('scheduletype', ['instant', 'schedule', 'document'])->default('instant');
+            $table->integer('price');
+            $table->timestamp('starttime')->nullable();
+            $table->timestamp('endtime')->nullable();
+            $table->date('date');
+            $table->integer('duration');
             $table->string('status')->default(0);
          
             $table->timestamps();

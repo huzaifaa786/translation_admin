@@ -13,9 +13,13 @@ class Order extends Model
         'user_id',
         'servicetype',
         'price',
-        'documenttype',
+        'starttime',
+        'endtime',
         'status',
-        'vendor_id'
+        'vendor_id',
+        'date',
+        'duration',
+        'scheduletype',
         
     ];
     public function user()

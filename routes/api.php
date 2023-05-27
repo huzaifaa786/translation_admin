@@ -41,6 +41,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('service/store', [ServiceController::class, 'store']);
         Route::any('vendor/online', [VendorController::class, 'offline']);
         Route::any('vendor/update', [VendorController::class, 'edit']);
+        Route::any('order/accept', [OrderController::class, 'accept']);
+        Route::any('order/reject', [OrderController::class, 'reject']);
+        Route::any('order/complete', [OrderController::class, 'complete']);
+        Route::any('vendor/order', [OrderController::class, 'vendororder']);
     });
     Route::group(['middleware' => 'auth:api'], function () {
         Route::any('balance/get', [UserController::class, 'balanceget']);

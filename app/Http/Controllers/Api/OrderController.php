@@ -13,6 +13,8 @@ class OrderController extends Controller
 {
     public function order(Request $request)
     {
+
+        
         $order = Order::create([
             'user_id' => Auth::user()->id,
         ] + $request->all());
@@ -24,13 +26,102 @@ class OrderController extends Controller
                 'document' => $request->documents,
             ]);
         }
+        $notification = Notification::create([
+            'user_id' => Auth::user()->id,
+            'vendor_id' => $request->vendor_id,
+            'order_id' => $order->id,
+            'title' => 'New order placed',
+            'body' => 'Click to View',
+        ]);
 
         return Api::setResponse('order', $order);
     }
     public function allorder(Request $request)
     {
 
-        $data = Order::where('user_id', $request->user_id)->with('document')->with('user')->with('vendor')->get();
+        $data = Order::where('user_id', $request->user_id)->with('document')->with('user')->with('vendor')->orderByDesc('created_at')->get();
         return Api::setResponse('order', $data);
+    }
+    public function vendororder(Request $request)
+    {
+
+        $data = Order::where('vendor_id', $request->vendor_id)->with('document')->with('user')->with('vendor')->orderByDesc('created_at')->get();
+        return Api::setResponse('order', $data);
+    }
+    public function accept(Request $request)
+    {
+
+        $order = Order::find($request->id);
+        $order->status = 1;
+        $order->save();
+        // $notification = Notification::create([
+        //     'user_id' => $request->user_id,
+        //     'order_id' => $request->id,
+        //     // 'company_id' => $request->company_id,
+        //     'title' => 'Your order has been accepted',
+        //     'body' => 'Click to View',
+        // ]);
+
+
+
+        // $data = User::find($request->user_id)->withfirebaseToken();
+
+        // $token = $data->firebase_token;
+
+        // NotificationHelper::send($notification, $token);
+
+        return Api::setResponse('orders', $order);
+    }
+    public function reject(Request $request)
+    {
+        $order = Order::find($request->id);
+
+        $order->status = 2;
+        $order->save();
+
+        // if ($order->paymentmethod === 'wallet') {
+        //     $user = Account::where('user_id', $request->user_id)->first();
+        //     $user->balance += $order->totalpayment;
+        //     $user->save();
+        // }
+        // $notification = Notification::create([
+        //     'user_id' => $request->user_id,
+        //     'order_id' => $request->id,
+        //     // 'company_id' => $request->company_id,
+        //     'title' => 'Your order has been rejected and order amount was refunded',
+        //     'body' => 'Click to View',
+        // ]);
+
+
+
+        // $data = User::find($request->user_id)->withfirebaseToken();
+
+        // $token = $data->firebase_token;
+
+        // NotificationHelper::send($notification, $token);
+
+        return Api::setResponse('orders', $order);
+    }
+    public function complete(Request $request)
+    {
+        $order = Order::find($request->id);
+        $order->status = 3;
+        $order->save();
+        // $notification = Notification::create([
+        //     'user_id' => $request->user_id,
+        //     'order_id' => $request->id,
+        //     // 'company_id' => $request->company_id,
+        //     'title' => 'Your order has been completed',
+        //     'body' => 'Click to View',
+        // ]);
+
+
+
+        // $data = User::find($request->user_id)->withfirebaseToken();
+
+        // $token = $data->firebase_token;
+
+        // NotificationHelper::send($notification, $token);
+        return Api::setResponse('orders', $order);
     }
 }

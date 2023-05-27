@@ -20,8 +20,8 @@ return new class extends Migration
             $table->enum('servicetype', ['audio/video', 'inPerson', 'documentType'])->default('audio/video');      
             $table->enum('scheduletype', ['instant', 'schedule', 'document'])->default('instant');
             $table->integer('price');
-            $table->timestamp('starttime')->nullable();
-            $table->timestamp('endtime')->nullable();
+            $table->time('starttime')->nullable();
+            $table->time('endtime')->nullable();
             $table->date('date');
             $table->integer('duration');
             $table->string('status')->default(0);

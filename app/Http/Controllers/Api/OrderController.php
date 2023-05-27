@@ -6,6 +6,7 @@ use App\Helpers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,10 +20,12 @@ class OrderController extends Controller
 
         $order = Order::create([
             'user_id' => Auth::user()->id,
-            'starttime' => strtotime($request->starttime), 
-            'endtime' => strtotime($request->endtime), 
-            
-        ] + $request->all());
+            'starttime' => Carbon::parse($request->starttime)->format('H:i:s'),
+            'endtime' => Carbon::parse($request->endtime)->format('H:i:s'),
+            'price' => $request->price,
+            'date' => Carbon::parse($request->date)->toDateString(),
+            'duration' => $request->duration
+        ]);
 
         if ($request->documents) {
 
@@ -31,13 +34,13 @@ class OrderController extends Controller
                 'document' => $request->documents,
             ]);
         }
-        $notification = Notification::create([
-            'user_id' => Auth::user()->id,
-            'vendor_id' => $request->vendor_id,
-            'order_id' => $order->id,
-            'title' => 'New order placed',
-            'body' => 'Click to View',
-        ]);
+        // $notification = Notification::create([
+        //     'user_id' => Auth::user()->id,
+        //     'vendor_id' => $request->vendor_id,
+        //     'order_id' => $order->id,
+        //     'title' => 'New order placed',
+        //     'body' => 'Click to View',
+        // ]);
 
         return Api::setResponse('order', $order);
     }

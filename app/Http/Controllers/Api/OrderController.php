@@ -6,6 +6,7 @@ use App\Helpers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Order;
+use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,9 +53,15 @@ class OrderController extends Controller
     }
     public function vendororder(Request $request)
     {
-
-        $data = Order::where('api_token', $request->api_token)->with('document')->with('user')->with('vendor')->orderByDesc('created_at')->get();
-        return Api::setResponse('order', $data);
+        $vendor = Vendor::where('api_token', $request->api_token)->first();
+        
+        $data = Order::where('vendor_id', $vendor->id)
+            ->with('document')
+            ->with('user')
+            ->orderByDesc('created_at')
+            ->get();
+        
+        return response()->json(['orders' => $data]);
     }
     public function accept(Request $request)
     {

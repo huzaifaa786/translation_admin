@@ -53,7 +53,7 @@ class OrderController extends Controller
     public function vendororder(Request $request)
     {
 
-        $data = Order::where('vendor_id', $request->vendor_id)->with('document')->with('user')->with('vendor')->orderByDesc('created_at')->get();
+        $data = Order::where('api_token', $request->api_token)->with('document')->with('user')->with('vendor')->orderByDesc('created_at')->get();
         return Api::setResponse('order', $data);
     }
     public function accept(Request $request)

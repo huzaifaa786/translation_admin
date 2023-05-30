@@ -34,10 +34,10 @@ class VendorController extends Controller
 
     public function edit(Request $request,)
     {
-
-        $data = Vendor::find($request->vendor_id);
-        $data->update($request->all());
-        return Api::setResponse('user', $data);
+        $vendor = Vendor::where('api_token', $request->api_token)->first();
+       
+        $vendor->update($request->all());
+        return Api::setResponse('vendor', $vendor);
         // toastr()->success('update successfully ');
        
     }

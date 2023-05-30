@@ -25,7 +25,6 @@ return new class extends Migration
             $table->date('date');
             $table->integer('duration');
             $table->string('status')->default(0);
-         
             $table->timestamps();
         });
     }

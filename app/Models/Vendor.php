@@ -25,7 +25,9 @@ class Vendor extends Authenticatable
         'language',
         'online',
         'number',
-        'profilepic'
+        'profilepic',
+        'about(Eng)',
+        'about(arabic)'
 
     ];
     protected $hidden = [

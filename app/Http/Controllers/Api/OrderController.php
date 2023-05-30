@@ -58,6 +58,8 @@ class OrderController extends Controller
         $data = Order::where('vendor_id', $vendor->id)
             ->with('document')
             ->with('user')
+            ->with('vendor')
+
             ->orderByDesc('created_at')
             ->get();
         

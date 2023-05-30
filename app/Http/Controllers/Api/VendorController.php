@@ -36,10 +36,10 @@ class VendorController extends Controller
     {
 
         $data = Vendor::find($request->vendor_id);
-        $data->profilepic = $request->profilepic;
-        $data->save();
+        $data->update($request->all());
+        return Api::setResponse('user', $data);
         // toastr()->success('update successfully ');
-        return Api::setResponse('vendor', $data);
+       
     }
     public function searchedList(Request $request,)
     {

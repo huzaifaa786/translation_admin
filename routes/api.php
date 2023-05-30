@@ -45,6 +45,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('order/reject', [OrderController::class, 'reject']);
         Route::any('order/complete', [OrderController::class, 'complete']);
         Route::any('vendor/order', [OrderController::class, 'vendororder']);
+        Route::any('vendor/changepassword', [AuthController::class, 'changevendorrpassword']);
     });
     Route::group(['middleware' => 'auth:api'], function () {
         Route::any('balance/get', [UserController::class, 'balanceget']);

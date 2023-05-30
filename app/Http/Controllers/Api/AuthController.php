@@ -104,6 +104,28 @@ class AuthController extends Controller
         }
 
     }
+    public function changevendorrpassword(Request $request)
+    {
+
+        $data = Vendor::where('api_token', $request->api_token)->first();
+
+        $data = $data->withpassword();
+        $previousPassword = $data->password;
+
+        // dd($new,$previousPassword);
+
+        if (Hash::check($request->password, $previousPassword)) {
+            $data->update([
+                'password' => $request->newpassword
+            ]);
+            // Passwords match
+            return Api::setResponse('update', $data);
+        } else {
+            // Passwords do not match
+            return Api::setError('Current password incorrect');
+        }
+
+    }
 
 
 }

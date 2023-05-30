@@ -25,7 +25,10 @@ class OrderController extends Controller
             'endtime' => Carbon::parse($request->endtime)->format('H:i:s'),
             'price' => $request->price,
             'date' => Carbon::parse($request->date)->toDateString(),
-            'duration' => $request->duration
+            'duration' => $request->duration,
+            'servicetype'=> $request->servicetype,
+            'scheduletype'=> $request->scheduletype,
+            'vendor_id'=>$request->vendor_id
         ]);
 
         if ($request->documents) {

@@ -61,7 +61,7 @@ class OrderController extends Controller
             ->orderByDesc('created_at')
             ->get();
         
-        return response()->json(['orders' => $data]);
+       return Api::setResponse('order', $data);
     }
     public function accept(Request $request)
     {

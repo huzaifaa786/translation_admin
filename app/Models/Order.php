@@ -34,4 +34,9 @@ class Order extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
+    
+    public function notification()
+    {
+        return $this->belongsTo(Notification::class);
+    }
 }

@@ -88,4 +88,8 @@ class Vendor extends Authenticatable
     {
         return $this->hasMany(Vendor::class);
     }
+    public function notification()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

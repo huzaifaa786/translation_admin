@@ -22,6 +22,7 @@ class Order extends Model
         'scheduletype',
         
     ];
+    
     public function user()
     {
         return $this->belongsTo(User::class);

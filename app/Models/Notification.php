@@ -20,7 +20,7 @@ class Notification extends Model
     ];
     public function order()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class)->with('user');
     }
     public function user()
     {

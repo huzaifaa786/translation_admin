@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ReportController;
@@ -48,6 +49,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('vendor/order', [OrderController::class, 'vendororder']);
         Route::any('vendor/sale', [ReportController::class, 'sales']);
         Route::any('vendor/weekly', [ReportController::class, 'weeklysale']);
+        Route::any('vendor/notification', [NotificationController::class, 'vendornotification']);
         Route::any('vendor/changepassword', [AuthController::class, 'changevendorrpassword']);
     });
     Route::group(['middleware' => 'auth:api'], function () {

@@ -47,6 +47,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('order/complete', [OrderController::class, 'complete']);
         Route::any('vendor/order', [OrderController::class, 'vendororder']);
         Route::any('vendor/sale', [ReportController::class, 'sales']);
+        Route::any('vendor/weekly', [ReportController::class, 'weeklysale']);
         Route::any('vendor/changepassword', [AuthController::class, 'changevendorrpassword']);
     });
     Route::group(['middleware' => 'auth:api'], function () {

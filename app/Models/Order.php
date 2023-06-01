@@ -22,7 +22,7 @@ class Order extends Model
         'scheduletype',
         
     ];
-    protected $with = ['user','vendor'];
+  
     public function user()
     {
         return $this->belongsTo(User::class);

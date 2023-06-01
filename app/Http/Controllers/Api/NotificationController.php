@@ -12,7 +12,7 @@ class NotificationController extends Controller
     public function vendornotification(Request $request)
     {
  
-       $vendor = Notification::where('vendor-id', $request->id)->first();
+       $vendor = Notification::where('vendor_id', $request->id)->first();
        return Api::setResponse('notification', $vendor);
     }
 }

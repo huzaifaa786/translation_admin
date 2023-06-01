@@ -22,7 +22,7 @@ class Notification extends Model
     {
         return $this->belongsTo(Order::class);
     }
-    public function user()
+    public function userr()
     {
         return $this->belongsTo(User::class);
     }

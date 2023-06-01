@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
@@ -45,6 +46,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('order/reject', [OrderController::class, 'reject']);
         Route::any('order/complete', [OrderController::class, 'complete']);
         Route::any('vendor/order', [OrderController::class, 'vendororder']);
+        Route::any('vendor/sale', [ReportController::class, 'sales']);
         Route::any('vendor/changepassword', [AuthController::class, 'changevendorrpassword']);
     });
     Route::group(['middleware' => 'auth:api'], function () {

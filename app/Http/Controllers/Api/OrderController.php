@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
+use App\Models\Notification;
 use App\Models\Order;
 use App\Models\Vendor;
 use Carbon\Carbon;
@@ -26,9 +27,9 @@ class OrderController extends Controller
             'price' => $request->price,
             'date' => Carbon::parse($request->date)->toDateString(),
             'duration' => $request->duration,
-            'servicetype'=> $request->servicetype,
-            'scheduletype'=> $request->scheduletype,
-            'vendor_id'=>$request->vendor_id
+            'servicetype' => $request->servicetype,
+            'scheduletype' => $request->scheduletype,
+            'vendor_id' => $request->vendor_id
         ]);
 
         if ($request->documents) {
@@ -38,13 +39,13 @@ class OrderController extends Controller
                 'document' => $request->documents,
             ]);
         }
-        // $notification = Notification::create([
-        //     'user_id' => Auth::user()->id,
-        //     'vendor_id' => $request->vendor_id,
-        //     'order_id' => $order->id,
-        //     'title' => 'New order placed',
-        //     'body' => 'Click to View',
-        // ]);
+        $notification = Notification::create([
+            'user_id' => Auth::user()->id,
+            'vendor_id' => $request->vendor_id,
+            'order_id' => $order->id,
+            'title' => 'New order placed',
+            'body' => 'Click to View',
+        ]);
 
         return Api::setResponse('order', $order);
     }
@@ -57,7 +58,7 @@ class OrderController extends Controller
     public function vendororder(Request $request)
     {
         $vendor = Vendor::where('api_token', $request->api_token)->first();
-        
+
         $data = Order::where('vendor_id', $vendor->id)
             ->with('document')
             ->with('user')
@@ -65,8 +66,8 @@ class OrderController extends Controller
 
             ->orderByDesc('created_at')
             ->get();
-        
-       return Api::setResponse('order', $data);
+
+        return Api::setResponse('order', $data);
     }
     public function accept(Request $request)
     {
@@ -74,13 +75,13 @@ class OrderController extends Controller
         $order = Order::find($request->id);
         $order->status = 1;
         $order->save();
-        // $notification = Notification::create([
-        //     'user_id' => $request->user_id,
-        //     'order_id' => $request->id,
-        //     // 'company_id' => $request->company_id,
-        //     'title' => 'Your order has been accepted',
-        //     'body' => 'Click to View',
-        // ]);
+        $notification = Notification::create([
+            'user_id' => $order->user_id,
+            'order_id' => $request->id,
+            // 'company_id' => $request->company_id,
+            'title' => 'Your order has been accepted',
+            'body' => 'Click to View',
+        ]);
 
 
 
@@ -104,13 +105,13 @@ class OrderController extends Controller
         //     $user->balance += $order->totalpayment;
         //     $user->save();
         // }
-        // $notification = Notification::create([
-        //     'user_id' => $request->user_id,
-        //     'order_id' => $request->id,
-        //     // 'company_id' => $request->company_id,
-        //     'title' => 'Your order has been rejected and order amount was refunded',
-        //     'body' => 'Click to View',
-        // ]);
+        $notification = Notification::create([
+            'user_id' => $order->user_id,
+            'order_id' => $request->id,
+            // 'company_id' => $request->company_id,
+            'title' => 'Your order has been rejected and order amount was refunded',
+            'body' => 'Click to View',
+        ]);
 
 
 
@@ -127,13 +128,13 @@ class OrderController extends Controller
         $order = Order::find($request->id);
         $order->status = 3;
         $order->save();
-        // $notification = Notification::create([
-        //     'user_id' => $request->user_id,
-        //     'order_id' => $request->id,
-        //     // 'company_id' => $request->company_id,
-        //     'title' => 'Your order has been completed',
-        //     'body' => 'Click to View',
-        // ]);
+        $notification = Notification::create([
+            'user_id' => $order->user_id,
+            'order_id' => $request->id,
+            // 'company_id' => $request->company_id,
+            'title' => 'Your order has been completed',
+            'body' => 'Click to View',
+        ]);
 
 
 

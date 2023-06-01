@@ -69,9 +69,9 @@ class Report
     //     return $months;
     // }
     //Not included in this project//
-    public static function weaklySale($weak){
-        $start = Carbon::createFromDate($weak)->startOfweak();
-        $end = Carbon::createFromDate($weak)->endOfweak();
+    public static function weaklySale($week){
+        $start = Carbon::createFromDate($week)->startOfweek();
+        $end = Carbon::createFromDate($week)->endOfweek();
 
         $days = [];
         while($start <= $end){

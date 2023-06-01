@@ -15,7 +15,7 @@ class ReportController extends Controller
    }
 
    public function weeklysale(Request $request){
-    $days = Report::weaklySale($request->weak);
+    $days = Report::weaklySale($request->week);
     return Api::setResponse('day', $days);
 }
 }

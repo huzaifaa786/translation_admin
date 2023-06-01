@@ -79,7 +79,7 @@ class Report
             $clone = clone $start;
             $obj->number = $start->day;
             $obj->amount = Order::whereBetween('created_at',[$start,$clone->endOfday()])->sum('price');
-            $months[] = $obj;
+            $days[] = $obj;
             $start->addday();
         }
 

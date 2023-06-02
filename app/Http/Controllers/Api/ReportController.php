@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class ReportController extends Controller
 {
     public function sales(Request $request){
-        $vendor= Auth::vendor()->id;
+        $vendor= Auth::user()->id;
         dd($vendor);
         $days = Report::MonthlySale($request->month,$request->year);
         return Api::setResponse('day', $days);

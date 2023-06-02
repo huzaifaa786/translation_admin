@@ -76,8 +76,8 @@ class AuthController extends Controller
 
         if (Auth::guard('web')->attempt($credentials)) {
             $User = User::find(Auth::guard('web')->user()->id);
-            $User->firebase_token = $request->firebase_token;
-            $User->save();
+            // $User->firebase_token = $request->firebase_token;
+            // $User->save();
 
             return Api::setResponse('User', $User->withToken());
         } else {

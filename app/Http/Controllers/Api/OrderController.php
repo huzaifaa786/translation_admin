@@ -42,20 +42,20 @@ class OrderController extends Controller
             ]);
         }
         $notification = Notification::create([
-           
+
             'vendor_id' => $request->vendor_id,
             'order_id' => $order->id,
             'title' => 'New order placed',
             'body' => 'Click to View',
         ]);
-        $data = User::find(Auth::user()->id)->withfirebaseToken();
+        // $data = User::find(Auth::user()->id)->withfirebaseToken();
 
-        $token = $data->firebase_token;
+        // $token = $data->firebase_token;
         $vendor = Vendor::find($request->vendor_id);
 
         $vendor = $vendor->firebase_token;
-
-        NotificationHelper::send($notification, $token);
+        dd($vendor);
+        // NotificationHelper::send($notification, $token);
         NotificationHelper::vendor($notification, $vendor);
 
         return Api::setResponse('order', $order);

@@ -11,15 +11,15 @@ class NotificationController extends Controller
 {
     public function vendornotification(Request $request)
     {
- 
-       $vendor = Notification::where('vendor_id', $request->id)->with('user')->with('order')->get();
-       return Api::setResponse('notifications', $vendor);
+
+        $vendor = Notification::where('vendor_id', $request->id)->with('user')->with('order')->get();
+        return Api::setResponse('notifications', $vendor);
     }
 
     public function usernotification(Request $request)
     {
- 
-       $vendor = Notification::where('user_id', $request->id)->with('vendor')->with('order')->get();
-       return Api::setResponse('notifications', $vendor);
+        $user = Auth::user()->id;
+        $notification = Notification::where('user_id', $user)->with('vendor')->with('order')->get();
+        return Api::setResponse('notifications', $notification);
     }
 }

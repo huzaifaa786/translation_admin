@@ -40,9 +40,8 @@ class Report
           
             $obj = new stdClass();
             $clone = clone $start;
-            $obj->date = $start->day;
-            $obj->month = $start->month;
-            $obj->year = $start->year;
+            $obj->date = Carbon::createFromDate($start->year, $start->month, $start->day);
+        
             $obj->amount = Order::whereBetween('created_at', [$start, $clone->endOfDay()])->where('status', 3)->where('vendor_id', $vendor)->sum('price');
            
             $days[] = $obj;

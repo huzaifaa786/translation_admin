@@ -96,7 +96,7 @@ class OrderController extends Controller
 
 
 
-        $data = User::find($request->user_id)->withfirebaseToken();
+        $data = User::find($order->user_id)->withfirebaseToken();
 
         $token = $data->firebase_token;
 
@@ -126,7 +126,7 @@ class OrderController extends Controller
 
 
 
-        $data = User::find($request->user_id)->withfirebaseToken();
+        $data = User::find($order->user_id)->withfirebaseToken();
 
         $token = $data->firebase_token;
 
@@ -149,7 +149,7 @@ class OrderController extends Controller
 
 
 
-        $data = User::find($request->user_id)->withfirebaseToken();
+        $data = User::find($order->user_id)->withfirebaseToken();
 
         $token = $data->firebase_token;
 

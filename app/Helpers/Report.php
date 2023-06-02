@@ -39,7 +39,7 @@ class Report
         while ($start <= $end) {
             $obj = new stdClass();
             $clone = clone $start;
-            $obj->date = $start->day;
+            $obj->date = $start;
             $obj->amount = Order::whereBetween('created_at', [$start, $clone->endOfDay()])->where('status', 3)->where('vendor_id', $vendor)->sum('price');
             $days[] = $obj;
             $start->addDay();

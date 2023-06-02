@@ -40,9 +40,11 @@ class Report
           
             $obj = new stdClass();
             $clone = clone $start;
-            $obj->date = $start->date;
+            $obj->date = $start->day;
+            $obj->month = $start->month;
+            $obj->year = $start->year;
             $obj->amount = Order::whereBetween('created_at', [$start, $clone->endOfDay()])->where('status', 3)->where('vendor_id', $vendor)->sum('price');
-            $obj->ali = "kach";
+           
             $days[] = $obj;
             $start->addDay();
         }

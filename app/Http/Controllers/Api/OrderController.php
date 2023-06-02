@@ -54,7 +54,7 @@ class OrderController extends Controller
         $vendor = Vendor::find($request->vendor_id);
 
         $vendor = $vendor->firebase_token;
-        dd($vendor);
+      
         // NotificationHelper::send($notification, $token);
         NotificationHelper::vendor($notification, $vendor);
 

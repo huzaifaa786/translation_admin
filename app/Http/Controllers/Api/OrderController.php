@@ -96,11 +96,11 @@ class OrderController extends Controller
 
 
 
-        // $data = User::find($request->user_id)->withfirebaseToken();
+        $data = User::find($request->user_id)->withfirebaseToken();
 
-        // $token = $data->firebase_token;
+        $token = $data->firebase_token;
 
-        // NotificationHelper::send($notification, $token);
+        NotificationHelper::send($notification, $token);
 
         return Api::setResponse('orders', $order);
     }
@@ -126,11 +126,11 @@ class OrderController extends Controller
 
 
 
-        // $data = User::find($request->user_id)->withfirebaseToken();
+        $data = User::find($request->user_id)->withfirebaseToken();
 
-        // $token = $data->firebase_token;
+        $token = $data->firebase_token;
 
-        // NotificationHelper::send($notification, $token);
+        NotificationHelper::send($notification, $token);
 
         return Api::setResponse('orders', $order);
     }
@@ -149,11 +149,11 @@ class OrderController extends Controller
 
 
 
-        // $data = User::find($request->user_id)->withfirebaseToken();
+        $data = User::find($request->user_id)->withfirebaseToken();
 
-        // $token = $data->firebase_token;
+        $token = $data->firebase_token;
 
-        // NotificationHelper::send($notification, $token);
+        NotificationHelper::send($notification, $token);
         return Api::setResponse('orders', $order);
     }
 }

@@ -19,7 +19,7 @@ class NotificationHelper
         $notification['data'] = $object->extra;
 
         $result = Http::withOptions(['json' => $notification])
-            ->withHeaders(["authorization" => "key=AAAAK5yoMRI:APA91bFkWrvWmOQscYvpGMzupeJnaMkwIAY-6v8UF-zMys6mRgGKLjz6Z3bDeqq7mhM-4a-JU7OU-w_B69jIP87FRn5aZUEj6uI0bm3LjkungwK5r04FOYYyxxU4c7s0mYVgqV0bebJt"])
+            ->withHeaders(["authorization" => "key=AAAAqimwxso:APA91bFINzYvYnYCpVuD8SqkgBzwEd0QoKk7ciR5qVreFaVf6c-YvbEaOMDOk8DhSEdeQ0TmbbT9XkZesiJ4dlpQ2D19O1XFMM-PQBnxrzMjmPKpjlw6vuYSPCMn-H1417-z--J5NdUQ"])
             ->post("https://fcm.googleapis.com/fcm/send");
 
             Log::alert($result);

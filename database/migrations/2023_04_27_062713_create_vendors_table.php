@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('about(Eng)')->nullable();
             $table->string('about(arabic)')->nullable();
             $table->boolean('online')->default(1);
+            $table->string('firebase_token')->nullable();
             $table->json('language');
             $table->bigInteger('rating')->default(0.0);
             $table->rememberToken();

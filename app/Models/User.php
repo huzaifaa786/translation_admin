@@ -23,7 +23,8 @@ class User extends Authenticatable
         'phone',
         'api_token',
         'password',
-        'profilepic'
+        'profilepic',
+        'firebase_token'
     ];
 
     /**
@@ -34,6 +35,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'firebase_token'
     ];
 
     /**

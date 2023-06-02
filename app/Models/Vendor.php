@@ -26,6 +26,7 @@ class Vendor extends Authenticatable
         'online',
         'number',
         'profilepic',
+        'firebase_token',
         'about(Eng)',
         'about(arabic)'
 
@@ -34,6 +35,7 @@ class Vendor extends Authenticatable
         'password',
         'remember_token',
         'api_token',
+        'firebase_token'
 
     ];
     public function setPassportAttribute($value)

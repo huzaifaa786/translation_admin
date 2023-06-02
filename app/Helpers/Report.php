@@ -31,24 +31,29 @@ class Report
     }
     public static function totalSale($month, $year, $vendor)
     {
-
-        $start = Carbon::createFromDate(2023, 1, 1); 
+        $start = Carbon::createFromDate(2023, 1, 1);
         $end = Carbon::createFromDate($year, $month)->endOfMonth();
-
+    
         $days = [];
         while ($start <= $end) {
-          
             $obj = new stdClass();
             $clone = clone $start;
             $obj->date = Carbon::createMidnightDate($start->year, $start->month, $start->day);
-        
-            $obj->amount = Order::whereBetween('created_at', [$start, $clone->endOfDay()])->where('status', 3)->where('vendor_id', $vendor)->sum('price');
-           
+    
+            $amount = Order::whereBetween('created_at', [$start, $clone->endOfDay()])
+                ->where('status', 3)
+                ->where('vendor_id', $vendor)
+                ->sum('price');
+    
+            $obj->amount = intval($amount); // Cast to integer
+    
             $days[] = $obj;
             $start->addDay();
         }
+    
         return $days;
     }
+    
 
 
 

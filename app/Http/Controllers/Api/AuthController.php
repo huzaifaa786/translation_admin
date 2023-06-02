@@ -19,7 +19,7 @@ class AuthController extends Controller
 
         $credentials = ApiValidate::register($request, Vendor::class);
         $vendor = Vendor::find(Vendor::create($credentials)->id)->withToken();
-     
+
         return Api::setResponse('Vendor', $vendor);
 
 
@@ -36,6 +36,8 @@ class AuthController extends Controller
 
         if (Auth::guard('vendor')->attempt($credentials)) {
             $vendor = Vendor::find(Auth::guard('vendor')->user()->id);
+            $vendor->firebase_token = $request->firebase_token;
+            $vendor->save();
             if ($vendor->status == 2) {
                 return Api::setError('admin reject your request');
             } else if ($vendor->status == 0) {
@@ -47,7 +49,7 @@ class AuthController extends Controller
             return Api::setError('Invalid credentials');
         }
     }
-//////////////////user///////////////////////////////////\\\\\\/////\\\\\////\\\\///\\\//\\/\
+    //////////////////user///////////////////////////////////\\\\\\/////\\\\\////\\\\///\\\//\\/\
     public function userregister(Request $request)
     {
 
@@ -74,7 +76,8 @@ class AuthController extends Controller
 
         if (Auth::guard('web')->attempt($credentials)) {
             $User = User::find(Auth::guard('web')->user()->id);
-         
+            $User->firebase_token = $request->firebase_token;
+            $User->save();
 
             return Api::setResponse('User', $User->withToken());
         } else {
@@ -102,7 +105,6 @@ class AuthController extends Controller
             // Passwords do not match
             return Api::setError('Current password incorrect');
         }
-
     }
     public function changevendorrpassword(Request $request)
     {
@@ -124,8 +126,5 @@ class AuthController extends Controller
             // Passwords do not match
             return Api::setError('Current password incorrect');
         }
-
     }
-
-
 }

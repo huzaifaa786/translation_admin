@@ -60,5 +60,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('order/get', [OrderController::class, 'allorder']);
         Route::any('user/changepassword', [AuthController::class, 'changeuserpassword']);
         Route::any('user/update', [UserController::class, 'edituser']);
+        Route::any('user/notification', [NotificationController::class, 'usernotification']);
     });
 });

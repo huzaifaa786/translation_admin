@@ -30,7 +30,7 @@ class NotificationHelper
         $notification['to'] = $vendor;
         $notification['notification']['click_action'] = "FLUTTER_NOTIFICATION_CLICK";
         $notification['notification']['title'] = $object->title;
-        $notification['notification']['body'] = $object->body;
+        // $notification['notification']['body'] = $object->body;
 
         $notification['data'] = $object->extra;
 

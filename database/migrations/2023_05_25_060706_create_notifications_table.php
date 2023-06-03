@@ -19,11 +19,13 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('order_id')->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-
+            $table->string('for_user')->default(0);
+            $table->string('for_vendor')->default(0);
             $table->string('title');
             $table->text('body');
             $table->boolean('sent')->default(false);
             $table->timestamp('read_at')->nullable();
+
             $table->timestamps();
         });
     }

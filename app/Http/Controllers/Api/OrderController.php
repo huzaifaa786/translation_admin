@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Notification;
 use App\Models\Order;
+use App\Models\Service;
 use App\Models\User;
 use App\Models\Vendor;
 use Carbon\Carbon;
@@ -20,10 +21,6 @@ class OrderController extends Controller
     {
 
         try {
-            //code...
-
-
-
             $order = Order::create([
                 'user_id' => Auth::user()->id,
                 'starttime' => Carbon::parse($request->starttime)->format('H:i:s'),
@@ -172,10 +169,5 @@ class OrderController extends Controller
         NotificationHelper::send($notification, $token);
         return Api::setResponse('orders', $order);
     }
-    // public function schedule(Request $request)
-    // {
-
-    //     $service = Service::where('vendoe_id', $request->id) ->whereBetween('starttime', [$begintime, $endtime])
-    //     ->WhereBetween('appointment_time_end', [$begintime, $endtime])->get();;
-    // }
+    
 }

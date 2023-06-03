@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
+use App\Http\Controllers\Api\AvailabilityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +40,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('payment/intent', [PaymentController::class, 'createPaymentIntent']);
     Route::any('add/bug', [UserController::class, 'addbug']);
     Route::any('vendor/calrating', [RatingController::class, 'calculate']);
-
+    Route::any('order/checkAvailability', [AvailabilityController::class, 'checkAvailability']);
     Route::group(['middleware' => 'auth:vendor_api'], function () {
 
         Route::any('service/store', [ServiceController::class, 'store']);

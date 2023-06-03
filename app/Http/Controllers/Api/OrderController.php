@@ -31,6 +31,7 @@ class OrderController extends Controller
             'price' => $request->price,
             'date' => Carbon::parse($request->date)->toDateString(),
             'duration' => $request->duration,
+            'meetingtype'=>$request->meetingtype,
             'servicetype' => $request->servicetype,
             'scheduletype' => $request->scheduletype,
             'vendor_id' => $request->vendor_id

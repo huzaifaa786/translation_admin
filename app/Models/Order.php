@@ -20,6 +20,7 @@ class Order extends Model
         'date',
         'duration',
         'scheduletype',
+        'meetingtype'
         
     ];
   

@@ -19,20 +19,20 @@ class OrderController extends Controller
     public function order(Request $request)
     {
 
+        if ($request->instant)
 
 
-
-        $order = Order::create([
-            'user_id' => Auth::user()->id,
-            'starttime' => Carbon::parse($request->starttime)->format('H:i:s'),
-            'endtime' => Carbon::parse($request->endtime)->format('H:i:s'),
-            'price' => $request->price,
-            'date' => Carbon::parse($request->date)->toDateString(),
-            'duration' => $request->duration,
-            'servicetype' => $request->servicetype,
-            'scheduletype' => $request->scheduletype,
-            'vendor_id' => $request->vendor_id
-        ]);
+            $order = Order::create([
+                'user_id' => Auth::user()->id,
+                'starttime' => Carbon::parse($request->starttime)->format('H:i:s'),
+                'endtime' => Carbon::parse($request->endtime)->format('H:i:s'),
+                'price' => $request->price,
+                'date' => Carbon::parse($request->date)->toDateString(),
+                'duration' => $request->duration,
+                'servicetype' => $request->servicetype,
+                'scheduletype' => $request->scheduletype,
+                'vendor_id' => $request->vendor_id
+            ]);
 
         if ($request->documents) {
 
@@ -45,10 +45,10 @@ class OrderController extends Controller
 
             'vendor_id' => $request->vendor_id,
             'order_id' => $order->id,
-            'user_id'=>Auth::user()->id,
+            'user_id' => Auth::user()->id,
             'title' => 'New order placed',
             'body' => 'Click to View',
-            'for_vendor'=> '1'
+            'for_vendor' => '1'
         ]);
         // $data = User::find(Auth::user()->id)->withfirebaseToken();
 
@@ -56,7 +56,7 @@ class OrderController extends Controller
         $vendor = Vendor::find($request->vendor_id);
 
         $vendor = $vendor->firebase_token;
-      
+
         // NotificationHelper::send($notification, $token);
         NotificationHelper::vendor($notification, $vendor);
 
@@ -90,9 +90,9 @@ class OrderController extends Controller
         $order->save();
         $notification = Notification::create([
             'user_id' => $order->user_id,
-            'vendor_id'=>Auth::user()->id,
+            'vendor_id' => Auth::user()->id,
             'order_id' => $request->id,
-            'for_user'=> '1',
+            'for_user' => '1',
             // 'company_id' => $request->company_id,
             'title' => 'Your order has been accepted',
             'body' => 'Click to View',
@@ -125,8 +125,8 @@ class OrderController extends Controller
         $notification = Notification::create([
             'user_id' => $order->user_id,
             'order_id' => $request->id,
-            'vendor_id'=>Auth::user()->id,
-            'for_user'=> '1',
+            'vendor_id' => Auth::user()->id,
+            'for_user' => '1',
             // 'company_id' => $request->company_id,
             'title' => 'Your order has been rejected and order amount was refunded',
             'body' => 'Click to View',
@@ -150,8 +150,8 @@ class OrderController extends Controller
         $notification = Notification::create([
             'user_id' => $order->user_id,
             'order_id' => $request->id,
-            'vendor_id'=>Auth::user()->id,
-            'for_user'=> '1',
+            'vendor_id' => Auth::user()->id,
+            'for_user' => '1',
             // 'company_id' => $request->company_id,
             'title' => 'Your order has been completed',
             'body' => 'Click to View',

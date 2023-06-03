@@ -45,8 +45,8 @@ class UserSeeder extends Seeder
             'schedual' => '[{"day":"Monday","startTime":"16:34","endTime":"16:35","isFrozen":false},{"day":"Tuesday","startTime":"18:35","endTime":"16:35","isFrozen":false},{"day":"Wednesday","startTime":"18:37","endTime":"16:37","isFrozen":false},{"day":"Thursday","startTime":"13:40","endTime":"16:42","isFrozen":false},{"day":"Friday","startTime":"","endTime":"","isFrozen":false},{"day":"Saturday","startTime":"","endTime":"","isFrozen":false},{"day":"Sunday","startTime":"","endTime":"","isFrozen":false}]',
             'urgent' => '[{"day":"25","price":"25","minpage":"1","maxpage":"25"}]',
             'unurgent' => '[{"day":"25","price":"25","minpage":"1","maxpage":"25"}]',
-            'inperson' => '3545',
-            'audiovideo' => '3545',
+            'inperson' => '10',
+            'audiovideo' => '10',
         ]);
     }
 }

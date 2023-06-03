@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->foreignId('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->bigInteger('rating')->default(0.0);
+            $table->decimal('rating')->default(0.0);
             $table->timestamps();
         });
     }

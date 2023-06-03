@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\UserController;
@@ -61,5 +62,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('user/changepassword', [AuthController::class, 'changeuserpassword']);
         Route::any('user/update', [UserController::class, 'edituser']);
         Route::any('user/notification', [NotificationController::class, 'usernotification']);
+        Route::any('user/rating', [RatingController::class, 'rating']);
     });
 });

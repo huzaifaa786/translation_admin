@@ -13,7 +13,7 @@ class RatingController extends Controller
     {
         $existingRating = Rating::where('order_id', $request->order_id)->first();
         if ($existingRating) {
-            return Api::setError('Invalid credentials');
+            return Api::setError('Rating');
         }
         $rating = Rating::create([
             'vendor_id' =>  $request->vendor_id,

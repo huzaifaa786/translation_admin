@@ -9,7 +9,7 @@ class Service extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'vendor_id', 'schedual','urgent','unurgent','inperson','audiovideo'
+        'vendor_id', 'schedual','urgent','unurgent','inperson','audiovideo','urgentprice','unurgentprice'
     ];
 
     public function vendor()

@@ -27,17 +27,8 @@ class RatingController extends Controller
     public function calculate(Request $request)
     {
 
-        // PlaceRating::where('place_id',$id)->selectRaw('SUM(rating)/COUNT(user_id) AS avg_rating')->first()->avg_rating;
+        PlaceRating::where('place_id',$request->id)->selectRaw('SUM(rating)/COUNT(vendor_id) AS avg_rating')->first()->avg_rating;
 
-           $rateArray =[];
-        //    foreach ($rates as $rate)
-        //    {
-        //        $rateArray[]= $rate['rating'];
-        //    }
-
-            $sum = array_sum($rateArray);
-            $result = $sum/5;
-
-            return response()->json(['rating'=>$result],200);
+         
     }
 }

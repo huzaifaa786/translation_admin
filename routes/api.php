@@ -38,6 +38,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
     Route::any('payment/intent', [PaymentController::class, 'createPaymentIntent']);
     Route::any('add/bug', [UserController::class, 'addbug']);
+    Route::any('vendor/calrating', [RatingController::class, 'calculate']);
 
     Route::group(['middleware' => 'auth:vendor_api'], function () {
 

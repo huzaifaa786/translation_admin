@@ -21,52 +21,52 @@ class OrderController extends Controller
 
         try {
             //code...
-        
 
 
-        $order = Order::create([
-            'user_id' => Auth::user()->id,
-            'starttime' => Carbon::parse($request->starttime)->format('H:i:s'),
-            'endtime' => Carbon::parse($request->endtime)->format('H:i:s'),
-            'price' => $request->price,
-            'date' => Carbon::parse($request->date)->toDateString(),
-            'duration' => $request->duration,
-            'meetingtype'=>$request->meetingtype,
-            'servicetype' => $request->servicetype,
-            'scheduletype' => $request->scheduletype,
-            'vendor_id' => $request->vendor_id
-        ]);
 
-        if ($request->documents) {
-
-            Document::create([
-                'order_id' => $order->id,
-                'document' => $request->documents,
+            $order = Order::create([
+                'user_id' => Auth::user()->id,
+                'starttime' => Carbon::parse($request->starttime)->format('H:i:s'),
+                'endtime' => Carbon::parse($request->endtime)->format('H:i:s'),
+                'price' => $request->price,
+                'date' => Carbon::parse($request->date)->toDateString(),
+                'duration' => $request->duration,
+                'meetingtype' => $request->meetingtype,
+                'servicetype' => $request->servicetype,
+                'scheduletype' => $request->scheduletype,
+                'vendor_id' => $request->vendor_id
             ]);
+
+            if ($request->documents) {
+
+                Document::create([
+                    'order_id' => $order->id,
+                    'document' => $request->documents,
+                ]);
+            }
+            $notification = Notification::create([
+
+                'vendor_id' => $request->vendor_id,
+                'order_id' => $order->id,
+                'user_id' => Auth::user()->id,
+                'title' => 'New order placed',
+                'body' => 'Click to View',
+                'for_vendor' => '1'
+            ]);
+            // $data = User::find(Auth::user()->id)->withfirebaseToken();
+
+            // $token = $data->firebase_token;
+            $vendor = Vendor::find($request->vendor_id);
+
+            $vendor = $vendor->firebase_token;
+
+            // NotificationHelper::send($notification, $token);
+            NotificationHelper::vendor($notification, $vendor);
+
+            return Api::setResponse('order', $order);
+        } catch (\Throwable $th) {
+            return Api::setError($th);
         }
-        $notification = Notification::create([
-
-            'vendor_id' => $request->vendor_id,
-            'order_id' => $order->id,
-            'user_id' => Auth::user()->id,
-            'title' => 'New order placed',
-            'body' => 'Click to View',
-            'for_vendor' => '1'
-        ]);
-        // $data = User::find(Auth::user()->id)->withfirebaseToken();
-
-        // $token = $data->firebase_token;
-        $vendor = Vendor::find($request->vendor_id);
-
-        $vendor = $vendor->firebase_token;
-
-        // NotificationHelper::send($notification, $token);
-        NotificationHelper::vendor($notification, $vendor);
-
-        return Api::setResponse('order', $order);
-    } catch (\Throwable $th) {
-        return Api::setError($th);
-    }
     }
     public function allorder(Request $request)
     {
@@ -172,4 +172,10 @@ class OrderController extends Controller
         NotificationHelper::send($notification, $token);
         return Api::setResponse('orders', $order);
     }
+    // public function schedule(Request $request)
+    // {
+
+    //     $service = Service::where('vendoe_id', $request->id) ->whereBetween('starttime', [$begintime, $endtime])
+    //     ->WhereBetween('appointment_time_end', [$begintime, $endtime])->get();;
+    // }
 }

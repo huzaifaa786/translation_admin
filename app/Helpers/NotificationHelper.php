@@ -26,7 +26,7 @@ class NotificationHelper
     }
     public static function vendor($object, $vendor)
     {
-        dd($vendor);
+        // dd($vendor);
         $notification['to'] = $vendor;
         $notification['notification']['click_action'] = "FLUTTER_NOTIFICATION_CLICK";
         $notification['notification']['title'] = $object->title;

@@ -19,7 +19,9 @@ class OrderController extends Controller
     public function order(Request $request)
     {
 
-
+        try {
+            //code...
+        
 
 
         $order = Order::create([
@@ -61,6 +63,9 @@ class OrderController extends Controller
         NotificationHelper::vendor($notification, $vendor);
 
         return Api::setResponse('order', $order);
+    } catch (\Throwable $th) {
+        return Api::setError($th);
+    }
     }
     public function allorder(Request $request)
     {

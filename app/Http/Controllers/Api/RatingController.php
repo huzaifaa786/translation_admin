@@ -27,8 +27,8 @@ class RatingController extends Controller
     public function calculate(Request $request)
     {
 
-        PlaceRating::where('place_id',$request->id)->selectRaw('SUM(rating)/COUNT(vendor_id) AS avg_rating')->first()->avg_rating;
+        $rating  = Rating::where('place_id',$request->id)->selectRaw('SUM(rating)/COUNT(vendor_id) AS avg_rating')->first()->avg_rating;
 
-         
+        return Api::setResponse('rating', $rating);
     }
 }

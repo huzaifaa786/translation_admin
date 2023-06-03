@@ -47,6 +47,8 @@ class UserSeeder extends Seeder
             'unurgent' => '[{"day":"25","price":"25","minpage":"1","maxpage":"25"}]',
             'inperson' => '10',
             'audiovideo' => '10',
+            'urgentprice'=>'10',
+            'unurgentprice'=>'10'
         ]);
     }
 }

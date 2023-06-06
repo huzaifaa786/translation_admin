@@ -65,5 +65,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('user/update', [UserController::class, 'edituser']);
         Route::any('user/notification', [NotificationController::class, 'usernotification']);
         Route::any('user/rating', [RatingController::class, 'rating']);
+        Route::any('user/schedule', [AvailabilityController::class, 'order']);
     });
 });

@@ -28,34 +28,38 @@ class VendorController extends Controller
     public function show(Request $request)
     {
         $vendor = Vendor::where('api_token', $request->api_token)->first();
-    
+
         return Api::setResponse('Vendor', $vendor);
     }
 
     public function edit(Request $request,)
     {
         $vendor = Vendor::where('api_token', $request->api_token)->first();
-       
+
         $vendor->update($request->all());
         return Api::setResponse('vendor', $vendor);
         // toastr()->success('update successfully ');
-       
+
     }
     public function searchedList(Request $request,)
     {
         $vendors = Vendor::whereJsonContains('language', $request->form)
             ->whereJsonContains('language',  $request->to)->with('service')
+            ->with(['rating' => function ($query) {
+                $query->selectRaw('vendor_id, SUM(rating)/COUNT(vendor_id) AS avg_rating')
+                    ->groupBy('vendor_id');
+            }])
             ->get();
         // toastr()->success('update successfully ');
         return Api::setResponse('vendor', $vendors);
     }
     public function addbalance(Request $request)
     {
-        
-       $data= Account::where('user_id',$request->id)->first();
-       $data->update([
-        'balance' => $request->balance + $data->balance
-    ]);
+
+        $data = Account::where('user_id', $request->id)->first();
+        $data->update([
+            'balance' => $request->balance + $data->balance
+        ]);
 
         return Api::setResponse('account', $data);
     }

@@ -52,14 +52,14 @@ class AvailabilityController extends Controller
             ->where('date', $date)
             ->where(function ($query) use ($startTime, $endTime) {
                 $query->where(function ($q) use ($startTime, $endTime) {
-                    $q->whereTime('starttime', '>=', $startTime)
-                        ->whereTime('starttime', '<', $endTime);
+                    $q->where('starttime', '>=', $startTime)
+                        ->where('starttime', '<', $endTime);
                 })->orWhere(function ($q) use ($startTime, $endTime) {
-                    $q->whereTime('endtime', '>', $startTime)
-                        ->whereTime('endtime', '<=', $endTime);
+                    $q->where('endtime', '>', $startTime)
+                        ->where('endtime', '<=', $endTime);
                 })->orWhere(function ($q) use ($startTime, $endTime) {
-                    $q->whereTime('starttime', '<=', $startTime)
-                        ->whereTime('endtime', '>=', $endTime);
+                    $q->where('starttime', '<=', $startTime)
+                        ->where('endtime', '>=', $endTime);
                 });
             })
             ->first();

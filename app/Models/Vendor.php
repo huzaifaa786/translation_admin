@@ -96,6 +96,6 @@ class Vendor extends Authenticatable
     }
     public function rating()
     {
-        return $this->belongsTo(Rating::class);
+        return $this->hasMany(Rating::class,'vendor_id');
     }
 }

@@ -41,18 +41,23 @@ class VendorController extends Controller
         // toastr()->success('update successfully ');
 
     }
-    public function searchedList(Request $request,)
+    public function searchedList(Request $request)
     {
         $vendors = Vendor::whereJsonContains('language', $request->form)
-            ->whereJsonContains('language',  $request->to)->with('service')
-            ->with(['rating' => function ($query) {
-                $query->selectRaw('vendor_id, SUM(rating)/COUNT(vendor_id) AS avg_rating')
-                    ->groupBy('vendor_id');
-            }])
+            ->whereJsonContains('language',  $request->to)
+            ->with('service')
+            ->with('rating') // Load the ratings
             ->get();
-        // toastr()->success('update successfully ');
+            
+        // Calculate the average rating for each vendor
+        $vendors->each(function ($vendor) {
+            $averageRating = $vendor->rating->avg('rating');
+            $vendor->averageRating = $averageRating;
+        });
+    
         return Api::setResponse('vendor', $vendors);
     }
+    
     public function addbalance(Request $request)
     {
 

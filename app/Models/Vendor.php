@@ -94,4 +94,8 @@ class Vendor extends Authenticatable
     {
         return $this->hasMany(Notification::class);
     }
+    public function rating()
+    {
+        return $this->belongsTo(Rating::class);
+    }
 }

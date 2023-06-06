@@ -16,4 +16,9 @@ class Rating extends Model
         'rating'
 
     ];
+
+    public function vendor()
+    {
+        return $this->hasOne(Vendor::class);
+    }
 }

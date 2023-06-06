@@ -11,7 +11,6 @@ class Rating extends Model
     protected $fillable = [
 
         'vendor_id',
-
         'order_id',
         'rating'
 
@@ -19,6 +18,6 @@ class Rating extends Model
 
     public function vendor()
     {
-        return $this->hasOne(Vendor::class);
+        return $this->belongsTo(Vendor::class);
     }
 }

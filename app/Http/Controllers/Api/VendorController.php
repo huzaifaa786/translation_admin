@@ -52,11 +52,12 @@ class VendorController extends Controller
         // Calculate the average rating for each vendor
         $vendors->each(function ($vendor) {
             $averageRating = $vendor->rating->avg('rating');
-            $vendor->averageRating = $averageRating;
+            $vendor->averageRating = $averageRating ? round($averageRating, 2) : null;
         });
     
         return Api::setResponse('vendor', $vendors);
     }
+    
     
     public function addbalance(Request $request)
     {

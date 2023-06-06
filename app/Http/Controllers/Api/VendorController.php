@@ -46,15 +46,9 @@ class VendorController extends Controller
         $vendors = Vendor::whereJsonContains('language', $request->form)
             ->whereJsonContains('language',  $request->to)
             ->with('service')
-            ->with('rating') // Load the ratings
+            ->with('rating') // Load the ratings with average rating
             ->get();
             
-        // Calculate the average rating for each vendor
-        $vendors->each(function ($vendor) {
-            $averageRating = $vendor->rating->avg('rating');
-            $vendor->averageRating = $averageRating ? round($averageRating, 2) : null;
-        });
-    
         return Api::setResponse('vendor', $vendors);
     }
     

@@ -96,6 +96,9 @@ class Vendor extends Authenticatable
     }
     public function rating()
     {
-        return $this->hasMany(Rating::class,'vendor_id');
+        return $this->hasMany(Rating::class)
+            ->selectRaw('vendor_id, AVG(rating) as average_rating')
+            ->groupBy('vendor_id');
     }
+    
 }

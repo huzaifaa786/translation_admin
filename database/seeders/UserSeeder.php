@@ -48,7 +48,8 @@ class UserSeeder extends Seeder
             'inperson' => '10',
             'audiovideo' => '10',
             'urgentprice'=>'10',
-            'unurgentprice'=>'10'
+            'unurgentprice'=>'10',
+            'onlineaudiovideo'=>'10'
         ]);
     }
 }

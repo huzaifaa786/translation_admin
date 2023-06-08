@@ -11,12 +11,21 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
     public function store(Request $request)
-
     {
-      
-       $data= Service::create($request->all());
-       return Api::setResponse('services', $data);
+        $vendor = Service::where('vendor_id', $request->vendor_id)->first();
+    
+        if ($vendor) {
+            // Vendor already has a service, so update it
+            $vendor->update($request->all());
+            $data = $vendor;
+        } else {
+            // Vendor doesn't have a service, create a new one
+            $data = Service::create($request->all());
+        }
+    
+        return Api::setResponse('services', $data);
     }
+    
        public function change(Request $request)
     {
 

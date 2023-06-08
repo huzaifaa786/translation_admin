@@ -41,7 +41,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('add/bug', [UserController::class, 'addbug']);
     Route::any('vendor/calrating', [RatingController::class, 'calculate']);
     Route::any('order/checkAvailability', [AvailabilityController::class, 'checkAvailability']);
-    Route::any('notification/check', [NotificationController::class, 'check']);
+       Route::any('notification/check', [NotificationController::class, 'check']);
     Route::group(['middleware' => 'auth:vendor_api'], function () {
 
         Route::any('service/store', [ServiceController::class, 'store']);

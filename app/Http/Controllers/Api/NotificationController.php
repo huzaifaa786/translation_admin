@@ -23,4 +23,30 @@ class NotificationController extends Controller
         $notification = Notification::where('user_id', $user)->where('for_user',1)->with('vendor')->with('order')->get();
         return Api::setResponse('notifications', $notification);
     }
+
+    public function check()
+    {
+        $has_new = Notification::where('vendor_id',Auth::guard('vendor_api')->user()->id)->where('is_read', false)->count();
+        if($has_new > 0)
+            return Api::setResponse('exist',true);
+        return Api::setResponse('exist',false);
+    }
+     public function userCheck()
+    {
+        $has_new = Notification::where('user_id',Auth::guard('api')->user()->id)->where('is_read', false)->count();
+        if($has_new > 0)
+            return Api::setResponse('exist',true);
+        return Api::setResponse('exist',false);
+    }
+    public function read(Request $request)
+    {
+        $noitification = Notification::find($request->notification_id);
+        if($noitification){
+            $noitification->update([
+                'is_read' => true
+            ]);
+            return Api::setMessage('notifcation read');
+        }
+            return Api::setMessage('notifcation not found');
+    }
 }

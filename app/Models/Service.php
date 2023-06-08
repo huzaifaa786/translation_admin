@@ -9,11 +9,13 @@ class Service extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'vendor_id', 'schedual','urgent','unurgent','inperson','audiovideo','urgentprice','unurgentprice'
+        'vendor_id', 'schedual', 'urgent', 'unurgent', 'inperson',
+         'audiovideo', 'urgentprice', 'unurgentprice','onlineaudiovideo','latitude','longitude'
+         
     ];
 
     public function vendor()
     {
-      return $this->belongsTo(Vendor::class,'id','vendor_id');
-}
+        return $this->belongsTo(Vendor::class, 'id', 'vendor_id');
+    }
 }

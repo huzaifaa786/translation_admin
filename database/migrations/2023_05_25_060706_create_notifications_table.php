@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('body');
             $table->boolean('sent')->default(false);
+            $table->boolean('is_read')->default(false);
             $table->timestamp('read_at')->nullable();
 
             $table->timestamps();

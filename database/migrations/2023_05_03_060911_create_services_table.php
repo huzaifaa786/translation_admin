@@ -20,6 +20,9 @@ return new class extends Migration
             $table->json('schedual');
             $table->string('inperson');
             $table->string('audiovideo');
+            $table->string('onlineaudiovideo');
+            $table->string('longitude');
+            $table->string('latitude');
             $table->string('urgentprice');
             $table->string('unurgentprice');
             $table->timestamps();

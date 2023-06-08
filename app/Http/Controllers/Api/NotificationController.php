@@ -26,7 +26,7 @@ class NotificationController extends Controller
 
     public function check()
     {
-        $has_new = Notification::where('vendor_id',Auth::guard('vendor_api')->user()->id)->where('is_read', false)->count();
+        $has_new = Notification::where('vendor_id',Auth::guard()->user()->id)->where('is_read', false)->count();
         if($has_new > 0)
             return Api::setResponse('exist',true);
         return Api::setResponse('exist',false);

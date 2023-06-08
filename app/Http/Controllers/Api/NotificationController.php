@@ -41,13 +41,21 @@ class NotificationController extends Controller
     }
     public function read(Request $request)
     {
-        $noitification = Notification::find($request->notification_id);
-        if($noitification){
-            $noitification->update([
-                'is_read' => true
-            ]);
-            return Api::setMessage('notifcation read');
+        $vendorId = Auth::guard('vendor_api')->user()->id;
+    
+        $notifications = Notification::where('vendor_id', $vendorId)->get();
+    
+        if($notifications->count() > 0){
+            $notifications->each(function($notification) {
+                $notification->update([
+                    'is_read' => true
+                ]);
+            });
+    
+            return Api::setMessage('notifications read');
         }
-            return Api::setMessage('notifcation not found');
+    
+        return Api::setMessage('notifications not found');
     }
+    
 }

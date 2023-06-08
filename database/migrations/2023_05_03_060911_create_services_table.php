@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('inperson');
             $table->string('audiovideo');
             $table->string('onlineaudiovideo');
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
             $table->string('urgentprice');
             $table->string('unurgentprice');
             $table->timestamps();

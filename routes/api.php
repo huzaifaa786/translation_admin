@@ -41,6 +41,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('add/bug', [UserController::class, 'addbug']);
     Route::any('vendor/calrating', [RatingController::class, 'calculate']);
     Route::any('order/checkAvailability', [AvailabilityController::class, 'checkAvailability']);
+    Route::any('notification/check', [NotificationController::class, 'check']);
     Route::group(['middleware' => 'auth:vendor_api'], function () {
 
         Route::any('service/store', [ServiceController::class, 'store']);
@@ -53,7 +54,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('vendor/sale', [ReportController::class, 'sales']);
         Route::any('vendor/weekly', [ReportController::class, 'weeklysale']);
         Route::any('vendor/notification', [NotificationController::class, 'vendornotification']);
-        Route::any('notification/check', [NotificationController::class, 'check']);
+     
         Route::any('vendor/changepassword', [AuthController::class, 'changevendorrpassword']);
     });
     Route::group(['middleware' => 'auth:api'], function () {

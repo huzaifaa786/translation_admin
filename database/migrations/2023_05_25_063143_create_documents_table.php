@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->string('document');
+            $table->string('documenttype');
+            $table->string('pages');
+            $table->string('file');
+            $table->string('description')->nullable();
+         
             $table->timestamps();
         });
     }

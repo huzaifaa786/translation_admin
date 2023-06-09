@@ -24,7 +24,7 @@ return new class extends Migration
             $table->time('starttime')->nullable();
             $table->time('endtime')->nullable();
             $table->date('date');
-            $table->integer('duration');
+            $table->integer('duration')->nullable();
             $table->string('status')->default(0);
             $table->timestamps();
         });

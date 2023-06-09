@@ -36,10 +36,7 @@ class OrderController extends Controller
 
             if ($request->documents) {
 
-                Document::create([
-                    'order_id' => $order->id,
-                    'document' => $request->documents,
-                ]);
+                Document::create($request->all());
             }
             $notification = Notification::create([
 
@@ -169,5 +166,4 @@ class OrderController extends Controller
         NotificationHelper::send($notification, $token);
         return Api::setResponse('orders', $order);
     }
-    
 }

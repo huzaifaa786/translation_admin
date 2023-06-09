@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('onlineaudiovideo');
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
+            $table->string('radius')->nullable();
             $table->string('urgentprice');
             $table->string('unurgentprice');
             $table->timestamps();

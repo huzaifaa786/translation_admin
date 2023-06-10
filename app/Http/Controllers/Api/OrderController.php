@@ -38,7 +38,7 @@ class OrderController extends Controller
 
                 Document::create([
                     'order_id' => $order->id,
-                    'pages' => $request->page,
+                    'pages' => $request->pages,
                     'file' => $request->file,
                     'documenttype' => $request->documenttype,
                     'description' => $request->description

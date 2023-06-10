@@ -38,13 +38,14 @@ class FileHelper
     }
     
     public static function saveFile($file){
+      
         // Generate a file name with extension
         $fileName = 'file-'.time().'.'.$file->getClientOriginalExtension();
         // Save the file
 
         $object = new stdClass();
         $object->name = 'File-'. uniqid();
-        $object->handle = $file->storeAs('video', $fileName);
+        $object->handle = $file->storeAs('files', $fileName);
         return $object->handle;
     }
     public static function saveCVFile($file){

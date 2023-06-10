@@ -20,11 +20,11 @@ class Document extends Model
     {
         return $this->belongsTo(Order::class);
     }
-    public function setfileribute($file)
+    public function setfileatribute($file)
     {
         $this->attributes['file'] = FileHelper::saveFile($file);
     }
-    public function getfileribute($file)
+    public function getfileatribute($file)
     {
         if ($file)
             return asset($file);

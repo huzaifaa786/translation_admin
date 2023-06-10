@@ -34,7 +34,7 @@ class OrderController extends Controller
                 'vendor_id' => $request->vendor_id
             ]);
 
-            if ($request->document) {
+            if ($request->servicetype == 'document') {
 
                 Document::create([
                     'order_id' => $order->id,

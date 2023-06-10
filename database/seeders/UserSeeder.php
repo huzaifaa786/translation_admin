@@ -52,6 +52,7 @@ class UserSeeder extends Seeder
             'onlineaudiovideo'=>'10',
             'longitude'=>'29.054052',
             'latitude'=>'46.048842',
+            'radius'=> '1000'
         ]);
     }
 }

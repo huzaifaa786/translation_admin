@@ -31,7 +31,9 @@ class OrderController extends Controller
                 'meetingtype' => $request->meetingtype,
                 'servicetype' => $request->servicetype,
                 'scheduletype' => $request->scheduletype,
-                'vendor_id' => $request->vendor_id
+                'vendor_id' => $request->vendor_id,
+                'longitude'=>$request->longitude,
+                'latitude'=>$request->latitude,
             ]);
 
             if ($request->servicetype == 'document') {

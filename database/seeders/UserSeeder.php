@@ -49,7 +49,9 @@ class UserSeeder extends Seeder
             'audiovideo' => '10',
             'urgentprice'=>'10',
             'unurgentprice'=>'10',
-            'onlineaudiovideo'=>'10'
+            'onlineaudiovideo'=>'10',
+            'longitude'=>'29.054052',
+            'latitude'=>'46.048842',
         ]);
     }
 }

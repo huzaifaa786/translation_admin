@@ -20,10 +20,11 @@ class Order extends Model
         'date',
         'duration',
         'scheduletype',
-        'meetingtype'
-        
+        'meetingtype',
+
+        'latitude', 'longitude'
     ];
-  
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -36,7 +37,7 @@ class Order extends Model
     {
         return $this->belongsTo(Vendor::class);
     }
-    
+
     public function notification()
     {
         return $this->belongsTo(Notification::class);

@@ -34,9 +34,17 @@ class OrderController extends Controller
                 'vendor_id' => $request->vendor_id
             ]);
 
-            if ($request->documents) {
+            if ($request->document) {
 
-                Document::create($request->all());
+                Document::create([
+                    'order_id' => $order->id,
+                    'pages' => $request->page,
+                    'file' => $request->file,
+                    'documenttype' => $request->documenttype,
+                    'description' => $request->description
+
+
+                ]);
             }
             $notification = Notification::create([
 

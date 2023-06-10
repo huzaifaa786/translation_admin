@@ -58,6 +58,7 @@ class AuthController extends Controller
         Account::create([
 
             'user_id' => $User->id,
+            'balance'=> '0'
 
         ]);
         return Api::setResponse('Vendor', $User);

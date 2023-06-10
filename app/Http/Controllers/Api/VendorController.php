@@ -44,7 +44,7 @@ class VendorController extends Controller
     public function searchedList(Request $request)
     {
         $vendors = Vendor::whereJsonContains('language', $request->form)
-            ->whereJsonContains('language',  $request->to)
+            ->whereJsonContains('language',  $request->to)->where('status',1)
             ->with('service')
             ->withAvg('rating','rating')  // Load the ratings with average rating
             ->get();

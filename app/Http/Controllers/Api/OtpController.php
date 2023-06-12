@@ -21,7 +21,7 @@ class OtpController extends Controller
     {
         $data = User::where('email', $request->email)->first();
         if ($data != null) {
-            $otp = random_int(100000, 999999);
+            $otp = random_int(1000, 9999);
             $mailData = [
                 'title' => 'Teanslation-Request Change Password',
                 'name' => $data->name,

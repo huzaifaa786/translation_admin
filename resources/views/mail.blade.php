@@ -14,7 +14,7 @@
         style="background-color: #ffffff; border-collapse: collapse;">
         <tr>
             <td align="center" style="padding: 40px 0;">
-                <img src="https://klicks.triteckodes.com/assets/img/logo.png" alt="Logo" width="150"
+                <img src="assets/img/logo2.png" alt="Logo" width="150"
                     height="auto" style="display: block;">
             </td>
         </tr>

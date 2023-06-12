@@ -47,10 +47,9 @@ class OtpMail extends Mailable
 
     public function build()
     {
-        return $this->from('sender@example.com')
-                    ->view('emails.otp')
-                    ->subject('One-Time Password (OTP)')
-                    ->with(['otp' => $this->otp]);
+        return $this->from('ar9800626@gmail.com')
+            ->view('mail')
+            ->subject('One-Time Password (OTP)');
     }
 
     /**
@@ -62,6 +61,4 @@ class OtpMail extends Mailable
     {
         return [];
     }
-
- 
 }

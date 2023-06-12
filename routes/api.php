@@ -42,6 +42,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('add/bug', [UserController::class, 'addbug']);
     Route::any('vendor/calrating', [RatingController::class, 'calculate']);
     Route::any('order/checkAvailability', [AvailabilityController::class, 'checkAvailability']);
+    Route::any('forgetuserpassword', [OtpController::class, 'sendopt']);
    
     Route::group(['middleware' => 'auth:vendor_api'], function () {
 
@@ -70,6 +71,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('user/notification', [NotificationController::class, 'usernotification']);
         Route::any('user/rating', [RatingController::class, 'rating']);
         Route::any('user/schedule', [AvailabilityController::class, 'order']);
-        Route::any('forgetuserpassword', [OtpController::class, 'sendopt']);
+      
     });
 });

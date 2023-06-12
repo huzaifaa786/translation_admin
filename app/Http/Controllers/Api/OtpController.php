@@ -34,4 +34,16 @@ class OtpController extends Controller
             return Api::setError('user not exist on this email');
         }
     }
+
+    public function forgetchange(Request $request)
+    {
+
+        $data = User::where('email', $request->email)->first();
+
+        $data->update([
+            'password' => $request->password
+        ]);
+        // toastr()->success('update successfully ');
+        return Api::setResponse('update', $data);
+    }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
 use App\Http\Controllers\Api\AvailabilityController;
+use App\Http\Controllers\Api\OtpController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -69,5 +70,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('user/notification', [NotificationController::class, 'usernotification']);
         Route::any('user/rating', [RatingController::class, 'rating']);
         Route::any('user/schedule', [AvailabilityController::class, 'order']);
+        Route::any('forgetuserpassword', [OtpController::class, 'sendopt']);
     });
 });

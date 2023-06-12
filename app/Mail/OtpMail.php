@@ -22,6 +22,7 @@ class OtpMail extends Mailable
 
     public function __construct($mailData)
     {
+
         $this->mailData = $mailData;
     }
 
@@ -47,7 +48,7 @@ class OtpMail extends Mailable
 
     public function build()
     {
-        return $this->from('ar9800626@gmail.com')
+        return $this->from('info@attendance.klickwash.net')
             ->view('mail')
             ->subject('One-Time Password (OTP)');
     }

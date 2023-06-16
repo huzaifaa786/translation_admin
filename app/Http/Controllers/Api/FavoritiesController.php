@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Favorities;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavoritiesController extends Controller
 {
@@ -29,12 +30,13 @@ class FavoritiesController extends Controller
             ->delete();
         
         // Create a new favorite entry
-        Favorities::create([
+        $data =Favorities::create([
             'user_id' => $user_id,
             'vendor_id' => $vendor_id,
         ]);
         
-        return response()->json(['message' => 'Favorite added successfully']);
+      
+        return Api::setResponse('favorities', $data);
     }
     
 }    

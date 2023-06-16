@@ -20,7 +20,7 @@ class FavoritiesController extends Controller
         
         if ($existingFavorite) {
            $existingFavorite->delete();
-           return response()->json(['message' => 'UnFavorite']);
+           return response()->json(['message' => 'vendor will be unFavorite']);
         }
         
         // Delete any existing favorite entry for the same user and vendor

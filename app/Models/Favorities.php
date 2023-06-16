@@ -13,6 +13,7 @@ class Favorities extends Model
         'vendor_id',
 
         'user_id',
+        
 
     ];
 }

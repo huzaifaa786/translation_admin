@@ -9,7 +9,7 @@ use Stripe\StripeClient;
 class PaymentController extends Controller
 {
     public function createPaymentIntent(Request $request){
-        $stripe = new StripeClient('sk_test_51MlTmPAN8zi2vyFsoj42hG3Ogz0rbxcPcbMBYhQ0dYurBHb0cpNmoDgcKioY4dkZeG55asSuZIpkKn1Ftyys4kqx00hbq1myWM');
+        $stripe = new StripeClient('sk_test_51NIouOGymMbhwQk2gFEXvnieRWvcu1qiYYEx3ZqMblb8Fh1XtMdF5oHAmwb1uBPEKcM1BDwMHWajBpSagSJFGqFS00asmwpNUe');
 
         // Use an existing Customer ID if this is a returning customer.
         $customer = $stripe->customers->create();
@@ -33,7 +33,7 @@ class PaymentController extends Controller
               'ephemeralKey' => $ephemeralKey->secret,
               'customer' => $customer->id,
               'intent' => $intent,
-              'publishableKey' => 'pk_test_51MlTmPAN8zi2vyFswyWqxxJKbe8NnGRtoOo55Z2P65V8EykUYWk034zKSkXkh2THsQZ6OYZzdoQOUxXmSmPiPz9G00dQnMo69A'
+              'publishableKey' => 'pk_test_51NIouOGymMbhwQk2cR0e4YSnF0qlR3dWnLW7UpKVnGmJROS0xVhSNh2DQE4VZgn9MzosxPrXHEhGfwig77xJKmng003qpA3ffH'
             ]
           );
           return Api::setResponse('intent',$paymentIntent);

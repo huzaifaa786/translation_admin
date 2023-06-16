@@ -12,6 +12,7 @@ class FavoritiesController extends Controller
 {
     public function store(Request $request)
     {
+        dd('dfdfdf');
         dd(Auth::user()->id);
         $user_id = Auth::user()->id;
     

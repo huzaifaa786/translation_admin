@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
 use App\Http\Controllers\Api\AvailabilityController;
+use App\Http\Controllers\Api\FavoritiesController;
 use App\Http\Controllers\Api\OtpController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('order/checkAvailability', [AvailabilityController::class, 'checkAvailability']);
     Route::any('forgetuserpassword', [OtpController::class, 'sendopt']);
     Route::any('forgetchangepassword', [OtpController::class, 'forgetchange']);
+    Route::any('add/favorities', [FavoritiesController::class, 'store']);
    
     Route::group(['middleware' => 'auth:vendor_api'], function () {
 

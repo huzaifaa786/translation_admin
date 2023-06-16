@@ -21,7 +21,7 @@ class VendorController extends Controller
 
     public function all()
     {
-        $data = Vendor::where('status', 1)->get();
+        $data = Vendor::where('status', 1)->with('favorities')->get();
         return Api::setResponse('Vendor', $data);
     }
 

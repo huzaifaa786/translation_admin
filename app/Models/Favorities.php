@@ -13,7 +13,16 @@ class Favorities extends Model
         'vendor_id',
 
         'user_id',
-        
+
 
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
 }

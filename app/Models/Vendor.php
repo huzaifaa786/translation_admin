@@ -100,5 +100,9 @@ class Vendor extends Authenticatable
     return $this->hasMany(Rating::class);
            
     }
+    public function favorities()
+    {
+        return $this->belongsTo(Favorities::class);
+    }
     
 }

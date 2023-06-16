@@ -13,6 +13,15 @@ class FavoritiesController extends Controller
         $user_id = $request->input('user_id');
         $vendor_id = $request->input('vendor_id');
         
+        // Check if the favorite entry already exists
+        $existingFavorite = Favorities::where('user_id', $user_id)
+            ->where('vendor_id', $vendor_id)
+            ->first();
+        
+        if ($existingFavorite) {
+            return response()->json(['message' => 'Favorite already exists']);
+        }
+        
         // Delete any existing favorite entry for the same user and vendor
         Favorities::where('user_id', $user_id)
             ->where('vendor_id', $vendor_id)
@@ -26,4 +35,5 @@ class FavoritiesController extends Controller
         
         return response()->json(['message' => 'Favorite added successfully']);
     }
+    
 }    

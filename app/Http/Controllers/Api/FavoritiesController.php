@@ -12,8 +12,9 @@ class FavoritiesController extends Controller
 {
     public function store(Request $request)
     {
+        dd(Auth::user()->id);
         $user_id = Auth::user()->id;
-        dd($user_id);
+    
         $vendor_id = $request->input('vendor_id');
 
         // Check if the favorite entry already exists

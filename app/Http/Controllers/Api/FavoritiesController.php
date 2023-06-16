@@ -13,7 +13,7 @@ class FavoritiesController extends Controller
     public function store(Request $request)
     {
         // dd('dfdfdf');
-        dd(Auth::guard('api')->user()->id);
+        // dd(Auth::guard('api')->user()->id);
         $user_id = Auth::guard('api')->user()->id;
     
         $vendor_id = $request->input('vendor_id');

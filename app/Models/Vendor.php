@@ -90,7 +90,7 @@ class Vendor extends Authenticatable
     public function isUserFavourite()
     {
         $user = auth()->guard('api')->user();
-        return $this->favoritedByUsers()->where('user_id', $user->id)->exists();
+        return $this->favoritedByUsers()->where('user_id', $user->id)->first();
     }
     public function vendor()
     {
@@ -102,7 +102,6 @@ class Vendor extends Authenticatable
     }
     public function rating()
     {
-
         return $this->hasMany(Rating::class);
     }
     public function favoritedByUsers()

@@ -35,7 +35,7 @@ class Vendor extends Authenticatable
         'password',
         'remember_token',
         'api_token',
-      
+
 
     ];
     public function setPassportAttribute($value)
@@ -80,15 +80,16 @@ class Vendor extends Authenticatable
     }
     public function service()
     {
-        return $this->hasOne(Service::class,'vendor_id','id');
+        return $this->hasOne(Service::class, 'vendor_id', 'id');
     }
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
 
-    public function isUserFavourite(){
-        return $this->favorities()->where('user_id',auth()->guard('api')->user()->id)->first();
+    public function isUserFavourite()
+    {
+        return $this->favorities()->where('user_id', auth()->guard('api')->user()->id)->first();
     }
     public function vendor()
     {
@@ -101,12 +102,11 @@ class Vendor extends Authenticatable
     public function rating()
     {
 
-    return $this->hasMany(Rating::class);
-           
+        return $this->hasMany(Rating::class);
     }
     public function favorities()
     {
-        return $this->hasMany(Favorities::class);
+
+        return $this->belongsToMany(User::class, 'favorites', 'vendor_id', 'user_id');
     }
-    
 }

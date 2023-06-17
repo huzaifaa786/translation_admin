@@ -47,9 +47,7 @@ class VendorController extends Controller
             ->whereJsonContains('language',  $request->to)
             ->where('status', 1)
             ->has('service')// Add this line to filter vendors with services
-            ->with('service')
-            ->with('favoritedByUsers')
-            ->withAvg('rating', 'rating')  // Load the ratings with average rating
+            ->with('service')->withAvg('rating', 'rating')  // Load the ratings with average rating
             ->get();
             
         return Api::setResponse('vendor', $vendors);

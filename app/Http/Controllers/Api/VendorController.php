@@ -46,7 +46,7 @@ class VendorController extends Controller
         $vendors = Vendor::whereJsonContains('language', $request->form)
             ->whereJsonContains('language',  $request->to)
             ->where('status', 1)
-            ->has('service') // Add this line to filter vendors with services
+            ->has('service')// Add this line to filter vendors with services
             ->with('service')
             ->with('isUserFavourite')
             ->withAvg('rating', 'rating')  // Load the ratings with average rating

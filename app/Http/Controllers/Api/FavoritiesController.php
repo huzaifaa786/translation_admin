@@ -15,7 +15,7 @@ class FavoritiesController extends Controller
         // dd('dfdfdf');
         // dd(Auth::guard('api')->user()->id);
         $user_id = Auth::guard('api')->user()->id;
-    
+
         $vendor_id = $request->input('vendor_id');
 
         // Check if the favorite entry already exists
@@ -41,5 +41,13 @@ class FavoritiesController extends Controller
 
 
         return Api::setResponse('favorities', $data);
+    }
+
+    public function userCheck(Request $request)
+    {
+        $check = Favorities::where('user_id', Auth::guard('api')->user()->id)->where('vendor_id', $request->vendor_id)->first();
+        if ($check > 0)
+            return Api::setResponse('exist', true);
+        return Api::setResponse('exist', false);
     }
 }

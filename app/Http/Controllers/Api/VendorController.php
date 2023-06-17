@@ -21,7 +21,7 @@ class VendorController extends Controller
 
     public function all()
     {
-        $data = Vendor::where('status', 1)->with('favorities')->get();
+        $data = Vendor::where('status', 1)->get();
         return Api::setResponse('Vendor', $data);
     }
 
@@ -48,6 +48,7 @@ class VendorController extends Controller
             ->where('status', 1)
             ->has('service') // Add this line to filter vendors with services
             ->with('service')
+            ->with('isUserFavourite')
             ->withAvg('rating', 'rating')  // Load the ratings with average rating
             ->get();
             

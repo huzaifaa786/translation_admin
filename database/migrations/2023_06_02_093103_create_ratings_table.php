@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vendor_id')->nullable();
+            $table->foreignuuid('vendor_id')->nullable();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->foreignId('order_id')->unique();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

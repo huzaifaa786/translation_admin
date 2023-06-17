@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
         ]);
 
         $vendor =  Vendor::create([
+        
             'name' => $faker->name,
             'username' => 'ali2000',
             'password' => 1234556,

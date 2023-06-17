@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('favorities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('vendor_id')->nullable();
+            $table->foreignuuid('vendor_id')->nullable();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->foreignId('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

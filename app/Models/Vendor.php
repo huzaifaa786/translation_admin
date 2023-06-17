@@ -106,6 +106,7 @@ class Vendor extends Authenticatable
     }
     public function favoritedByUsers()
     {
-        return $this->belongsToMany(User::class, 'favorities', 'vendor_id', 'user_id');
+        dd( $this->belongsToMany(User::class, 'favorities', 'vendor_id', 'user_id'));
+
     }
 }

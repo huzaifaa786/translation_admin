@@ -48,7 +48,7 @@ class VendorController extends Controller
             ->where('status', 1)
             ->has('service')// Add this line to filter vendors with services
             ->with('service')
-            ->with('isUserFavourite')
+            ->with('favoritedByUsers')
             ->withAvg('rating', 'rating')  // Load the ratings with average rating
             ->get();
             

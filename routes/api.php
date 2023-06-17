@@ -33,7 +33,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('user/login', [AuthController::class, 'userlogin']);
     Route::any('user/register', [AuthController::class, 'userregister']);
     // search list
-    Route::any('vendor/search', [VendorController::class, 'searchedList']);
+  
     Route::any('vendor/show', [VendorController::class, 'show']);
     Route::any('service/get', [ServiceController::class, 'serviceget']);
 
@@ -75,6 +75,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('user/rating', [RatingController::class, 'rating']);
         Route::any('user/schedule', [AvailabilityController::class, 'order']);
         Route::any('add/favorities', [FavoritiesController::class, 'store']);
+        Route::any('vendor/search', [VendorController::class, 'searchedList']);
       
     });
 });

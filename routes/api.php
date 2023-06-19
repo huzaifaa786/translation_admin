@@ -79,7 +79,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('check/favorities', [FavoritiesController::class, 'userCheck']);
     });
 
-    Route::group(['middleware' => 'auth:api'], function () {
+    Route::group(['middleware' => ['auth:api','auth:vendor_api']], function () {
         /**
          * Authentication for pusher private channels
          */
@@ -151,9 +151,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::post('/setActiveStatus', 'MessagesController@setActiveStatus')->name('api.activeStatus.set');
     });
 
-    Route::group(['middleware' => 'auth:vendor_api'], function () {
-        Route::post('/sendMessage', 'MessagesController@send')->name('api.send.message');
-    });
+    
     
 });
 

@@ -79,7 +79,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('check/favorities', [FavoritiesController::class, 'userCheck']);
     });
 
-    Route::group(['middleware' => 'auth:or'], function () {
+    Route::group(['middleware' => 'or'], function () {
         /**
          * Authentication for pusher private channels
          */

@@ -147,4 +147,16 @@ class AuthController extends Controller
             // return Api::setResponse('user', $user->withToken());
         }
     }
+
+    public function otplogin(Request $request)
+    {
+
+        $data = User::where('phone', $request->phone)->first();
+        if ($data != null) {
+
+            return Api::setResponse('data', $data->withToken());
+        } else {
+            return Api::setError('User not exist on this number');
+        }
+    }
 }

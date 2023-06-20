@@ -31,6 +31,7 @@ Route::any('vendor/login', [AuthController::class, 'vendorlogin']);
 Route::any('user/login', [AuthController::class, 'userlogin']);
 Route::any('user/register', [AuthController::class, 'userregister']);
 Route::any('userget', [AuthController::class, 'getuser']);
+Route::any('otplogin', [AuthController::class, 'otplogin']);
 
 Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
    

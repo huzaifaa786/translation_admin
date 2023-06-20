@@ -25,13 +25,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+Route::any('vendor/register', [AuthController::class, 'vendorregister']);
+Route::any('vendor/login', [AuthController::class, 'vendorlogin']);
+Route::any('user/login', [AuthController::class, 'userlogin']);
+Route::any('user/register', [AuthController::class, 'userregister']);
 
 Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
-    Route::any('vendor/register', [AuthController::class, 'vendorregister']);
-    Route::any('vendor/login', [AuthController::class, 'vendorlogin']);
-    Route::any('user/login', [AuthController::class, 'userlogin']);
-    Route::any('user/register', [AuthController::class, 'userregister']);
+   
     // search list
 
     Route::any('vendor/show', [VendorController::class, 'show']);

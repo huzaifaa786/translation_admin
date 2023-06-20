@@ -41,7 +41,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Company Name</th>
+                     
                         <th scope="col">Coupon</th>
                         <th scope="col">Coupon percentage </th>
                   
@@ -69,7 +69,7 @@
                             </td>
                             <td> <button type="button" class="btn btn-success m-r-20 btn-sm edit-btn"
                                     id="{{ $copen->id }}"
-                                    name="{{ $copen->copen }}"company_id="{{ $copen->company->id }}"percentage="{{ $copen->percentage }}"minimum="{{ $copen->minimum }}"maximum="{{ $copen->maximum }}"
+                                    name="{{ $copen->copen }}"percentage="{{ $copen->percentage }}"maximum="{{ $copen->maximum }}"
                                     data-bs-toggle="modal" data-bs-target="#defaultModal">Edit</button></td>
 
 
@@ -172,7 +172,7 @@
 
                 let id = this.id;
 
-                let company_id = $(this).attr('company_id');
+              
 
                 let name = $(this).attr('name');
 
@@ -184,7 +184,7 @@
 
 
 
-                $("#companyid").val(company_id).change();
+               
                 $('#name').val(name);
                 $('#copen_percentage').val(percentage);
                 $('#copen_maximum').val(maximum);

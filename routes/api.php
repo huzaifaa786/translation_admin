@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VendorController;
 use App\Http\Controllers\Api\AvailabilityController;
+use App\Http\Controllers\Api\CouponController;
 use App\Http\Controllers\Api\FavoritiesController;
 use App\Http\Controllers\Api\OtpController;
 use Illuminate\Http\Request;
@@ -65,6 +66,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('vendor/changepassword', [AuthController::class, 'changevendorrpassword']);
     });
     Route::group(['middleware' => 'auth:api'], function () {
+        Route::any('getcoupon', [CouponController::class, 'coupon']);
         Route::any('balance/get', [UserController::class, 'balanceget']);
         Route::any('balance/add', [VendorController::class, 'addbalance']);
         Route::any('user/get', [UserController::class, 'userget']);

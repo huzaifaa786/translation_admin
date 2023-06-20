@@ -18,7 +18,7 @@ class ApiValidate{
         else
             return[
                 'username' => $request->username,
-                'password' => $request->password
+                
             ];
     }
     public static function userlogin($request, $model){

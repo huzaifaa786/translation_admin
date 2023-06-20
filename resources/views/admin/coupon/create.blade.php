@@ -55,7 +55,7 @@
                     @foreach ($copens as $key => $copen)
                         <tr>
                             <th>{{ $key + 1 }}</th>
-                            <td>{{ $copen->company->name }}</td>
+                        
                             <td>
                                 {{ $copen->copen }}</td>
                             <td>
@@ -119,14 +119,7 @@
                     <div class="modal-body">
 
                         @csrf
-                        <label>Company Name</label>
-
-                        <select id="companyid" name="company_id" class="form-select">
-                            @foreach (App\Models\Company::all() as $company)
-                                <option value="{{ $company->id }}">{{ $company->name }}
-                                </option>
-                            @endforeach
-                        </select>
+                       
                         <label>Coupon</label>
                         <div class="form-group form-float">
                             <input type="text" class="form-control" id="name" placeholder="Name" name="copen"
@@ -204,31 +197,7 @@
 
 
 
-            // $('tbody').on('click', '.delete-btn', function() {
-
-            //     let id = this.id;
-            //     alert(id);
-            //     $('#deleteForm').attr('action', '{{ route('delete/mall', '') }}' + '/' + id);
-
-            // });
-            // $('tbody').on('click', '.edit-btn', function() {
-            //     alert('sdfjdjf');
-            //     let id = this.id;
-            //     let city name = $(this).attr('city name');
-            //     alertcity(name);
-            //     let name = $(this).attr('name');
-            //     // let image = $(this).attr('image');
-
-
-
-            //     $('#city name').val(city name);
-            //     $('#name').val(name);
-
-            //     // $('#image').val(image);
-
-            //     $('#updateForm').attr('action', '{{ route('edit-mall', '') }}' + '/' + id);
-
-            // });
+        
 
         })
     </script>

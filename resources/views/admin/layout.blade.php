@@ -274,6 +274,9 @@
 
                 </ul>
             </li><!-- End Forms Nav -->
+            <a class="nav-link collapsed" href="{{ route('all-copen') }}">
+                <i class="bi bi-menu-button-wide"></i><span>Enter Coupon</span><i></i>
+            </a>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">

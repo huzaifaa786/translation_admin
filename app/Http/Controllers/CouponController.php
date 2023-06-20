@@ -40,7 +40,7 @@ class CouponController extends Controller
     {
 
         $data = Coupon::all();
-        return view('Admin.copen.copen', ['copens' => $data]);
+        return view('admin.coupon.create', ['copens' => $data]);
 
 }
 }

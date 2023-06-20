@@ -32,3 +32,5 @@ Route::get('admin/all/vendor', [VendorController::class, 'all'])->name('all-vend
 Route::get('admin/delete/copen/{id}', [CouponController::class, 'delete'])->name('delete/copen');
 Route::post('admin/edit/copen/{id}', [CouponController::class, 'update'])->name('edit-copen');
 Route::get('admin/all/copen', [CouponController::class, 'show'])->name('all-copen');
+Route::any('copen', [CouponController::class, 'shows'])->name("companycopen");
+Route::any('copensave', [CouponController::class, 'store'])->name("savecopen");

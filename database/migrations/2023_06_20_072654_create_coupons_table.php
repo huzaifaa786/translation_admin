@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('copen');
             $table->string('percentage');
-            $table->string('minimum');
+           
             $table->string('maximum');
 
             $table->timestamps();

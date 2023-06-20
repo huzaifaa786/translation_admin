@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,6 @@ Route::get('admin/show/vendor', [VendorController::class, 'show'])->name('show-v
 Route::get('admin/reject/vendor/{id}', [VendorController::class, 'reject'])->name('reject/vendor');
 Route::get('admin/approve/{id}', [VendorController::class, 'aprove'])->name('approve/vendor');
 Route::get('admin/all/vendor', [VendorController::class, 'all'])->name('all-vendor');
+Route::get('admin/delete/copen/{id}', [CouponController::class, 'delete'])->name('delete/copen');
+Route::post('admin/edit/copen/{id}', [CouponController::class, 'update'])->name('edit-copen');
+Route::get('admin/all/copen', [CouponController::class, 'show'])->name('all-copen');

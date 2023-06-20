@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
+            $table->string('copen');
+            $table->string('percentage');
+            $table->string('minimum');
+            $table->string('maximum');
+
             $table->timestamps();
         });
     }

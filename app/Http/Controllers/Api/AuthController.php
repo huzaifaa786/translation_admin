@@ -128,4 +128,23 @@ class AuthController extends Controller
             return Api::setError('Current password incorrect');
         }
     }
+    public function getuser(Request $request)
+    {
+        $data = User::where('email', $request->email)->first();
+
+        if ($data != null) {
+            return Api::setResponse('data', $data->withToken());
+        } else {
+            return Api::setError('User not exist on this email');
+            // $credentials = ApiValidate::register($request, User::class);
+
+
+            // $user = User::create($credentials);
+
+
+
+
+            // return Api::setResponse('user', $user->withToken());
+        }
+    }
 }

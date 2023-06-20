@@ -24,7 +24,8 @@ class User extends Authenticatable
         'api_token',
         'password',
         'profilepic',
-        'firebase_token'
+        'firebase_token',
+        'user_type',
     ];
 
     /**

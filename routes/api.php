@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OrderController;
@@ -81,6 +82,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('add/favorities', [FavoritiesController::class, 'store']);
         Route::any('vendor/search', [VendorController::class, 'searchedList']);
         Route::any('check/favorities', [FavoritiesController::class, 'userCheck']);
+        Route::any('balanceshow', [AccountController::class, 'show']);
     });
 
     Route::group(['middleware' => 'or'], function () {

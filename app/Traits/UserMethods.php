@@ -25,7 +25,7 @@ trait UserMethods
             'username' => 'max:255|required',
             'email' => 'email|required|unique:users',
          
-            'phone' => 'numeric|required',
+          
         ];
     }
 

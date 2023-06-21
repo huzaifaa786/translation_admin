@@ -27,16 +27,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::any('vendor/register', [AuthController::class, 'vendorregister']);
-Route::any('vendor/login', [AuthController::class, 'vendorlogin']);
-Route::any('user/login', [AuthController::class, 'userlogin']);
-Route::any('user/register', [AuthController::class, 'userregister']);
-Route::any('userget', [AuthController::class, 'getuser']);
-Route::any('otplogin', [AuthController::class, 'otplogin']);
+
+
 
 Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
-   
-    // search list
+
+    Route::any('vendor/register', [AuthController::class, 'vendorregister']);
+    Route::any('vendor/login', [AuthController::class, 'vendorlogin']);
+    Route::any('user/login', [AuthController::class, 'userlogin']);
+    Route::any('user/register', [AuthController::class, 'userregister']);
+    Route::any('userget', [AuthController::class, 'getuser']);
+    Route::any('otplogin', [AuthController::class, 'otplogin']);
 
     Route::any('vendor/show', [VendorController::class, 'show']);
     Route::any('service/get', [ServiceController::class, 'serviceget']);
@@ -83,6 +84,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('vendor/search', [VendorController::class, 'searchedList']);
         Route::any('check/favorities', [FavoritiesController::class, 'userCheck']);
         Route::any('balanceshow', [AccountController::class, 'show']);
+        Route::any('balancesubtract', [AccountController::class, 'subtract']);
     });
 
     Route::group(['middleware' => 'or'], function () {
@@ -156,8 +158,4 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
          */
         Route::post('/setActiveStatus', 'MessagesController@setActiveStatus')->name('api.activeStatus.set');
     });
-
-   
-    
 });
-

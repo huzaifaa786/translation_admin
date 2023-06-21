@@ -11,7 +11,11 @@ class CouponController extends Controller
 {
     public function coupon(Request $request)
     {
-        $coupons = Coupon::all();
+        $coupons = Coupon::where('copen', $request->coupon)->first;
+
+        if ($coupons == null) {
+            return Api::setResponse('error', 'Coupon not exist');
+        }
         return Api::setResponse('coupons', $coupons);
     }
 }

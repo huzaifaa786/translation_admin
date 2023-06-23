@@ -29,7 +29,7 @@
         <tr>
             <td align="center" style="padding: 40px 0;">
                 <p style="margin-bottom: 20px;">Thanks,</p>
-                <p style="margin-bottom: 0;">Klicks</p>
+                <p style="margin-bottom: 0;">1Lang</p>
             </td>
         </tr>
     </table>

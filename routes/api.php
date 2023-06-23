@@ -84,7 +84,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('vendor/search', [VendorController::class, 'searchedList']);
         Route::any('check/favorities', [FavoritiesController::class, 'userCheck']);
         Route::any('balanceshow', [AccountController::class, 'show']);
+        Route::any('user/check', [NotificationController::class, 'usercheck']);
         Route::any('balancesubtract', [AccountController::class, 'subtract']);
+        Route::any('usernotification/read', [NotificationController::class, 'userread']);
     });
 
     Route::group(['middleware' => 'or'], function () {

@@ -50,4 +50,10 @@ class FavoritiesController extends Controller
             return Api::setResponse('exist', true);
         return Api::setResponse('exist', false);
     }
+    public function getfavorities(Request $request)
+    {
+
+        $vendor = Favorities::where('user_id', Auth::guard('api')->user()->id)->with('vendor')->orderByDesc('created_at')->get();
+        return Api::setResponse('vendors', $vendor);
+    }
 }

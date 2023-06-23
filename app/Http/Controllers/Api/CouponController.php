@@ -11,7 +11,7 @@ class CouponController extends Controller
 {
     public function coupon(Request $request)
     {
-        $coupons = Coupon::where('copen', $request->coupon)->first;
+        $coupons = Coupon::where('copen', $request->coupon)->first();
 
         if ($coupons == null) {
             return Api::setResponse('error', 'Coupon not exist');

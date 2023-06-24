@@ -82,6 +82,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('user/schedule', [AvailabilityController::class, 'order']);
         Route::any('add/favorities', [FavoritiesController::class, 'store']);
         Route::any('get/favorities', [FavoritiesController::class, 'getfavorities']);
+        Route::any('check/favorities', [FavoritiesController::class, 'checkfavorit']);
         Route::any('vendor/search', [VendorController::class, 'searchedList']);
         Route::any('check/favorities', [FavoritiesController::class, 'userCheck']);
         Route::any('balanceshow', [AccountController::class, 'show']);

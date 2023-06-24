@@ -53,7 +53,14 @@ class FavoritiesController extends Controller
     public function getfavorities(Request $request)
     {
 
-        $vendor = Favorities::where('user_id', Auth::guard('api')->user()->id)->with('vendor')->orderByDesc('created_at')->get();
+        $vendor = Favorities::where('user_id', Auth::guard('api')->user()->id)->with('vendor')->with('rating')->orderByDesc('created_at')->get();
         return Api::setResponse('vendors', $vendor);
+    }
+
+    public function checkfavorit(Request $request)
+    {
+
+        $vendor = Favorities::where('user_id', Auth::guard('api')->user()->id)->where('vendor_id', $request->id)->first();
+        return Api::setResponse('vendor', $vendor);
     }
 }

@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
+use Ramsey\Uuid\Uuid;
 
 class MessagesController extends Controller
 {
     protected $perPage = 30;
 
-     /**
+    /**
      * Authinticate the connection for pusher
      *
      * @param Request $request
@@ -50,7 +50,7 @@ class MessagesController extends Controller
         // User data
         if ($request['type'] == 'user') {
             $fetch = User::where('id', $request['id'])->first();
-            if($fetch){
+            if ($fetch) {
                 $userAvatar = Chatify::getUserWithAvatar($fetch)->avatar;
             }
         }
@@ -80,7 +80,7 @@ class MessagesController extends Controller
             ], 200);
         } else {
             return response()->json([
-                'message'=>"Sorry, File does not exist in our server or may have been deleted!"
+                'message' => "Sorry, File does not exist in our server or may have been deleted!"
             ], 404);
         }
     }
@@ -145,7 +145,7 @@ class MessagesController extends Controller
 
             // send to user using pusher
             if (Auth::user()->id != $request['id']) {
-                Chatify::push("private-chatify.".$request['id'], 'messaging', [
+                Chatify::push("private-chatify." . $request['id'], 'messaging', [
                     'from_id' => Auth::user()->id,
                     'to_id' => $request['id'],
                     'message' => $messageData
@@ -207,20 +207,42 @@ class MessagesController extends Controller
      */
     public function getContacts(Request $request)
     {
+
+
+
+
+
         // get all users that received/sent message from/to [Auth user]
-        $users = Message::join('users',  function ($join) {
-            $join->on('ch_messages.from_id', '=', 'users.id')
-                ->orOn('ch_messages.to_id', '=', 'users.id');
-        })
-        ->where(function ($q) {
-            $q->where('ch_messages.from_id', Auth::user()->id)
-            ->orWhere('ch_messages.to_id', Auth::user()->id);
-        })
-        ->where('users.id','!=',Auth::user()->id)
-        ->select('users.*',DB::raw('MAX(ch_messages.created_at) max_created_at'))
-        ->orderBy('max_created_at', 'desc')
-        ->groupBy('users.id','users.username')
-        ->paginate($request->per_page ?? $this->perPage);
+        if (Uuid::isValid(Auth::user()->id)) {
+            $users = Message::join('users',  function ($join) {
+                $join->on('ch_messages.from_id', '=', 'users.id')
+                    ->orOn('ch_messages.to_id', '=', 'users.id');
+            })
+                ->where(function ($q) {
+                    $q->where('ch_messages.from_id', Auth::user()->id)
+                        ->orWhere('ch_messages.to_id', Auth::user()->id);
+                })
+                ->where('users.id', '!=', Auth::user()->id)
+                ->select('users.*', DB::raw('MAX(ch_messages.created_at) max_created_at'))
+                ->orderBy('max_created_at', 'desc')
+                ->groupBy('users.id')
+                ->paginate($request->per_page ?? $this->perPage);
+        } else {
+            $users = Message::join('vendors',  function ($join) {
+                $join->on('ch_messages.from_id', '=', 'vendors.id')
+                    ->orOn('ch_messages.to_id', '=', 'vendors.id');
+            })
+                ->where(function ($q) {
+                    $q->where('ch_messages.from_id', Auth::user()->id)
+                        ->orWhere('ch_messages.to_id', Auth::user()->id);
+                })
+                ->where('vendors.id', '!=', Auth::user()->id)
+                ->select('vendors.*', DB::raw('MAX(ch_messages.created_at) max_created_at'))
+                ->orderBy('max_created_at', 'desc')
+                ->groupBy('vendors.id')
+                ->paginate($request->per_page ?? $this->perPage);
+        }
+       
 
         return response()->json([
             'contacts' => $users->items(),
@@ -275,9 +297,9 @@ class MessagesController extends Controller
     public function search(Request $request)
     {
         $input = trim(filter_var($request['input']));
-        $records = User::where('id','!=',Auth::user()->id)
-                    ->where('name', 'LIKE', "%{$input}%")
-                    ->paginate($request->per_page ?? $this->perPage);
+        $records = User::where('id', '!=', Auth::user()->id)
+            ->where('name', 'LIKE', "%{$input}%")
+            ->paginate($request->per_page ?? $this->perPage);
 
         foreach ($records->items() as $index => $record) {
             $records[$index] += Chatify::getUserWithAvatar($record);

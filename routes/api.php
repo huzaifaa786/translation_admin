@@ -125,7 +125,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         /**
          * Get contacts
          */
-        Route::get('/getContacts', 'MessagesController@getContacts')->name('api.contacts.get');
+        Route::any('/getContacts', 'MessagesController@getContacts')->name('api.contacts.get');
 
         /**
          * Star in favorite list

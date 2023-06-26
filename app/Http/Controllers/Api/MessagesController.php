@@ -170,7 +170,7 @@ class MessagesController extends Controller
      */
     public function fetch(Request $request)
     {
-        $query = Chatify::fetchMessagesQuery($request['id'])->latest()->orderByDesc('created_at');
+        $query = Chatify::fetchMessagesQuery($request['id'])->latest('created_at')->orderBy('id', 'asc');
         $messages = $query->paginate($request->per_page ?? $this->perPage);
         $totalMessages = $messages->total();
         $lastPage = $messages->lastPage();

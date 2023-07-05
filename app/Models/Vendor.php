@@ -26,6 +26,7 @@ class Vendor extends Authenticatable
         'status',
         'language',
         'online',
+        'profile',
         'number',
         'profilepic',
         'firebase_token',

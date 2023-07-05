@@ -15,7 +15,7 @@ class Vendor extends Authenticatable
 {
     use HasFactory, UserMethods, Notifiable, Notifier;
     protected $fillable = [
-        
+
         'name',
         'username',
         'DOB',
@@ -38,7 +38,7 @@ class Vendor extends Authenticatable
         'password',
         'remember_token',
         'api_token',
-      
+
 
     ];
 
@@ -95,7 +95,7 @@ class Vendor extends Authenticatable
     }
     public function service()
     {
-        return $this->hasOne(Service::class,'vendor_id','id');
+        return $this->hasOne(Service::class, 'vendor_id', 'id');
     }
     public function order()
     {
@@ -105,19 +105,25 @@ class Vendor extends Authenticatable
     {
         return $this->hasMany(Vendor::class);
     }
+    
     public function notification()
     {
         return $this->hasMany(Notification::class);
     }
+
     public function rating()
     {
 
-    return $this->hasMany(Rating::class);
-           
+        return $this->hasMany(Rating::class);
     }
+
     public function favorities()
     {
         return $this->belongsTo(Favorities::class);
     }
-    
+
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'vendor_id', 'user_id');
+    }
 }

@@ -105,7 +105,7 @@ class Vendor extends Authenticatable
     {
         return $this->hasMany(Vendor::class);
     }
-    
+
     public function notification()
     {
         return $this->hasMany(Notification::class);
@@ -124,6 +124,6 @@ class Vendor extends Authenticatable
 
     public function favoritedByUsers()
     {
-        return $this->belongsToMany(User::class, 'favorites', 'vendor_id', 'user_id');
+        return $this->belongsToMany(User::class, 'favorities', 'vendor_id', 'user_id');
     }
 }

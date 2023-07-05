@@ -45,14 +45,12 @@ class VendorController extends Controller
     }
     public function searchedList(Request $request)
     {
-        $user = Auth::user();
+        
         $vendors = Vendor::whereJsonContains('language', $request->form)
             ->whereJsonContains('language',  $request->to)
             ->where('status', 1)
             ->has('service')
-            ->with('service')->withAvg('rating', 'rating')->with(['favoritedByUsers' => function ($query) use ($user) {
-                $query->where('id', $user->id);
-            }])
+            ->with('service')->withAvg('rating', 'rating')
             ->get();
             
         return Api::setResponse('vendor', $vendors);

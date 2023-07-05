@@ -35,7 +35,7 @@ class VendorController extends Controller
     public function edit(Request $request,)
     {
         $vendor = Vendor::where('api_token', $request->api_token)->first();
-        $vendor->profile = 1;
+        $vendor->profile = '1';
 
         $vendor->update($request->all());
         return Api::setResponse('vendor', $vendor);

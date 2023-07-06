@@ -21,4 +21,9 @@ class Favorities extends Model
     {
         return $this->belongsTo(Vendor::class,'vendor_id','id');
     }
+    public function rating()
+    {
+        return $this->belongsTo(Rating::class,);
+    }
+
 }

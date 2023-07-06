@@ -25,7 +25,7 @@ class FavoritiesController extends Controller
 
         if ($existingFavorite) {
             $existingFavorite->delete();
-            return response()->json(['message' => 'vendor will be unFavorite']);
+            return Api::setResponse('favourit', false);
         }
 
         // Delete any existing favorite entry for the same user and vendor
@@ -40,7 +40,7 @@ class FavoritiesController extends Controller
         ]);
 
 
-        return Api::setResponse('favorities', $data);
+        return Api::setResponse('favourit', true);
     }
 
     public function userCheck(Request $request)

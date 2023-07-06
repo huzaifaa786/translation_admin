@@ -45,7 +45,8 @@ class FavoritiesController extends Controller
 
     public function userCheck(Request $request)
     {
-        $check = Favorities::where('user_id', Auth::guard('api')->user()->id)->where('vendor_id', $request->vendor_id)->first();
+        $check = Favorities::where('user_id', Auth::guard('api')->user()->id)->where('vendor_id', $request->id)->first();
+        
         if ($check) {
             return Api::setResponse('favourit', true);
         }

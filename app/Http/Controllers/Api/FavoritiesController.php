@@ -55,7 +55,7 @@ class FavoritiesController extends Controller
     public function getfavorities(Request $request)
     {
 
-        $vendor = Favorities::where('user_id', Auth::guard('api')->user()->id)->with('vendor')->with('rating')->orderByDesc('created_at')->get();
+        $vendor = Favorities::where('user_id', Auth::guard('api')->user()->id)->with('vendor')->with('vendor.service')->with('vendor.rating')->orderByDesc('created_at')->get();
         return Api::setResponse('vendors', $vendor);
     }
 

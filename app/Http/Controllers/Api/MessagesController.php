@@ -171,17 +171,17 @@ class MessagesController extends Controller
             NotificationHelper::vendor($notification, $token);
         } else {
             $user = User::find($request['id']);
-            dd($request['id']);
+         
 
             $notification = Notification::create([
                 'user_id' => $request['id'],
                 'vendor_id' => Auth::user()->id,
 
                 'for_user' => '1',
-                // 'company_id' => $request->company_id,
+           
                 'title' => 'New message',
                 'body' => 'Click to View',
-                ''
+                
 
             ]);
             $token = $user->firebase_token;

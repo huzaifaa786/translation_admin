@@ -163,7 +163,7 @@ class MessagesController extends Controller
                 'vendor_id' => $request['id'],
 
                 'user_id' => Auth::user()->id,
-                'title' => 'New order placed',
+                'title' => 'New message from '.Auth::user()->name,
                 'body' => 'Click to View',
                 'for_vendor' => '1'
             ]);
@@ -180,7 +180,7 @@ class MessagesController extends Controller
 
                 'for_user' => '1',
            
-                'title' => 'New message',
+                'title' => 'New message from '.Auth::user()->name,
                 'body' => 'Click to View',
                 
 

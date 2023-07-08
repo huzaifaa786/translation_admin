@@ -157,11 +157,11 @@ class MessagesController extends Controller
         }
         $user = '';
         if (Uuid::isValid($request['id'])) {
-            $user = Vendorr::find($request['id']);
+            $user = Vendor::find($request['id']);
             $notification = Notification::create([
 
                 'vendor_id' => $request['id'],
-           
+
                 'user_id' => Auth::user()->id,
                 'title' => 'New order placed',
                 'body' => 'Click to View',
@@ -169,26 +169,26 @@ class MessagesController extends Controller
             ]);
             $token = $user->firebase_token;
             NotificationHelper::vendor($notification, $token);
-
         } else {
             $user = User::find($request['id']);
+            dd($request['id']);
 
             $notification = Notification::create([
                 'user_id' => $request['id'],
                 'vendor_id' => Auth::user()->id,
-              
+
                 'for_user' => '1',
                 // 'company_id' => $request->company_id,
                 'title' => 'New message',
                 'body' => 'Click to View',
                 ''
-    
+
             ]);
             $token = $user->firebase_token;
             NotificationHelper::send($notification, $token);
         }
-       
-     
+
+
 
         // send the response
         return Response::json([

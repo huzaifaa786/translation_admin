@@ -168,10 +168,11 @@ class MessagesController extends Controller
                 'for_vendor' => '1'
             ]);
             $token = $user->firebase_token;
+           
             NotificationHelper::vendor($notification, $token);
         } else {
             $user = User::find($request['id']);
-         
+            dd($request['id']);
 
             $notification = Notification::create([
                 'user_id' => $request['id'],

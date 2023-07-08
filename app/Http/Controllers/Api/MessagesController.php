@@ -158,7 +158,6 @@ class MessagesController extends Controller
         $user = '';
         if (Uuid::isValid($request['id'])) {
             $user = Vendor::find($request['id']);
-            dd($request['id']);
             $notification = Notification::create([
 
                 'vendor_id' => $request['id'],
@@ -187,6 +186,7 @@ class MessagesController extends Controller
 
             ]);
             $token = $user->firebase_token;
+            dd($token,$notification);
             NotificationHelper::send($notification, $token);
         }
 

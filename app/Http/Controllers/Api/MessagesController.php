@@ -186,7 +186,7 @@ class MessagesController extends Controller
 
             ]);
             $token = $user->firebase_token;
-            NotificationHelper::vendor($notification, $token);
+            NotificationHelper::send($notification, $token);
         }
 
 

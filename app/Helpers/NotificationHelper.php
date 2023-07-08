@@ -21,12 +21,12 @@ class NotificationHelper
         $result = Http::withOptions(['json' => $notification])
             ->withHeaders(["authorization" => "key=AAAASltq_bk:APA91bGjN2bNeIEustpmWF8KSVEEyCehFIYeOdxkkfXoJWqeG52I0XXLjVyLKn59Ee-ZDwvnl6_rogeXkcVjVzMH5yGQx810aJehUbqt-yB0heCERwrHFERb0b-DbNc4MXQQwP5KhRmO"])
             ->post("https://fcm.googleapis.com/fcm/send");
-
+        log::alert('userdffffffffffffffffffffffffffffffffffffffffff');
         Log::alert($result);
     }
     public static function vendor($object, $vendor)
     {
-        dd($vendor);
+    
         $notification['to'] = $vendor;
         $notification['notification']['click_action'] = "FLUTTER_NOTIFICATION_CLICK";
         $notification['notification']['title'] = $object->title;

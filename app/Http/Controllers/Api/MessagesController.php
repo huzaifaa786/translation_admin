@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\NotificationHelper;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Models\ChMessage as Message;
 use App\Models\ChFavorite as Favorite;
+use App\Models\Notification;
 use Chatify\Facades\ChatifyMessenger as Chatify;
 use App\Models\User;
+use App\Models\Vendor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -152,6 +155,40 @@ class MessagesController extends Controller
                 ]);
             }
         }
+        $user = '';
+        if (Uuid::isValid($request['id'])) {
+            $user = Vendorr::find($request['id']);
+            $notification = Notification::create([
+
+                'vendor_id' => $request['id'],
+           
+                'user_id' => Auth::user()->id,
+                'title' => 'New order placed',
+                'body' => 'Click to View',
+                'for_vendor' => '1'
+            ]);
+            $token = $user->firebase_token;
+            NotificationHelper::vendor($notification, $token);
+
+        } else {
+            $user = User::find($request['id']);
+
+            $notification = Notification::create([
+                'user_id' => $request['id'],
+                'vendor_id' => Auth::user()->id,
+              
+                'for_user' => '1',
+                // 'company_id' => $request->company_id,
+                'title' => 'New message',
+                'body' => 'Click to View',
+                ''
+    
+            ]);
+            $token = $user->firebase_token;
+            NotificationHelper::send($notification, $token);
+        }
+       
+     
 
         // send the response
         return Response::json([
@@ -242,7 +279,7 @@ class MessagesController extends Controller
                 ->groupBy('vendors.id')
                 ->paginate($request->per_page ?? $this->perPage);
         }
-       
+
 
         return response()->json([
             'contacts' => $users->items(),

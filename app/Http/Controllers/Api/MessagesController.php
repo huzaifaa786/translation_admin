@@ -147,9 +147,13 @@ class MessagesController extends Controller
             $messageData = Chatify::parseMessage($message);
             if ($messageData['attachment']['file'] != null) {
                 $path = config('chatify.attachments.folder') . '/' . $messageData['attachment']['file'];
-               
+
                 if (Chatify::storage()->exists($path)) {
-                    $messageData['attachment']['file_url'] = Chatify::storage()->url($path);
+                    $messageData['attachment'](
+                        [
+                            'file_url' => Chatify::storage()->url($path)
+                        ]
+                    );
                 }
             }
             // send to user using pusher
@@ -169,26 +173,26 @@ class MessagesController extends Controller
                 'vendor_id' => $request['id'],
 
                 'user_id' => Auth::user()->id,
-                'title' => 'New message from '.Auth::user()->name,
+                'title' => 'New message from ' . Auth::user()->name,
                 'body' => 'Click to View',
                 'for_vendor' => '1'
             ]);
             $token = $user->firebase_token;
-           
+
             NotificationHelper::vendor($notification, $token);
         } else {
             $user = User::find($request['id']);
-         
+
 
             $notification = Notification::create([
                 'user_id' => $request['id'],
                 'vendor_id' => Auth::user()->id,
 
                 'for_user' => '1',
-           
-                'title' => 'New message from '.Auth::user()->name,
+
+                'title' => 'New message from ' . Auth::user()->name,
                 'body' => 'Click to View',
-                
+
 
             ]);
             $token = $user->firebase_token;

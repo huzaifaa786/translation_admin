@@ -146,7 +146,7 @@ class MessagesController extends Controller
             // fetch message to send it with the response
             $messageData = Chatify::parseMessage($message);
             if ($messageData['attachment']->file != null) {
-                $path = config('chatify.attachments.folder') . '/' . $messageData['attachment']['file'];
+                $path = config('chatify.attachments.folder') . '/' . $messageData['attachment']->file;
 
                 if (Chatify::storage()->exists($path)) {
                     $messageData['attachment'](

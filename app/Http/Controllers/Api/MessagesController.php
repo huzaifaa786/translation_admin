@@ -20,7 +20,7 @@ use Ramsey\Uuid\Uuid;
 
 class MessagesController extends Controller
 {
-    protected $perPage = 30;
+    protected $perPage = 100000;
 
     /**
      * Authinticate the connection for pusher

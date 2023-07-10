@@ -149,11 +149,8 @@ class MessagesController extends Controller
                 $path = config('chatify.attachments.folder') . '/' . $messageData['attachment']->file;
 
                 if (Chatify::storage()->exists($path)) {
-                    $messageData['attachment'](
-                        [
-                            'file_url' => Chatify::storage()->url($path)
-                        ]
-                    );
+                    $messageData['attachment']->file_url = Chatify::storage()->url($path);
+                        
                 }
             }
             // send to user using pusher

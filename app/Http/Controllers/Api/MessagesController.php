@@ -222,7 +222,7 @@ class MessagesController extends Controller
         $totalMessages = $messages->total();
         $lastPage = $messages->lastPage();
         $msgs= $messages->items();
-        dd($msgs);
+        dd(count($msgs));
         foreach ($msgs as $key => $msg) {
             if (isset($msg->attachment)) {
                 $attachmentOBJ = json_decode($msg->attachment);

@@ -145,7 +145,13 @@ class MessagesController extends Controller
 
             // fetch message to send it with the response
             $messageData = Chatify::parseMessage($message);
-
+            if ($messageData['attachment']['file'] != null) {
+                $path = config('chatify.attachments.folder') . '/' . $messageData['attachment']['file'];
+               
+                if (Chatify::storage()->exists($path)) {
+                    $messageData['attachment']['file_url'] = Chatify::storage()->url($path);
+                }
+            }
             // send to user using pusher
             if (Auth::user()->id != $request['id']) {
                 Chatify::push("private-chatify." . $request['id'], 'messaging', [

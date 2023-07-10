@@ -221,7 +221,8 @@ class MessagesController extends Controller
         $messages = $query->paginate($request->per_page ?? $this->perPage);
         $totalMessages = $messages->total();
         $lastPage = $messages->lastPage();
-        $msgs= $messages->items()->get();
+        $msgs= $messages->items();
+        dd($msgs);
         foreach ($msgs as $key => $msg) {
             if (isset($msg->attachment)) {
                 $attachmentOBJ = json_decode($msg->attachment);

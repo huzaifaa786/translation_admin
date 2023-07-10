@@ -215,6 +215,7 @@ class MessagesController extends Controller
     public function fetch(Request $request)
     {
         $query = Chatify::fetchMessagesQuery($request['id'])->orderBy('created_at');
+        dd($query);
         foreach ($query as $key => $msg) {
             if (isset($msg->attachment)) {
                 $attachmentOBJ = json_decode($msg->attachment);

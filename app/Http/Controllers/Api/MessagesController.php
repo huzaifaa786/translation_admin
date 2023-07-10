@@ -216,15 +216,41 @@ class MessagesController extends Controller
     public function fetch(Request $request)
     {
         $query = Chatify::fetchMessagesQuery($request['id'])->orderBy('created_at');
-        
         $messages = $query->paginate($request->per_page ?? $this->perPage);
         $totalMessages = $messages->total();
         $lastPage = $messages->lastPage();
+        $msgs= $messages->items();
+     
+        foreach ($msgs as $key => $msg) {
+            if (isset($msg->attachment)) {
+                $attachmentOBJ = json_decode($msg->attachment);
+                $attachment = $attachmentOBJ->new_name;
+                $attachment_title = htmlentities(trim($attachmentOBJ->old_name), ENT_QUOTES, 'UTF-8');
+                $ext = pathinfo($attachment, PATHINFO_EXTENSION);
+                $attachment_type = in_array($ext, $this->getAllowedImages()) ? 'image' : 'file';
+            } else {
+                // If the message doesn't have an attachment, set default values
+                $attachment = null;
+                $attachment_title = null;
+                $attachment_type = null;
+            }
+        
+            // Create the 'attachment' object
+            $attachmentObject = (object) [
+                'file' => $attachment,
+                'title' => $attachment_title,
+                'type' => $attachment_type
+            ];
+        
+            // Update the message object in the query collection
+            $msg->attachment = $attachmentObject;
+            $msgs[$key] = $msg;
+        }
         $response = [
             'total' => $totalMessages,
             'last_page' => $lastPage,
             'last_message_id' => collect($messages->items())->last()->id ?? null,
-            'messages' => $messages->items(),
+            'messages' => $msgs,
         ];
         return Response::json($response);
     }

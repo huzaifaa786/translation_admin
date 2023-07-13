@@ -45,7 +45,7 @@ class FileHelper
 
         $object = new stdClass();
         $object->name = 'File-'. uniqid();
-        $object->handle = $file->storeAs('public/files', $fileName);
+        $object->handle = $file->storeAs('files', $fileName);
         return $object->handle;
     }
     public static function saveCVFile($file){

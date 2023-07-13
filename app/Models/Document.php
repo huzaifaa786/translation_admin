@@ -28,8 +28,7 @@ class Document extends Model
     public function getFileAttribute($file)
     {
         if ($file)
-            return asset('storage/app/'.$file);
-            // return  unlink(storage_path('app/'.$file));
+            return asset('storage/'.$file);
         else
             return $file;
     }

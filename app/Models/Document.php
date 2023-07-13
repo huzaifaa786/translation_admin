@@ -28,7 +28,7 @@ class Document extends Model
     public function getFileAttribute($file)
     {
         if ($file)
-            return storage_path('app/'.$file);
+            return public_path('app/'.$file);
             // return  unlink(storage_path('app/'.$file));
         else
             return $file;

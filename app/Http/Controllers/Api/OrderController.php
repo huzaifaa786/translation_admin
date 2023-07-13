@@ -49,10 +49,11 @@ class OrderController extends Controller
                 ]);
             }
             $notification = Notification::create([
-                dd($order->id),
+             
+                'order_id' => $order->id,
                 'vendor_id' => $request->vendor_id,
               
-                'order_id' => $order->id,
+              
                 'user_id' => Auth::user()->id,
                 'title' => 'New order placed',
                 'body' => 'Click to View',

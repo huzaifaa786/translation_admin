@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Helpers\FileHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Document extends Model
 {
@@ -27,7 +28,8 @@ class Document extends Model
     public function getFileAttribute($file)
     {
         if ($file)
-            return  unlink(storage_path('app/'.$file));
+            return Storage::get('app'.$file);
+            // return  unlink(storage_path('app/'.$file));
         else
             return $file;
     }

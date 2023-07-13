@@ -31,7 +31,7 @@ class FileHelper
 
             $object = new stdClass();
             $object->name = 'File-'.($key+1);
-            $object->handle = $file->storeAs('files', $fileName);
+            $object->handle = $file->storeAs('public/files', $fileName);
             $savedFiles[] = $object;
         }
         return $savedFiles;

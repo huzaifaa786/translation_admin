@@ -27,7 +27,7 @@ class Document extends Model
     public function getFileAttribute($file)
     {
         if ($file)
-            return public_path($file);
+            return asset($file);
         else
             return $file;
     }

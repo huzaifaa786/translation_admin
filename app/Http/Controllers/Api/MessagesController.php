@@ -295,7 +295,7 @@ class MessagesController extends Controller
                 })
                 ->where('users.id', '!=', Auth::user()->id)
                 ->select('users.*', DB::raw('MAX(ch_messages.created_at) as max_created_at'))
-                ->selectRaw('SUM(CASE WHEN ch_messages.is_seen = 0 AND ch_messages.to_id = '.Auth::user()->id.' THEN 1 ELSE 0 END) as unseen_count')
+                ->selectRaw('SUM(CASE WHEN ch_messages.seen = 0 AND ch_messages.to_id = '.Auth::user()->id.' THEN 1 ELSE 0 END) as unseen_count')
                 ->join('ch_messages as last_message', function ($join) {
                     $join->on('ch_messages.from_id', '=', 'last_message.from_id')
                         ->on('ch_messages.to_id', '=', 'last_message.to_id')
@@ -317,7 +317,7 @@ class MessagesController extends Controller
                 })
                 ->where('vendors.id', '!=', Auth::user()->id)
                 ->select('vendors.*', DB::raw('MAX(ch_messages.created_at) as max_created_at'))
-                ->selectRaw('SUM(CASE WHEN ch_messages.is_seen = 0 AND ch_messages.to_id = '.Auth::user()->id.' THEN 1 ELSE 0 END) as unseen_count')
+                ->selectRaw('SUM(CASE WHEN ch_messages.seen = 0 AND ch_messages.to_id = '.Auth::user()->id.' THEN 1 ELSE 0 END) as unseen_count')
                 ->join('ch_messages as last_message', function ($join) {
                     $join->on('ch_messages.from_id', '=', 'last_message.from_id')
                         ->on('ch_messages.to_id', '=', 'last_message.to_id')

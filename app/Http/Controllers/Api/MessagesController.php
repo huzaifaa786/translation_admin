@@ -325,7 +325,7 @@ if (Uuid::isValid(Auth::user()->id)) {
             });
         })
         ->leftJoin('vendors as last_message_vendor', 'last_message.from_id', '=', 'last_message_vendor.id')
-        ->whereNull('last_message_vendor.deleted_at')
+        
         ->orderBy('max_created_at', 'desc')
         ->groupBy('vendors.id')
         ->paginate($request->per_page ?? $this->perPage);

@@ -150,6 +150,7 @@ class MessagesController extends Controller
 
                 if (Chatify::storage()->exists($path)) {
                     $messageData['attachment']->file_url = Chatify::storage()->url($path);
+                        
                 }
             }
             // send to user using pusher
@@ -218,8 +219,8 @@ class MessagesController extends Controller
         $messages = $query->paginate($request->per_page ?? $this->perPage);
         $totalMessages = $messages->total();
         $lastPage = $messages->lastPage();
-        $msgs = $messages->items();
-
+        $msgs= $messages->items();
+     
         foreach ($msgs as $key => $msg) {
             if (isset($msg->attachment)) {
                 $attachmentOBJ = json_decode($msg->attachment);
@@ -233,14 +234,14 @@ class MessagesController extends Controller
                 $attachment_title = null;
                 $attachment_type = null;
             }
-
+        
             // Create the 'attachment' object
             $attachmentObject = (object) [
                 'file' => $attachment,
                 'title' => $attachment_title,
                 'type' => $attachment_type
             ];
-
+        
             // Update the message object in the query collection
             $msg->attachment = $attachmentObject;
             $msgs[$key] = $msg;
@@ -280,62 +281,46 @@ class MessagesController extends Controller
     {
 
 
-// get all users that received/sent messages from/to [Auth user]
-if (Uuid::isValid(Auth::user()->id)) {
-    $users = Message::join('users', function ($join) {
-        $join->on('ch_messages.from_id', '=', 'users.id')
-            ->orOn('ch_messages.to_id', '=', 'users.id');
-    })
-        ->where(function ($q) {
-            $q->where('ch_messages.from_id', Auth::user()->id)
-                ->orWhere('ch_messages.to_id', Auth::user()->id);
-        })
-        ->where('users.id', '!=', Auth::user()->id)
-        ->select('users.*', DB::raw('MAX(ch_messages.created_at) as max_created_at'))
-        ->selectRaw('SUM(CASE WHEN ch_messages.seen = 0 AND ch_messages.to_id = ' . Auth::user()->id . ' THEN 1 ELSE 0 END) as unseen_count')
-        ->join('ch_messages as last_message', function ($join) {
-            $join->on(function ($query) {
-                $query->on('ch_messages.from_id', '=', 'last_message.from_id')
-                    ->on('ch_messages.to_id', '=', 'last_message.to_id')
-                    ->where('ch_messages.created_at', '<', 'last_message.created_at');
-            });
-        })
-        ->leftJoin('users as last_message_user', 'last_message.from_id', '=', 'last_message_user.id')
-        ->whereNull('last_message_user.deleted_at')
-        ->orderBy('max_created_at', 'desc')
-        ->groupBy('users.id')
-        ->paginate($request->per_page ?? $this->perPage);
-} else {
-    $users = Message::join('vendors', function ($join) {
-        $join->on('ch_messages.from_id', '=', 'vendors.id')
-            ->orOn('ch_messages.to_id', '=', 'vendors.id');
-    })
-        ->where(function ($q) {
-            $q->where('ch_messages.from_id', Auth::user()->id)
-                ->orWhere('ch_messages.to_id', Auth::user()->id);
-        })
-        ->where('vendors.id', '!=', Auth::user()->id)
-        ->select('vendors.*', DB::raw('MAX(ch_messages.created_at) as max_created_at'))
-        ->selectRaw('SUM(CASE WHEN ch_messages.seen = 0 AND ch_messages.to_id = ' . Auth::user()->id . ' THEN 1 ELSE 0 END) as unseen_count')
-        ->join('ch_messages as last_message', function ($join) {
-            $join->on(function ($query) {
-                $query->on('ch_messages.from_id', '=', 'last_message.from_id')
-                    ->on('ch_messages.to_id', '=', 'last_message.to_id')
-                    ->where('ch_messages.created_at', '<', 'last_message.created_at');
-            });
-        })
-        ->leftJoin('vendors as last_message_vendor', 'last_message.from_id', '=', 'last_message_vendor.id')
-        
-        ->orderBy('max_created_at', 'desc')
-        ->groupBy('vendors.id')
-        ->paginate($request->per_page ?? $this->perPage);
-}
 
-return response()->json([
-    'contacts' => $users->items(),
-    'total' => $users->total() ?? 0,
-    'last_page' => $users->lastPage() ?? 1,
-], 200);
+
+
+        // get all users that received/sent message from/to [Auth user]
+        if (Uuid::isValid(Auth::user()->id)) {
+            $users = Message::join('users',  function ($join) {
+                $join->on('ch_messages.from_id', '=', 'users.id')
+                    ->orOn('ch_messages.to_id', '=', 'users.id');
+            })
+                ->where(function ($q) {
+                    $q->where('ch_messages.from_id', Auth::user()->id)
+                        ->orWhere('ch_messages.to_id', Auth::user()->id);
+                })
+                ->where('users.id', '!=', Auth::user()->id)
+                ->select('users.*', DB::raw('MAX(ch_messages.created_at) max_created_at'))
+                ->orderBy('max_created_at', 'desc')
+                ->groupBy('users.id')
+                ->paginate($request->per_page ?? $this->perPage);
+        } else {
+            $users = Message::join('vendors',  function ($join) {
+                $join->on('ch_messages.from_id', '=', 'vendors.id')
+                    ->orOn('ch_messages.to_id', '=', 'vendors.id');
+            })
+                ->where(function ($q) {
+                    $q->where('ch_messages.from_id', Auth::user()->id)
+                        ->orWhere('ch_messages.to_id', Auth::user()->id);
+                })
+                ->where('vendors.id', '!=', Auth::user()->id)
+                ->select('vendors.*', DB::raw('MAX(ch_messages.created_at) max_created_at'))
+                ->orderBy('max_created_at', 'desc')
+                ->groupBy('vendors.id')
+                ->paginate($request->per_page ?? $this->perPage);
+        }
+
+
+        return response()->json([
+            'contacts' => $users->items(),
+            'total' => $users->total() ?? 0,
+            'last_page' => $users->lastPage() ?? 1,
+        ], 200);
     }
 
     /**

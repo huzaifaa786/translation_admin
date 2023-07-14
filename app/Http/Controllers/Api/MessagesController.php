@@ -277,7 +277,11 @@ class MessagesController extends Controller
      */
     public function getUnSeenCount(Request $request)
     {
-        $msgCount = Message::where('seen', 0)->where('to_id', Auth::user()->id)->get()->count();
+        $msgCount = Message::where('seen', 0)->where('to_id', Auth::user()->id)->get('from_id')->toArray();
+
+        count(array_unique($msgCount));
+
+
         return Response::json([
             'unseen' => $msgCount,
         ], 200);

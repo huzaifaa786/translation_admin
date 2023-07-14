@@ -21,6 +21,7 @@ class NotificationController extends Controller
     {
         $user = Auth::guard('api')->user()->id;
         $notification = Notification::where('user_id', $user)->where('for_user', 1)->with('vendor')->with('order')->orderByDesc('created_at')->get();
+        
         return Api::setResponse('notifications', $notification);
     }
 

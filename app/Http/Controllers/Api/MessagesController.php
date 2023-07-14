@@ -150,7 +150,6 @@ class MessagesController extends Controller
 
                 if (Chatify::storage()->exists($path)) {
                     $messageData['attachment']->file_url = Chatify::storage()->url($path);
-                        
                 }
             }
             // send to user using pusher
@@ -219,8 +218,8 @@ class MessagesController extends Controller
         $messages = $query->paginate($request->per_page ?? $this->perPage);
         $totalMessages = $messages->total();
         $lastPage = $messages->lastPage();
-        $msgs= $messages->items();
-     
+        $msgs = $messages->items();
+
         foreach ($msgs as $key => $msg) {
             if (isset($msg->attachment)) {
                 $attachmentOBJ = json_decode($msg->attachment);
@@ -234,14 +233,14 @@ class MessagesController extends Controller
                 $attachment_title = null;
                 $attachment_type = null;
             }
-        
+
             // Create the 'attachment' object
             $attachmentObject = (object) [
                 'file' => $attachment,
                 'title' => $attachment_title,
                 'type' => $attachment_type
             ];
-        
+
             // Update the message object in the query collection
             $msg->attachment = $attachmentObject;
             $msgs[$key] = $msg;
@@ -272,6 +271,19 @@ class MessagesController extends Controller
     }
 
     /**
+     * Get unseen count
+     *
+   
+     */
+    public function getUnSeenCount(Request $request)
+    {
+        $msgCount = Message::where('seen', 0)->where('to_id', Auth::user()->id)->get()->count();
+        return Response::json([
+            'unseen' => $msgCount,
+        ], 200);
+    }
+
+    /**
      * Get contacts list
      *
      * @param Request $request
@@ -279,10 +291,6 @@ class MessagesController extends Controller
      */
     public function getContacts(Request $request)
     {
-
-
-
-
 
         // get all users that received/sent message from/to [Auth user]
         if (Uuid::isValid(Auth::user()->id)) {

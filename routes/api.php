@@ -120,7 +120,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         /**
          * Make messages as seen
          */
-        Route::post('/makeSeen', 'MessagesController@seen')->name('api.messages.seen');
+        Route::post('/makeSeen', 'MessagesController@seen')->name('api.messages.seen');Route::post('/unseen/all', 'MessagesController@getUnSeenCount')->name('api.messages.unseen');
 
         /**
          * Get contacts

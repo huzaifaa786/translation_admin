@@ -310,6 +310,7 @@ class MessagesController extends Controller
                 })
                 ->where('vendors.id', '!=', Auth::user()->id)
                 ->select('vendors.*', DB::raw('MAX(ch_messages.created_at) max_created_at'))
+                ->selectRaw('SUM(CASE WHEN ch_messages.seen = 0 AND ch_messages.to_id = ' . Auth::user()->id . ' THEN 1 ELSE 0 END) as unseen_count')
                 ->orderBy('max_created_at', 'desc')
                 ->groupBy('vendors.id')
                 ->paginate($request->per_page ?? $this->perPage);

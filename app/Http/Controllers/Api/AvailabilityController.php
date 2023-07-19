@@ -78,6 +78,7 @@ class AvailabilityController extends Controller
         }
 
         $service = Service::where('vendor_id', $request->vendor_id)->first();
+        dd($service);
 
         if (!$service) {
             return Api::setError('Service not found');

@@ -21,6 +21,7 @@ class Vendor extends Authenticatable
         'DOB',
         'passport',
         'certificate',
+        'certificate_name',
         'api_token',
         'password',
         'status',
@@ -66,6 +67,11 @@ class Vendor extends Authenticatable
     public function setCertificateAttribute($value)
     {
         $this->attributes['certificate'] = ImageHelper::saveImageFromApi($value, 'images');
+        $this->attributes['certificate_name'] = $value->getClientOriginalName();
+    }
+    
+    public function setCertificateNameAttribute($value)
+    {
     }
     public function getPassportAttribute($value)
     {

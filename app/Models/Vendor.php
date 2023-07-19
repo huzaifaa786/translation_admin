@@ -21,7 +21,7 @@ class Vendor extends Authenticatable
         'DOB',
         'passport',
         'certificate',
-        'certificate_name',
+        'certifcate_name',
         'api_token',
         'password',
         'status',

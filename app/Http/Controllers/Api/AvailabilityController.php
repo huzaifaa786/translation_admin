@@ -64,6 +64,7 @@ class AvailabilityController extends Controller
             })
             ->first();
 
+            dd($existingOrder);
         return $existingOrder;
     }
 

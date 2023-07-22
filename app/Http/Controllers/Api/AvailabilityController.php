@@ -64,7 +64,7 @@ class AvailabilityController extends Controller
             })
             ->first();
 
-        return !$existingOrder;
+        return $existingOrder;
     }
 
     public function checkAvailability(Request $request)

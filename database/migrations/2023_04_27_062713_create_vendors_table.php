@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('passport');
             $table->string('number')->nullable();
             $table->string('profilepic')->nullable();
-            $table->string('certificate')->nullable();;
+            $table->string('certificate')->nullable();
+            $table->string('cvimage')->nullable();
             $table->string('status')->default(0);
             $table->string('about(Eng)')->nullable();
             $table->string('about(arabic)')->nullable();

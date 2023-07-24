@@ -31,7 +31,8 @@ class Vendor extends Authenticatable
         'profilepic',
         'firebase_token',
         'about(Eng)',
-        'about(arabic)'
+        'about(arabic)',
+        'cvimage',
 
     ];
     protected $hidden = [

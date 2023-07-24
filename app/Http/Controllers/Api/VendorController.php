@@ -45,7 +45,7 @@ class VendorController extends Controller
     }
     public function searchedList(Request $request)
     {
-        dd($request);
+       
         
         $vendors = Vendor::whereJsonContains('language', $request->form)
             ->whereJsonContains('language',  $request->to)
@@ -53,7 +53,7 @@ class VendorController extends Controller
             ->has('service')
             ->with('service')->withAvg('rating', 'rating')
             ->get();
-            
+            dd($vendors);
         return Api::setResponse('vendor', $vendors);
     }
     

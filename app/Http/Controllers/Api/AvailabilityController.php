@@ -64,7 +64,7 @@ class AvailabilityController extends Controller
             })
             ->first();
 
-        return !$existingOrder;
+        return $existingOrder;
     }
 
     public function checkAvailability(Request $request)
@@ -79,7 +79,7 @@ class AvailabilityController extends Controller
 
         $service = Service::where('vendor_id', $request->vendor_id)->first();
 
-        if (!$service) {
+        if ($service == null) {
             return Api::setError('Service not found');
         }
 
@@ -92,7 +92,7 @@ class AvailabilityController extends Controller
      
         $vendorId = $request->vendor_id;
 
-        if (!$this->isOrderAvailable($vendorId, $date, $startTime, $endTime)) {
+        if ($this->isOrderAvailable($vendorId, $date, $startTime, $endTime) != null) {
             return Api::setError('Translator not available');
         }
 

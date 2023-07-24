@@ -69,6 +69,11 @@ class Vendor extends Authenticatable
     {
         $this->attributes['certificate'] = ImageHelper::saveImageFromApi($value, 'images');
     }
+
+    public function setCvAttribute($value)
+    {
+        $this->attributes['cvimage'] = ImageHelper::saveImageFromApi($value, 'images');
+    }
     
     public function setCertificateNameAttribute($value)
     {
@@ -88,6 +93,14 @@ class Vendor extends Authenticatable
             return $value;
     }
     public function getProfilepicAttribute($value)
+    {
+        if ($value)
+            return asset($value);
+        else
+            return $value;
+    }
+
+    public function getCvAttribute($value)
     {
         if ($value)
             return asset($value);

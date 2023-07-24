@@ -53,7 +53,7 @@ class VendorController extends Controller
             ->has('service')
             ->with('service')->withAvg('rating', 'rating')
             ->get();
-            dd($vendors);
+       
         return Api::setResponse('vendor', $vendors);
     }
     

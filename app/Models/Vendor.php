@@ -33,7 +33,7 @@ class Vendor extends Authenticatable
         'firebase_token',
         'about(Eng)',
         'about(arabic)',
-        'cvimage',
+        'cvImage',
 
     ];
     protected $hidden = [
@@ -72,7 +72,7 @@ class Vendor extends Authenticatable
 
     public function setCvAttribute($value)
     {
-        $this->attributes['cvimage'] = ImageHelper::saveImageFromApi($value, 'images');
+        $this->attributes['cvImage'] = ImageHelper::saveImageFromApi($value, 'images');
     }
     
     public function setCertificateNameAttribute($value)

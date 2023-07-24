@@ -45,6 +45,7 @@ class VendorController extends Controller
     }
     public function searchedList(Request $request)
     {
+        dd($request);
         
         $vendors = Vendor::whereJsonContains('language', $request->form)
             ->whereJsonContains('language',  $request->to)

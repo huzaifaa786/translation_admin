@@ -185,10 +185,10 @@ class OrderController extends Controller
  public function orderrating(Request $request)
  {
      // Retrieve orders for the specified user with status 3
-     $data = Order::where('user_id', $request->user_id)->where('status', 3)->latest('created_at')->with('vendor')->get();
- 
-     // Create an empty array to hold orders without ratings
-     $ordersWithoutRating = [];
+     $data = Order::where('user_id', $request->user_id)
+         ->where('status', 3)
+         ->with('vendor')
+         ->first();
  
      // Loop through each order and check if it has a rating
      foreach ($data as $order) {
@@ -196,14 +196,15 @@ class OrderController extends Controller
  
          // Check if the order has no rating
          if ($rating === null) {
-             // Add the order to the array of orders without ratings
+             // Add a flag for orders without ratings
              $order->has_rating = false;
-             $ordersWithoutRating[] = $order;
+         } else {
+             $order->has_rating = true;
          }
      }
  
-     // Return the orders without ratings as the API response
-     return Api::setResponse('order', $ordersWithoutRating);
+     // Return the orders (with the 'has_rating' flag) as the API response
+     return Api::setResponse('orders', $data);
  }
  
 

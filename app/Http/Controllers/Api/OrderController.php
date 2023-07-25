@@ -187,14 +187,8 @@ class OrderController extends Controller
 
         // Loop through each order and check if it has a rating
         foreach ($data as $order) {
-            if ($order->status == 3) {
-                // If the order status is 3, set has_rating to false and continue to the next order
-                $order->has_rating = false;
-                continue;
-            }
-
             $rating = Rating::where('order_id', $order->id)->first();
-
+    
             if ($rating === null) {
                 // Add an additional key-value pair to indicate no rating
                 $order->has_rating = false;

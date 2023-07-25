@@ -183,12 +183,7 @@ class OrderController extends Controller
     public function orderrating(Request $request)
     {
 
-        $data = Order::where('user_id', $request->user_id)
-            ->with('document')
-            ->with('user')
-            ->with('vendor')
-            ->orderByDesc('created_at')
-            ->get();
+        $data = Order::where('user_id', $request->user_id)->get();
 
         // Loop through each order and check if it has a rating
         foreach ($data as $order) {

@@ -179,34 +179,31 @@ class OrderController extends Controller
         NotificationHelper::send($notification, $token);
         return Api::setResponse('orders', $order);
     }
-    public function orderrating(Request $request)
-    {
-        $data = Order::where('user_id', $request->user_id)->where('status', 3)->get();
-    
-        $hasOrderWithoutRating = false; // Flag to indicate if there's an order without rating
-    
-        // Loop through each order and check if it has a rating
-        foreach ($data as $order) {
-            $rating = Rating::where('order_id', $order->id)->first();
-    
-            if ($rating === null) {
-                // Set the flag to true if an order without rating is found
-                $hasOrderWithoutRating = true;
-                // Add the flag to the order to indicate no rating
-                $order->has_rating = false;
-            } else {
-                // Add the rating details to the order
-                $order->rating = $rating;
-            }
-        }
-    
-        // Now you can return the appropriate response based on the flag
-        if ($hasOrderWithoutRating) {
-            return Api::setResponse('has_rating', false, 'order', $data);
-        } else {
-            return Api::setResponse('has_rating', true);
+
+ // Assuming you have the necessary classes and dependencies imported/defined.
+
+public function orderrating(Request $request)
+{
+    // Retrieve orders for the specified user with status 3
+    $data = Order::where('user_id', $request->user_id)->where('status', 3)->get();
+
+    // Create an empty array to hold orders without ratings
+    $ordersWithoutRating = [];
+
+    // Loop through each order and check if it has a rating
+    foreach ($data as $order) {
+        $rating = Rating::where('order_id', $order->id)->first();
+
+        // Check if the order has no rating
+        if ($rating === null) {
+            // Add the order to the array of orders without ratings
+            $order->has_rating = false;
+            $ordersWithoutRating[] = $order;
         }
     }
-    
-    
+
+    // Return the orders without ratings as the API response
+    return Api::setResponse('order', $ordersWithoutRating);
+}
+
 }

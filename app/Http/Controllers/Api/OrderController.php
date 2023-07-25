@@ -32,8 +32,8 @@ class OrderController extends Controller
                 'servicetype' => $request->servicetype,
                 'scheduletype' => $request->scheduletype,
                 'vendor_id' => $request->vendor_id,
-                'longitude'=>$request->longitude,
-                'latitude'=>$request->latitude,
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude,
             ]);
 
             if ($request->servicetype == 'document') {
@@ -49,11 +49,11 @@ class OrderController extends Controller
                 ]);
             }
             $notification = Notification::create([
-             
+
                 'order_id' => $order->id,
                 'vendor_id' => $request->vendor_id,
-              
-              
+
+
                 'user_id' => Auth::user()->id,
                 'title' => 'New order placed',
                 'body' => 'Click to View',
@@ -177,5 +177,37 @@ class OrderController extends Controller
 
         NotificationHelper::send($notification, $token);
         return Api::setResponse('orders', $order);
+    }
+
+    public function orderrating(Request $request)
+    {
+        $data = Order::where('user_id', $request->user_id)
+            ->with('document')
+            ->with('user')
+            ->with('vendor')
+            ->orderByDesc('created_at')
+            ->get();
+
+        // Loop through each order and check if it has a rating
+        foreach ($data as $order) {
+            if ($order->status == 3) {
+                // If the order status is 3, set has_rating to false and continue to the next order
+                $order->has_rating = false;
+                continue;
+            }
+
+            $rating = Rating::where('order_id', $order->id)->first();
+
+            if ($rating === null) {
+                // Add an additional key-value pair to indicate no rating
+                $order->has_rating = false;
+            } else {
+                // Add the rating details to the order
+                $order->rating = $rating;
+                $order->has_rating = true;
+            }
+        }
+
+        return Api::setResponse('order', $data);
     }
 }

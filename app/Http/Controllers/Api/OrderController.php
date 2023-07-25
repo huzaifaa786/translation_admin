@@ -187,7 +187,7 @@ class OrderController extends Controller
      // Retrieve the latest order for the specified user with status 3
      $order = Order::where('user_id', $request->user_id)
          ->where('status', 3)
-         ->with('vendor')
+         ->with('vendor')->with('user')
          ->latest('created_at')
          ->first();
  

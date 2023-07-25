@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Notification;
 use App\Models\Order;
+use App\Models\Rating;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\Vendor;

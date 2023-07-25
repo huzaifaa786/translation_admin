@@ -179,26 +179,28 @@ class OrderController extends Controller
         NotificationHelper::send($notification, $token);
         return Api::setResponse('orders', $order);
     }
-
     public function orderrating(Request $request)
     {
-
-        $data = Order::where('user_id', $request->user_id)->where('status',3)->get();
-
+        $data = Order::where('user_id', $request->user_id)->where('status', 3)->get();
+    
+        // Initialize an array to store orders without ratings
+        $ordersWithoutRating = [];
+    
         // Loop through each order and check if it has a rating
         foreach ($data as $order) {
             $rating = Rating::where('order_id', $order->id)->first();
     
             if ($rating === null) {
-                // Add an additional key-value pair to indicate no rating
-                $order->has_rating = false;
+                // Add the order to the new array as it has no rating
+                $ordersWithoutRating[] = $order;
             } else {
                 // Add the rating details to the order
                 $order->rating = $rating;
-                $order->has_rating = true;
             }
         }
-
-        return Api::setResponse('order', $data);
+    
+        // Now you can return the filtered data containing orders without ratings
+        return Api::setResponse('order', $ordersWithoutRating);
     }
+    
 }

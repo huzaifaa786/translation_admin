@@ -182,28 +182,29 @@ class OrderController extends Controller
 
  // Assuming you have the necessary classes and dependencies imported/defined.
 
-public function orderrating(Request $request)
-{
-    // Retrieve orders for the specified user with status 3
-    $data = Order::where('user_id', $request->user_id)->where('status', 3) ->latest('created_at')->first();
-
-    // Create an empty array to hold orders without ratings
-    $ordersWithoutRating = [];
-
-    // Loop through each order and check if it has a rating
-    foreach ($data as $order) {
-        $rating = Rating::where('order_id', $order->id)->first();
-
-        // Check if the order has no rating
-        if ($rating === null) {
-            // Add the order to the array of orders without ratings
-            $order->has_rating = false;
-            $ordersWithoutRating[] = $order;
-        }
-    }
-
-    // Return the orders without ratings as the API response
-    return Api::setResponse('order', $ordersWithoutRating);
-}
+ public function orderrating(Request $request)
+ {
+     // Retrieve orders for the specified user with status 3
+     $data = Order::where('user_id', $request->user_id)->where('status', 3)->latest('created_at')->get();
+ 
+     // Create an empty array to hold orders without ratings
+     $ordersWithoutRating = [];
+ 
+     // Loop through each order and check if it has a rating
+     foreach ($data as $order) {
+         $rating = Rating::where('order_id', $order->id)->first();
+ 
+         // Check if the order has no rating
+         if ($rating === null) {
+             // Add the order to the array of orders without ratings
+             $order->has_rating = false;
+             $ordersWithoutRating[] = $order;
+         }
+     }
+ 
+     // Return the orders without ratings as the API response
+     return Api::setResponse('order', $ordersWithoutRating);
+ }
+ 
 
 }

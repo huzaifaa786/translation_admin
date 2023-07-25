@@ -185,7 +185,7 @@ class OrderController extends Controller
  public function orderrating(Request $request)
  {
      // Retrieve orders for the specified user with status 3
-     $data = Order::where('user_id', $request->user_id)->where('status', 3)->latest('created_at')->get();
+     $data = Order::where('user_id', $request->user_id)->where('status', 3)->latest('created_at')->with('vendor')->get();
  
      // Create an empty array to hold orders without ratings
      $ordersWithoutRating = [];

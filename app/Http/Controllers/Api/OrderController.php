@@ -184,28 +184,33 @@ class OrderController extends Controller
 
  public function orderrating(Request $request)
  {
-     // Retrieve orders for the specified user with status 3
-     $data = Order::where('user_id', $request->user_id)
+     // Retrieve the latest order for the specified user with status 3
+     $order = Order::where('user_id', $request->user_id)
          ->where('status', 3)
          ->with('vendor')
+         ->latest('created_at')
          ->first();
  
-     // Loop through each order and check if it has a rating
-     foreach ($data as $order) {
+     // Check if the order exists
+     if ($order) {
+         // Check if the order has a rating
          $rating = Rating::where('order_id', $order->id)->first();
  
-         // Check if the order has no rating
+         // Add the 'has_rating' flag to the order
          if ($rating === null) {
-             // Add a flag for orders without ratings
              $order->has_rating = false;
          } else {
              $order->has_rating = true;
          }
-     }
  
-     // Return the orders (with the 'has_rating' flag) as the API response
-     return Api::setResponse('orders', $data);
+         // Return the order (with the 'has_rating' flag) as the API response
+         return Api::setResponse('order', $order);
+     } else {
+         // Return an error response if the order doesn't exist
+         return Api::setResponse('error', 'No order found with the specified criteria.', 404);
+     }
  }
+ 
  
 
 }

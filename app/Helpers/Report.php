@@ -8,6 +8,7 @@ use App\Models\Sale;
 use App\Models\Transaction;
 use App\Models\Vendor;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use stdClass;
 
 class Report
@@ -32,15 +33,15 @@ class Report
     public static function totalSale($month, $year, $vendor)
     {
         $start = Carbon::createFromDate(2023, 1, 1);
-        $end = Carbon::createFromDate($year, $month)->endOfMonth();
-    
+        $endOfMonth = Carbon::createFromDate($year, $month)->endOfMonth();
         $days = [];
-        while ($start <= $end) {
+    
+        while ($start <= $endOfMonth) {
             $obj = new stdClass();
-            $clone = clone $start;
             $obj->date = Carbon::createMidnightDate($start->year, $start->month, $start->day);
     
-            $amount = Order::whereBetween('date', [$start, $clone->endOfDay()])
+            $amount = DB::table('orders')
+                ->whereDate('date', $start)
                 ->where('status', 3)
                 ->where('vendor_id', $vendor)
                 ->sum('price');

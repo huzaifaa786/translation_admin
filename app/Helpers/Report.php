@@ -40,7 +40,7 @@ class Report
             $clone = clone $start;
             $obj->date = Carbon::createMidnightDate($start->year, $start->month, $start->day);
     
-            $amount = Order::whereBetween('created_at', [$start, $clone->endOfDay()])
+            $amount = Order::whereBetween('date', [$start, $clone->endOfDay()])
                 ->where('status', 3)
                 ->where('vendor_id', $vendor)
                 ->sum('price');

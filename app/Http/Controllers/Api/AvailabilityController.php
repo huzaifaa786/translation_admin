@@ -93,7 +93,7 @@ class AvailabilityController extends Controller
         $vendorId = $request->vendor_id;
 
         if ($this->isOrderAvailable($vendorId, $date, $startTime, $endTime) != null) {
-            return Api::setError('Translator not available');
+            return Api::setError('Timings are booked , please try other times');
         }
 
         return Api::setResponse('available', true);

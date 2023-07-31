@@ -33,6 +33,7 @@
                     <th scope="col">Order id</th>
                     <th scope="col">Vendor </th>
                     <th scope="col">Service Type </th>
+                    <th scope="col">Service name </th>
                     <th scope="col">Serive Date</th>
                     <th scope="col">Service Time</th>
                     <th scope="col">Price</th>
@@ -52,6 +53,19 @@
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->vendor->name }}</td>
                     <td>{{ $order->servicetype }}</td>
+                    <td>  
+                        @if($order->servicetype === 'schedule')
+                            @if ($order->scheduletype === 'inPerson')
+                        In Person
+                    @elseif ($order->scheduletype === 'audio/video')
+                        Audio/Video
+                   
+                    @endif
+                        @else
+                            ------
+                        
+                        @endif
+                    </td>
                     <td>{{ $order->date }}</td>
                     <td>{{ $order->starttime }} - {{$order->endtime}}</td>
                     <td>{{ $order->price }}</td>

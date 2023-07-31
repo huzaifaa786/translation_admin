@@ -21,6 +21,11 @@ class Bug extends Model
     {
         $this->attributes['picture'] = ImageHelper::saveImageFromApi($value, 'images');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function getpictureAttribute($value)
     {
         if ($value)

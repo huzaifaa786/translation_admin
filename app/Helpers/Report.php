@@ -41,7 +41,7 @@ class Report
             $obj->date = Carbon::createMidnightDate($start->year, $start->month, $start->day);
     
             $amount = DB::table('orders')
-                ->whereDate('date', $start)
+                ->whereDate('created_at', $start)
                 ->where('status', 3)
                 ->where('vendor_id', $vendor)
                 ->sum('price');

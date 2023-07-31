@@ -17,7 +17,6 @@
                         <th scope="col">language</th>
                         <th scope="col">passport</th>
                         <th scope="col">Certificate</th>
-                      
                         <th scope="col">Status</th>
                       
                       
@@ -68,15 +67,15 @@
                             </td>
                             <td>
                                 @if ($vendor->status == 1)
-                                <a 
-                                    class="btn btn-sm btn-success">Aprove
+                                <a href="{{ URL('admin/disable/' . $vendor->id) }}"
+                                    class="btn btn-sm btn-danger">Disable
                                 </a>
                                     
-                                @elseif ($vendor->status == 2)
+                                @elseif ($vendor->status == 0)
                                 
 
-                                <a 
-                                class="btn btn-sm btn-danger">reject</a>
+                                <a href="{{ URL('admin/approve/' . $vendor->id) }}"
+                                class="btn btn-sm btn-success">Enable</a>
                                 @endif
                             </td>
                         

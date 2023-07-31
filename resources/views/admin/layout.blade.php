@@ -277,24 +277,18 @@
             <a class="nav-link collapsed" href="{{ route('all-copen') }}">
                 <i class="bi bi-menu-button-wide"></i><span>Enter Coupon</span><i></i>
             </a>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Sell</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        {{-- <a href="{{ route('all-mall') }}">
-                            <i class="bi bi-circle"></i><span>Add Company</span>
-                        </a> --}}
-                    </li>
-                    <li>
-                        {{-- <a href="{{ route('all-company') }}">
-                            <i class="bi bi-circle"></i><span>All Company</span>
-                        </a> --}}
-                    </li>
-                </ul>
-            </li><!-- End Tables Nav -->
+            
+            <a class="nav-link collapsed" href="{{ route('bug.index') }}">
+                <i class="bi bi-menu-button-wide"></i><span>Bugs</span><i></i>
+            </a>
+            
+            <a class="nav-link collapsed" href="{{ route('allsales') }}">
+                <i class="bi bi-menu-button-wide"></i><span>Sales</span><i></i>
+            </a>
+            
+            <a class="nav-link collapsed" href="{{ route('companyUsers') }}">
+                <i class="bi bi-menu-button-wide"></i><span>Company Users</span><i></i>
+            </a>
 
             {{-- <a class="nav-link collapsed"  href="{{ route('all-copen') }}">
                 <i class="bi bi-menu-button-wide"></i><span>Enter Coupon</span><i></i>

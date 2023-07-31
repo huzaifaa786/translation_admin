@@ -29,6 +29,14 @@ class VendorController extends Controller
         $vendor->save();
         return redirect()->back();
     }
+    
+    public function disable($id)
+    {
+        $vendor = Vendor::find($id);
+        $vendor->status = 0;
+        $vendor->save();
+        return redirect()->back();
+    }
     public function all()
     {
 

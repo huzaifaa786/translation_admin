@@ -13,21 +13,21 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        $companyusers = User::where('is_company',true)->get();
-        return view('admin.companyUser.create')->with('companyusers',$companyusers);
+        $companyusers = User::where('is_company', true)->get();
+        return view('admin.companyUser.create')->with('companyusers', $companyusers);
     }
-        public function store(Request $request)
+    public function store(Request $request)
     {
         $credentials = ApiValidate::userregister($request,  User::class);
-        User::create([
+        $user = User::create([
             'is_company' => true,
             'user_type' => 'Email',
         ] + $credentials);
 
         Account::create([
 
-            'user_id' => $request->id,
-            'balance'=> '0'
+            'user_id' => $user->id,
+            'balance' => '0'
 
         ]);
         return redirect()->back();

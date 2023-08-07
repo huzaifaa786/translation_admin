@@ -19,8 +19,16 @@ class CompanyController extends Controller
     {
         $credentials = ApiValidate::userregister($request,  User::class);
         User::create([
-            'is_company' => true
+            'is_company' => true,
+            'user_type' => 'Email',
         ] + $credentials);
+
+        Account::create([
+
+            'user_id' => $request->id,
+            'balance'=> '0'
+
+        ]);
         return redirect()->back();
     }
 }

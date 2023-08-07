@@ -26,6 +26,10 @@
                     <label for="inputEmail4" class="form-label"> Password</label>
                     <input type="password" name="password" class="form-control" id="maximum" required>
                 </div>
+                <div class="col-6">
+                    <label for="inputEmail4" class="form-label"> Number</label>
+                    <input type="number" name="number" class="form-control" id="maximum" required>
+                </div>
               
 
                 <div class="d-flex  justify-content-end">

@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-6">
                     <label for="inputEmail4" class="form-label"> Number</label>
-                    <input type="number" name="phone" class="form-control" id="maximum" required>
+                    <input type="phone" name="phone" class="form-control" id="maximum" required>
                 </div>
               
 

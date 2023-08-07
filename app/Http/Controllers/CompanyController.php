@@ -18,6 +18,7 @@ class CompanyController extends Controller
     }
     public function store(Request $request)
     {
+        dd($request);
         $credentials = ApiValidate::userregister($request,  User::class);
         $user = User::create([
             'is_company' => true,

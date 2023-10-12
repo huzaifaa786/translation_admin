@@ -15,17 +15,20 @@ return new class extends Migration
             $table->id();
             $table->foreignuuid('vendor_id');
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
-            $table->json('urgent');
-            $table->json('unurgent');
-            $table->json('schedual');
-            $table->string('inperson');
-            $table->string('audiovideo');
-            $table->string('onlineaudiovideo');
+            $table->json('urgent')->nullable();
+            $table->json('unurgent')->nullable();
+            $table->json('schedual')->nullable();
+            $table->string('inperson')->nullable();
+            $table->string('audiovideo')->nullable();
+            $table->string('onlineaudiovideo')->nullable();
+            $table->boolean('isInperson')->default('false');
+            $table->boolean('isdocument')->default('false');
+            $table->boolean('isAudioVideo')->default('false');
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
             $table->string('radius')->nullable();
-            $table->string('urgentprice');
-            $table->string('unurgentprice');
+            $table->string('urgentprice')->nullable();
+            $table->string('unurgentprice')->nullable();
             $table->timestamps();
         });
     }

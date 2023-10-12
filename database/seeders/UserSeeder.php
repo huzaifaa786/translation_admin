@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
             'radius'=> '1000',
             'isInperson'=>true,
             'isdocument'=>true,
-            'isAudioOrVideo'=>true,
+            'isAudioVideo'=>true,
         ]);
     }
 }

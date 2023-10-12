@@ -15,7 +15,7 @@ class Service extends Model
     ];
     protected $casts = [
         'isInperson' => 'boolean',
-        'isAudioVideo'=>'boolean',
+        'isdocument'=>'boolean',
         'isAudioVideo'=>'boolean'
     ];
 

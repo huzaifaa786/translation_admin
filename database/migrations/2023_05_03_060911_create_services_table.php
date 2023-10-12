@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('inperson')->nullable();
             $table->string('audiovideo')->nullable();
             $table->string('onlineaudiovideo')->nullable();
-            $table->boolean('isInperson')->default('false');
-            $table->boolean('isdocument')->default('false');
-            $table->boolean('isAudioVideo')->default('false');
+            $table->boolean('isInperson')->default(false);
+            $table->boolean('isdocument')->default(false);
+            $table->boolean('isAudioVideo')->default(false);
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
             $table->string('radius')->nullable();

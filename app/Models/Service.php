@@ -13,6 +13,11 @@ class Service extends Model
          'audiovideo', 'urgentprice', 'unurgentprice','onlineaudiovideo','latitude','longitude','radius',
          'isdocument','isInperson','isAudioVideo'
     ];
+    protected $casts = [
+        'isInperson' => 'boolean',
+        'isAudioVideo'=>'boolean',
+        'isAudioVideo'=>'boolean'
+    ];
 
     public function vendor()
     {

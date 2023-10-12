@@ -10,8 +10,8 @@ class Service extends Model
     use HasFactory;
     protected $fillable = [
         'vendor_id', 'schedual', 'urgent', 'unurgent', 'inperson',
-         'audiovideo', 'urgentprice', 'unurgentprice','onlineaudiovideo','latitude','longitude','radius'
-         
+         'audiovideo', 'urgentprice', 'unurgentprice','onlineaudiovideo','latitude','longitude','radius',
+         'isdocument','isInperson','isAudioVideo'
     ];
 
     public function vendor()

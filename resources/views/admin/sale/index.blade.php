@@ -1,22 +1,35 @@
 @extends('admin.layout')
 
 @section('content')
-<div class="col-6">
-
+<div >
     <form id="myForm" action="{{url('admin/vendor/salesall')}}" method="GET">
         <input type="hidden" name="id" class="form-control">
-        <label for="inputEmail4" class="form-label">Vendor Name</label>
-        <select id="inputState" class="form-select" name="period" onchange="submitForm()">
-            <option>choose vendor</option>
-            @foreach (App\Models\Vendor::all() as $vendor)
-
-            <option @if (isset($id))  @if ($id==$vendor->id)
-                selected="selected"
-                @endif
-                @endif
-                value="{{ $vendor->id }}">{{ $vendor->name }}</option>
-            @endforeach
-        </select>
+        <div class="row">
+            <div class="col">
+                <label for="inputEmail4" class="form-label">Vendor Name</label>
+                <select id="inputState" class="form-select" name="period" required>
+                    @foreach (App\Models\Vendor::all() as $vendor)
+                    <option @if (isset($id))  @if ($id==$vendor->id)
+                        selected="selected"
+                        @endif
+                        @endif
+                        value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col">
+                <label for="start_date" class="form-label">Start date</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" required>
+            </div>
+            <div class="col">
+                <label for="end_date" class="form-label">End date</label>
+                <input type="date" name="end_date" id="end_date" class="form-control">
+            </div>
+            <div class="col">
+                <br>
+                <button type="submit" class="btn btn-primary mt-2">Filter</button>
+            </div>
+        </div>
     </form>
 </div>
 <br>
@@ -53,17 +66,17 @@
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->vendor->name }}</td>
                     <td>{{ $order->servicetype }}</td>
-                    <td>  
+                    <td>
                         @if($order->servicetype === 'schedule')
                             @if ($order->scheduletype === 'inPerson')
                         In Person
                     @elseif ($order->scheduletype === 'audio/video')
                         Audio/Video
-                   
+
                     @endif
                         @else
                             ------
-                        
+
                         @endif
                     </td>
                     <td>{{ $order->date }}</td>
@@ -82,7 +95,7 @@
                     </td>
                 </tr>
                 @endforeach
-              
+
             </tbody>
         </table>
         <span class="text-end">
@@ -92,19 +105,4 @@
 
     </div>
 </div>
-@endsection
-
-@section('script')
-<script>
-    function submitForm() {
-      // Get the selected company ID
-      var companyId = document.getElementById("inputState").value;
-  
-      // Set the company ID as the value of the hidden input field
-      document.getElementsByName("id")[0].value = companyId;
-  
-      // Submit the form
-      document.getElementById("myForm").submit();
-    }
-</script>
 @endsection

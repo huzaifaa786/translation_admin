@@ -13,6 +13,7 @@
                         <th scope="col">#</th>
                         <th scope="col"> Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Phone #</th>
                         <th scope="col">user Name</th>
                         <th scope="col">DOB</th>
                         <th scope="col">Language</th>
@@ -34,6 +35,7 @@
                         <th>{{ $key + 1 }}</th>
                         <td>{{ $vendor->name }}</td>
                         <td>{{ $vendor->email }}</td>
+                        <td>{{ $vendor->number }}</td>
                         <td>{{ $vendor->username }}</td>
                         <td>{{ $vendor->DOB }}</td>
                         <td>

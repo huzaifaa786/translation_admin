@@ -9,6 +9,10 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    {{-- javascript --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    
     <!-- Favicons -->
     <link href="{{asset('assets/img/favicon.ico')}}" rel="icon">
     <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
@@ -277,15 +281,15 @@
             <a class="nav-link collapsed" href="{{ route('all-copen') }}">
                 <i class="bi bi-menu-button-wide"></i><span>Enter Coupon</span><i></i>
             </a>
-            
+
             <a class="nav-link collapsed" href="{{ route('bug.index') }}">
                 <i class="bi bi-menu-button-wide"></i><span>Bugs</span><i></i>
             </a>
-            
+
             <a class="nav-link collapsed" href="{{ route('allsales') }}">
                 <i class="bi bi-menu-button-wide"></i><span>Sales</span><i></i>
             </a>
-            
+
             <a class="nav-link collapsed" href="{{ route('companyUsers') }}">
                 <i class="bi bi-menu-button-wide"></i><span>Company Users</span><i></i>
             </a>

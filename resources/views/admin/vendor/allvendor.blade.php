@@ -12,15 +12,13 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col"> Name</th>
+                        <th scope="col">Email</th>  
                         <th scope="col">user Name</th>
                         <th scope="col">DOB</th>
                         <th scope="col">language</th>
                         <th scope="col">passport</th>
                         <th scope="col">Certificate</th>
                         <th scope="col">Status</th>
-                      
-                      
-                       
                     </tr>
                 </thead>
 
@@ -30,6 +28,7 @@
                         <tr>
                             <th>{{ $key + 1 }}</th>
                             <td>{{ $vendor->name }}</td>
+                            <td>{{$vendor->email}}</td>
                             <td>{{ $vendor->username }}</td>
                             <td>{{ $vendor->DOB }}</td>
                             <td>
@@ -42,7 +41,7 @@
                                     }
                                 @endphp
                             </td>
-                          
+
                             <td>
                                 {{-- {{dd($product->productimage->count())}} --}}
                                 @if ($vendor->passport!= null)
@@ -70,28 +69,24 @@
                                 <a href="{{ URL('admin/disable/' . $vendor->id) }}"
                                     class="btn btn-sm btn-danger">Disable
                                 </a>
-                                    
+
                                 @elseif ($vendor->status == 0)
-                                
+
 
                                 <a href="{{ URL('admin/approve/' . $vendor->id) }}"
                                 class="btn btn-sm btn-success">Enable</a>
                                 @endif
                             </td>
-                        
-                           
-                          
-                           
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-    
 
 
-  
+
+
 @endsection
 
 

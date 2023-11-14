@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\AvailabilityController;
 use App\Http\Controllers\Api\CouponController;
 use App\Http\Controllers\Api\FavoritiesController;
 use App\Http\Controllers\Api\OtpController;
+use App\Http\Controllers\Api\VendorOtpController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +69,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('notification/check', [NotificationController::class, 'check']);
         Route::any('notification/read', [NotificationController::class, 'read']);
         Route::any('vendor/changepassword', [AuthController::class, 'changevendorrpassword']);
+        Route::any('forgetvendorpassword',[VendorOtpController::class,'sendopt']);
+        Route::any('vendorforgetchangepassword', [VendorOtpController::class,'forgetchange']);
     });
     Route::group(['middleware' => 'auth:api'], function () {
         Route::any('getcoupon', [CouponController::class, 'coupon']);

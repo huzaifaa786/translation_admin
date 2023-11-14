@@ -12,16 +12,17 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col"> Name</th>
+                        <th scope="col">Email</th>
                         <th scope="col">user Name</th>
                         <th scope="col">DOB</th>
                         <th scope="col">Language</th>
                         <th scope="col">passport</th>
                         <th scope="col">Certificate</th>
-                      
+
                         <th scope="col">Action</th>
                         <th scope="col">Action</th>
-                      
-                       
+
+
                     </tr>
                 </thead>
 
@@ -32,6 +33,7 @@
                     <tr>
                         <th>{{ $key + 1 }}</th>
                         <td>{{ $vendor->name }}</td>
+                        <td>{{ $vendor->email }}</td>
                         <td>{{ $vendor->username }}</td>
                         <td>{{ $vendor->DOB }}</td>
                         <td>
@@ -44,7 +46,7 @@
                                 }
                             @endphp
                         </td>
-                      
+
                         <td>
                             {{-- {{dd($product->productimage->count())}} --}}
                             @if ($vendor->passport!= null)
@@ -67,21 +69,21 @@
                                 no image avalible
                             @endif
                         </td>
-                    
+
                         <td><a href="{{ URL('admin/approve/' . $vendor->id) }}"
                                 class="btn btn-sm btn-primary">Aprove</a></td>
-                      
+
                         <td> <button type="button" class="btn btn-danger waves-effect m-r-20 btn-sm delete-btn"
                                 id="{{ $vendor->id }}" data-bs-toggle="modal"
                                 data-bs-target="#basicModal">Reject</button>
                         </td>
-                     
+
                     </tr>
-                  
+
                     @else
-                
+
                     @endif
-                      
+
                     @endforeach
                 </tbody>
             </table>
@@ -110,7 +112,7 @@
             </div>
         </div>
     </div>
-  
+
 @endsection
 @section('css')
     <link rel="stylesheet" type="text/css"
@@ -131,11 +133,11 @@
             $('tbody').on('click', '.delete-btn', function() {
 
                 let id = this.id;
-             
+
                 $('#deleteForm').attr('action', '{{ route('reject/vendor', '') }}' + '/' + id);
 
             });
-        
+
         })
     </script>
 @endsection

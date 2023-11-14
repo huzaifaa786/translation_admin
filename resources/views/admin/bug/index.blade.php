@@ -3,7 +3,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title">Coupon List</h5>
+        <h5 class="card-title">Bug reports</h5>
 
         <!-- Table with stripped rows -->
         <table id="example" class="datatable" style="width:100%">
@@ -25,7 +25,9 @@
                     <td>
                         {{ $bug->user->username }}</td>
                     <td>
-                        <img src="{{ ($bug->picture) }} " width="50" height="60">
+                        <a href="{{ $bug->picture }}" data-lightbox="bug-images" data-title="Bug Picture">
+                            <img src="{{ $bug->picture }}" width="50" height="60">
+                        </a>
                     </td>
                     <td> {{ $bug->bug }}</td>
                 </tr>
@@ -123,7 +125,7 @@
 
                 let id = this.id;
 
-              
+
 
                 let name = $(this).attr('name');
 
@@ -131,16 +133,16 @@
 
                 let maximum = $(this).attr('maximum');
 
-               
 
 
 
-               
+
+
                 $('#name').val(name);
                 $('#copen_percentage').val(percentage);
                 $('#copen_maximum').val(maximum);
 
-             
+
 
                 $('#updateForm').attr('action', '{{ route('edit-copen', '') }}' + '/' + id);
 
@@ -148,7 +150,7 @@
 
 
 
-        
+
 
         })
 </script>

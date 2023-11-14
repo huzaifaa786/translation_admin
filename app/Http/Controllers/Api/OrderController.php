@@ -58,7 +58,8 @@ class OrderController extends Controller
                 'user_id' => Auth::user()->id,
                 'title' => 'New order placed',
                 'body' => 'Click to View',
-                'for_vendor' => '1'
+                'for_vendor' => '1',
+                'for_user' => '1',
             ]);
             // $data = User::find(Auth::user()->id)->withfirebaseToken();
 
@@ -190,19 +191,19 @@ class OrderController extends Controller
          ->with('vendor')->with('user')
          ->latest('created_at')
          ->first();
- 
+
      // Check if the order exists
      if ($order) {
          // Check if the order has a rating
          $rating = Rating::where('order_id', $order->id)->first();
- 
+
          // Add the 'has_rating' flag to the order
          if ($rating === null) {
              $order->has_rating = false;
          } else {
              $order->has_rating = true;
          }
- 
+
          // Return the order (with the 'has_rating' flag) as the API response
          return Api::setResponse('order', $order);
      } else {
@@ -210,7 +211,7 @@ class OrderController extends Controller
          return Api::setResponse('error', 'No order found with the specified criteria.', 404);
      }
  }
- 
- 
+
+
 
 }

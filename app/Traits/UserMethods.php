@@ -24,19 +24,20 @@ trait UserMethods
         return [
             'username' => 'max:255|required',
             'email' => 'email|required|unique:users',
-         
-          
+
+
         ];
     }
 
     public static function VendorRegisterRules()
     {
         return [
-         
-          
+
+
             'username' => 'required|unique:vendors',
+            'email' =>  'required|unique:vendors',
             'password' => 'min:6|required',
-         
+
         ];
     }
 

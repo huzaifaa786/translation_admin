@@ -34,6 +34,7 @@ class Vendor extends Authenticatable
         'about(Eng)',
         'about(arabic)',
         'cvImage',
+        'email',
 
     ];
     protected $hidden = [
@@ -74,7 +75,7 @@ class Vendor extends Authenticatable
     {
         $this->attributes['cvImage'] = ImageHelper::saveImageFromApi($value, 'images');
     }
-    
+
     public function setCertificateNameAttribute($value)
     {
     }
@@ -141,5 +142,5 @@ class Vendor extends Authenticatable
         return $this->belongsTo(Favorities::class);
     }
 
-   
+
 }

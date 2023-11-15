@@ -89,11 +89,16 @@ class AvailabilityController extends Controller
         if (!$this->isTimeWithinSchedule($schedule, $dayOfWeek, $startTime, $endTime)) {
             return Api::setError('Timings are booked , please try other times ');
         }
-     
+
         $vendorId = $request->vendor_id;
 
-        if ($this->isOrderAvailable($vendorId, $date, $startTime, $endTime) != null) {
-            return Api::setError('Timings are booked , please try other times');
+        $existingOrder = $this->isOrderAvailable($vendorId, $date, $startTime, $endTime);
+        if($existingOrder !=null)
+        {
+            if($existingOrder->status != 2)
+            {
+                return Api::setError('Timings are booked , please try other times');
+            }
         }
 
         return Api::setResponse('available', true);

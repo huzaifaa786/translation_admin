@@ -69,9 +69,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('notification/check', [NotificationController::class, 'check']);
         Route::any('notification/read', [NotificationController::class, 'read']);
         Route::any('vendor/changepassword', [AuthController::class, 'changevendorrpassword']);
+    });
         Route::any('forgetvendorpassword',[VendorOtpController::class,'sendopt']);
         Route::any('vendorforgetchangepassword', [VendorOtpController::class,'forgetchange']);
-    });
+
     Route::group(['middleware' => 'auth:api'], function () {
         Route::any('getcoupon', [CouponController::class, 'coupon']);
         Route::any('balance/get', [UserController::class, 'balanceget']);

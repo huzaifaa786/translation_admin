@@ -32,7 +32,7 @@ class AuthController extends Controller
     public function vendorlogin(Request $request)
     {
         $credentials = ApiValidate::login($request, Vendor::class);
-        // $credentials = $request->only('email', 'password');
+        //$credentials = $request->only('email', 'password');
 
         if (Auth::guard('vendor')->attempt($credentials)) {
             $vendor = Vendor::find(Auth::guard('vendor')->user()->id);

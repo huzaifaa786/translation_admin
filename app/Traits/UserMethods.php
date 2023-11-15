@@ -44,7 +44,7 @@ trait UserMethods
     public static function loginRules()
     {
         return [
-            'username' => 'required',
+            'email' => 'required',
             'password' => 'required'
         ];
     }

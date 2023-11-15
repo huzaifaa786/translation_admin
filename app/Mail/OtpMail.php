@@ -48,7 +48,7 @@ class OtpMail extends Mailable
 
     public function build()
     {
-        return $this->from('info@1-lang.com')
+        return $this->from('info@attendance.klickwash.net')
             ->view('mail')
             ->subject('One-Time Password (OTP)');
     }

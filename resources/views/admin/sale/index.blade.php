@@ -59,7 +59,8 @@
             @endphp
                 @foreach ($sales as $key => $order)
                 @php
-                    $grandTotal += $order->price
+                   if($order->status == 3 || $order->status == 1)
+                     $grandTotal += $order->price
                 @endphp
                 <tr>
                     <th>{{ $key + 1 }}</th>

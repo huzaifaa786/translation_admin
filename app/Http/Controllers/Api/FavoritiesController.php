@@ -46,7 +46,7 @@ class FavoritiesController extends Controller
     public function userCheck(Request $request)
     {
         $check = Favorities::where('user_id', Auth::guard('api')->user()->id)->where('vendor_id', $request->id)->first();
-        
+
         if ($check) {
             return Api::setResponse('favourit', true);
         }
@@ -55,7 +55,11 @@ class FavoritiesController extends Controller
     public function getfavorities(Request $request)
     {
 
-        $vendor = Favorities::where('user_id', Auth::guard('api')->user()->id)->with('vendor')->with('vendor.service')->with('vendor.rating')->orderByDesc('created_at')->get();
+        $vendor = Favorities::where('user_id', Auth::guard('api')->user()->id)->with('vendor')->with('vendor.service')
+        ->whereHas('vendor', function ($query) {
+            $query->where('status', 1);
+        })
+        ->with('vendor.rating')->orderByDesc('created_at')->get();
         return Api::setResponse('vendors', $vendor);
     }
 

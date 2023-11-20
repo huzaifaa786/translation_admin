@@ -19,6 +19,7 @@
                         <th scope="col">Language</th>
                         <th scope="col">passport</th>
                         <th scope="col">Certificate</th>
+                        <th scope="col">cv</th>
 
                         <th scope="col">Action</th>
                         <th scope="col">Action</th>
@@ -65,6 +66,16 @@
                             @if($vendor->certificate!= null)
                                 <a href="{{ asset($vendor->certificate) }} " target="blank">
                                     <img src="{{ asset($vendor->certificate) }} "width="50" height="60">
+
+                                </a>
+                            @else
+                                no image avalible
+                            @endif
+                        </td>
+                        <td>
+                            @if($vendor->cvImage!= null)
+                                <a href="{{ asset($vendor->cvImage) }} " target="blank">
+                                    <img src="{{ asset($vendor->cvImage) }} "width="50" height="60">
 
                                 </a>
                             @else

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
- 
+
 });
 Route::view('admin/login','admin.login')->name('admin/login');
 Route::post('admin/postlogin', [AdminController::class, 'login'])->name('admin-login');

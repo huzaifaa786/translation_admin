@@ -74,6 +74,7 @@ class AvailabilityController extends Controller
 
     public function checkAvailability(Request $request)
     {
+        $currentTime = Carbon::now();
         $startTime = $this->formatTime($request->starttime);
         $endTime = $this->formatTime($request->endtime);
         $date = $this->formatDate($request->date);
@@ -81,9 +82,9 @@ class AvailabilityController extends Controller
         if (!$this->isDateValid($date)) {
             return Api::setError('Date must be today or in the future');
         }
-
-        if (!$this->isValidTime($startTime)) {
-            return Api::setError('Time must be current or in the future');
+        $requestedDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' ' . $startTime);
+        if ($requestedDateTime->lte($currentTime)) {
+            return Api::setError('Start time must be greater than or equal to the current time');
         }
 
         $service = Service::where('vendor_id', $request->vendor_id)->first();
@@ -96,7 +97,7 @@ class AvailabilityController extends Controller
         $dayOfWeek = date('l', strtotime($date));
 
         if (!$this->isTimeWithinSchedule($schedule, $dayOfWeek, $startTime, $endTime)) {
-            return Api::setError('Timings are booked , please change schedule ');
+            return Api::setError('Timings are booked , please try other times ');
         }
 
         $vendorId = $request->vendor_id;
@@ -104,7 +105,7 @@ class AvailabilityController extends Controller
         $existingOrder = $this->isOrderAvailable($vendorId, $date, $startTime, $endTime);
         if ($existingOrder != null) {
             if ($existingOrder->status != 2) {
-                return Api::setError('Timings are booked , ');
+                return Api::setError('Timings are booked , please try other times');
             }
         }
 

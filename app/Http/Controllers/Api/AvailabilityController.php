@@ -29,7 +29,7 @@ class AvailabilityController extends Controller
     private function isValidTime($time)
     {
         $currentTime = Carbon::now()->format('H:i:s');
-        return  $time >= $currentTime;
+        return  false;
     }
 
     private function isTimeWithinSchedule($schedule, $dayOfWeek, $startTime, $endTime)

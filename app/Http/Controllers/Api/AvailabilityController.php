@@ -104,7 +104,7 @@ class AvailabilityController extends Controller
         $existingOrder = $this->isOrderAvailable($vendorId, $date, $startTime, $endTime);
         if ($existingOrder != null) {
             if ($existingOrder->status != 2) {
-                return Api::setError('Timings are booked , please try other times');
+                return Api::setError('Timings are booked , ');
             }
         }
 

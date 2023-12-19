@@ -26,22 +26,27 @@ class AvailabilityController extends Controller
         $currentDate = date('Y-m-d');
         return $date >= $currentDate;
     }
+    private function isValidTime($time)
+    {
+        $currentTime = Carbon::now()->format('H:i:s');
+        return  $time >= $currentTime;
+    }
 
     private function isTimeWithinSchedule($schedule, $dayOfWeek, $startTime, $endTime)
     {
-        if($schedule)
-        foreach ($schedule as $slot) {
-            if ($slot->day === $dayOfWeek && !$slot->isFrozen) {
-                $slotStartTime = $slot->startTime;
-                $slotEndTime = $slot->endTime;
+        if ($schedule)
+            foreach ($schedule as $slot) {
+                if ($slot->day === $dayOfWeek && !$slot->isFrozen) {
+                    $slotStartTime = $slot->startTime;
+                    $slotEndTime = $slot->endTime;
 
-                if (!empty($slotStartTime) && !empty($slotEndTime)) {
-                    if ($startTime >= $slotStartTime && $endTime <= $slotEndTime) {
-                        return true;
+                    if (!empty($slotStartTime) && !empty($slotEndTime)) {
+                        if ($startTime >= $slotStartTime && $endTime <= $slotEndTime) {
+                            return true;
+                        }
                     }
                 }
             }
-        }
 
         return false;
     }
@@ -77,6 +82,10 @@ class AvailabilityController extends Controller
             return Api::setError('Date must be today or in the future');
         }
 
+        if (!$this->isValidTime($startTime)) {
+            return Api::setError('Time must be current or in the future');
+        }
+
         $service = Service::where('vendor_id', $request->vendor_id)->first();
 
         if ($service == null) {
@@ -93,10 +102,8 @@ class AvailabilityController extends Controller
         $vendorId = $request->vendor_id;
 
         $existingOrder = $this->isOrderAvailable($vendorId, $date, $startTime, $endTime);
-        if($existingOrder !=null)
-        {
-            if($existingOrder->status != 2)
-            {
+        if ($existingOrder != null) {
+            if ($existingOrder->status != 2) {
                 return Api::setError('Timings are booked , please try other times');
             }
         }

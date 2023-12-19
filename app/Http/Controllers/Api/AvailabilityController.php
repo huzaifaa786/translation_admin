@@ -28,8 +28,13 @@ class AvailabilityController extends Controller
     }
     private function isValidTime($time)
     {
-        $currentTime = Carbon::now()->format('H:i:s');
-        return  $time >= $currentTime;
+        $currentTime = Carbon::now();
+        $givenTime = Carbon::parse($time);
+        $difference = $givenTime->diffInSeconds($currentTime);
+        if ($difference < 0)
+            return false;
+        else
+            return true;
     }
 
     private function isTimeWithinSchedule($schedule, $dayOfWeek, $startTime, $endTime)
@@ -74,7 +79,7 @@ class AvailabilityController extends Controller
 
     public function checkAvailability(Request $request)
     {
-        $currentTime = Carbon::now();
+
         $startTime = $this->formatTime($request->starttime);
         $endTime = $this->formatTime($request->endtime);
         $date = $this->formatDate($request->date);
@@ -82,9 +87,8 @@ class AvailabilityController extends Controller
         if (!$this->isDateValid($date)) {
             return Api::setError('Date must be today or in the future');
         }
-        $requestedDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' ' . $startTime);
-        if ($requestedDateTime->lte($currentTime)) {
-            return Api::setError('Start time must be greater than or equal to the current time');
+        if (!$this->isValidTime($startTime)) {
+            return Api::setError('Time must be greater than or equal to current time');
         }
 
         $service = Service::where('vendor_id', $request->vendor_id)->first();

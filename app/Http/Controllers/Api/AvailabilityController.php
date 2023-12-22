@@ -72,9 +72,17 @@ class AvailabilityController extends Controller
                         ->where('endtime', '>=', $endTime);
                 });
             })
-            ->first();
+            ->get();
+        foreach ($existingOrder as $key => $order) {
+            if ($order != null) {
+                if ($order->status != 2) {
+                    return false;
+                }
+            }
+        }
+        return true;
 
-        return $existingOrder;
+
     }
 
     public function checkAvailability(Request $request)
@@ -106,14 +114,12 @@ class AvailabilityController extends Controller
 
         $vendorId = $request->vendor_id;
 
-        $existingOrder = $this->isOrderAvailable($vendorId, $date, $startTime, $endTime);
+        $notExistingOrder = $this->isOrderAvailable($vendorId, $date, $startTime, $endTime);
 
-        if ($existingOrder != null) {
-            if ($existingOrder->status != 2) {
-                return Api::setError('Timings are booked , please try other times');
-            }
-        }
 
+        if($notExistingOrder)
         return Api::setResponse('available', true);
+        else
+        return Api::setError('Timings are booked , please try other times');
     }
 }

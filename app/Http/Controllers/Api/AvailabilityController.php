@@ -60,18 +60,18 @@ class AvailabilityController extends Controller
     {
         $existingOrder = Order::where('vendor_id', $vendorId)
             ->where('date', $date)
-            ->where(function ($query) use ($startTime, $endTime) {
-                $query->where(function ($q) use ($startTime, $endTime) {
-                    $q->where('starttime', '>=', $startTime)
-                        ->where('starttime', '<', $endTime);
-                })->orWhere(function ($q) use ($startTime, $endTime) {
-                    $q->where('endtime', '>', $startTime)
-                        ->where('endtime', '<=', $endTime);
-                })->orWhere(function ($q) use ($startTime, $endTime) {
-                    $q->where('starttime', '<=', $startTime)
-                        ->where('endtime', '>=', $endTime);
-                });
-            })
+            // ->where(function ($query) use ($startTime, $endTime) {
+            //     $query->where(function ($q) use ($startTime, $endTime) {
+            //         $q->where('starttime', '>=', $startTime)
+            //             ->where('starttime', '<', $endTime);
+            //     })->orWhere(function ($q) use ($startTime, $endTime) {
+            //         $q->where('endtime', '>', $startTime)
+            //             ->where('endtime', '<=', $endTime);
+            //     })->orWhere(function ($q) use ($startTime, $endTime) {
+            //         $q->where('starttime', '<=', $startTime)
+            //             ->where('endtime', '>=', $endTime);
+            //     });
+            // })
             ->first();
 
         return $existingOrder;
@@ -79,7 +79,6 @@ class AvailabilityController extends Controller
 
     public function checkAvailability(Request $request)
     {
-
         $startTime = $this->formatTime($request->starttime);
         $endTime = $this->formatTime($request->endtime);
         $date = $this->formatDate($request->date);

@@ -101,7 +101,7 @@ class AvailabilityController extends Controller
         $dayOfWeek = date('l', strtotime($date));
 
         if (!$this->isTimeWithinSchedule($schedule, $dayOfWeek, $startTime, $endTime)) {
-            return Api::setError('Timings are booked , please try other times ');
+            return Api::setError('Timings are not within Schedule, please try other times');
         }
 
         $vendorId = $request->vendor_id;

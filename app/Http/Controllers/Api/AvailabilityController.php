@@ -79,6 +79,7 @@ class AvailabilityController extends Controller
 
     public function checkAvailability(Request $request)
     {
+
         $startTime = $this->formatTime($request->starttime);
         $endTime = $this->formatTime($request->endtime);
         $date = $this->formatDate($request->date);
@@ -106,6 +107,7 @@ class AvailabilityController extends Controller
         $vendorId = $request->vendor_id;
 
         $existingOrder = $this->isOrderAvailable($vendorId, $date, $startTime, $endTime);
+        dd($existingOrder);
         if ($existingOrder != null) {
             if ($existingOrder->status != 2) {
                 return Api::setError('Timings are booked , please try other times');

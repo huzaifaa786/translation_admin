@@ -60,25 +60,34 @@ class AvailabilityController extends Controller
     {
         $existingOrder = Order::where('vendor_id', $vendorId)
             ->where('date', $date)
-            // ->where(function ($query) use ($startTime, $endTime) {
-            //     $query->where(function ($q) use ($startTime, $endTime) {
-            //         $q->where('starttime', '>=', $startTime)
-            //             ->where('starttime', '<', $endTime);
-            //     })->orWhere(function ($q) use ($startTime, $endTime) {
-            //         $q->where('endtime', '>', $startTime)
-            //             ->where('endtime', '<=', $endTime);
-            //     })->orWhere(function ($q) use ($startTime, $endTime) {
-            //         $q->where('starttime', '<=', $startTime)
-            //             ->where('endtime', '>=', $endTime);
-            //     });
-            // })
-            ->first();
+            ->where(function ($query) use ($startTime, $endTime) {
+                $query->where(function ($q) use ($startTime, $endTime) {
+                    $q->where('starttime', '>=', $startTime)
+                        ->where('starttime', '<', $endTime);
+                })->orWhere(function ($q) use ($startTime, $endTime) {
+                    $q->where('endtime', '>', $startTime)
+                        ->where('endtime', '<=', $endTime);
+                })->orWhere(function ($q) use ($startTime, $endTime) {
+                    $q->where('starttime', '<=', $startTime)
+                        ->where('endtime', '>=', $endTime);
+                });
+            })
+            ->get();
+        foreach ($existingOrder as $key => $order) {
+            if ($order != null) {
+                if ($order->status != 2) {
+                    return false;
+                }
+            }
+        }
+        return true;
 
-        return $existingOrder;
+
     }
 
     public function checkAvailability(Request $request)
     {
+
         $startTime = $this->formatTime($request->starttime);
         $endTime = $this->formatTime($request->endtime);
         $date = $this->formatDate($request->date);
@@ -105,13 +114,12 @@ class AvailabilityController extends Controller
 
         $vendorId = $request->vendor_id;
 
-        $existingOrder = $this->isOrderAvailable($vendorId, $date, $startTime, $endTime);
-        if ($existingOrder != null) {
-            if ($existingOrder->status != 2) {
-                return Api::setError('Timings are booked , please try other times');
-            }
-        }
+        $notExistingOrder = $this->isOrderAvailable($vendorId, $date, $startTime, $endTime);
 
+
+        if($notExistingOrder)
         return Api::setResponse('available', true);
+        else
+        return Api::setError('Timings are booked , please try other times');
     }
 }

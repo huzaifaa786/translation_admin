@@ -21,7 +21,7 @@ class SaleController extends Controller
             $end_date= $request->end_date;
         else
         $end_date = Carbon::now()->format('Y-m-d');
-        $sales = Order::where('vendor_id',$request->period)->whereBetween('created_at',[$start_date,$end_date]) ->orderByDesc('created_at')->get();
+        $sales = Order::where('vendor_id',$request->period)->whereBetween('date',[$start_date,$end_date]) ->orderByDesc('date')->get();
         return view('admin.sale.index',['sales'=>$sales, 'id'=>$request->period,'start_date'=>$start_date,'end_date'=>$end_date]);
     }
 }

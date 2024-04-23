@@ -73,12 +73,13 @@ class VendorController extends Controller
     {
         $request->validate([
             'currency' => 'required|string',
-        ]);
-
-        $vendor->currency = $request->currency;
-        $vendor->save();
-
-        // return response()->json(['message' => 'Preferred currency updated successfully'], 200);
-        return Api::setResponse('currency', $vendor);
+         ]);
+         $user = Vendor::find(Auth()->user()->id);
+   
+         $user->update([
+            'currency' => $request->currency
+         ]);
+   
+         return Api::setResponse('user', $user);
     }
 }

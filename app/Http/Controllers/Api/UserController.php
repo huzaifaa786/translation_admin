@@ -41,11 +41,12 @@ class UserController extends Controller
       $request->validate([
          'currency' => 'required|string',
       ]);
+      $user = User::find(Auth()->user()->id);
 
-      $user->currency = $request->currency;
-      $user->save();
+      $user->update([
+         'currency' => $request->currency
+      ]);
 
-      // return response()->json(['message' => 'Preferred currency updated successfully'], 200);
-      return Api::setResponse('currency', $user);
+      return Api::setResponse('user', $user);
    }
 }

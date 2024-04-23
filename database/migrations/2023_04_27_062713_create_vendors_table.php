@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('firebase_token')->nullable();
             $table->json('language');
             $table->bigInteger('rating')->default(0.0);
+            $table->string('currency')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

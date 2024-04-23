@@ -45,19 +45,19 @@ class VendorController extends Controller
     }
     public function searchedList(Request $request)
     {
-       
-        
+
+
         $vendors = Vendor::whereJsonContains('language', $request->form)
             ->whereJsonContains('language',  $request->to)
             ->where('status', "1")
             ->has('service')
             ->with('service')->withAvg('rating', 'rating')
             ->get();
-       
+
         return Api::setResponse('vendor', $vendors);
     }
-    
-    
+
+
     public function addbalance(Request $request)
     {
 
@@ -68,7 +68,17 @@ class VendorController extends Controller
 
         return Api::setResponse('account', $data);
     }
-   
 
+    public function updatePreferredCurrency(Request $request, Vendor $vendor)
+    {
+        $request->validate([
+            'currency' => 'required|string',
+        ]);
 
+        $vendor->currency = $request->currency;
+        $vendor->save();
+
+        // return response()->json(['message' => 'Preferred currency updated successfully'], 200);
+        return Api::setResponse('currency', $vendor);
+    }
 }

@@ -52,6 +52,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('order/checkAvailability', [AvailabilityController::class, 'checkAvailability']);
     Route::any('forgetuserpassword', [OtpController::class, 'sendopt']);
     Route::any('forgetchangepassword', [OtpController::class, 'forgetchange']);
+    Route::any('currency/store', [VendorController::class, 'updatePreferredCurrency']);
 
 
     Route::group(['middleware' => 'auth:vendor_api'], function () {
@@ -70,8 +71,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('notification/read', [NotificationController::class, 'read']);
         Route::any('vendor/changepassword', [AuthController::class, 'changevendorrpassword']);
     });
-        Route::any('forgetvendorpassword',[VendorOtpController::class,'sendopt']);
-        Route::any('vendorforgetchangepassword', [VendorOtpController::class,'forgetchange']);
+    Route::any('forgetvendorpassword', [VendorOtpController::class, 'sendopt']);
+    Route::any('vendorforgetchangepassword', [VendorOtpController::class, 'forgetchange']);
 
     Route::group(['middleware' => 'auth:api'], function () {
         Route::any('getcoupon', [CouponController::class, 'coupon']);
@@ -125,7 +126,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         /**
          * Make messages as seen
          */
-        Route::post('/makeSeen', 'MessagesController@seen')->name('api.messages.seen');Route::post('/unseen/all', 'MessagesController@getUnSeenCount')->name('api.messages.unseen');
+        Route::post('/makeSeen', 'MessagesController@seen')->name('api.messages.seen');
+        Route::post('/unseen/all', 'MessagesController@getUnSeenCount')->name('api.messages.unseen');
 
         /**
          * Get contacts

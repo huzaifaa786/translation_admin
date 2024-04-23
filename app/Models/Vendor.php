@@ -15,7 +15,6 @@ class Vendor extends Authenticatable
 {
     use HasFactory, UserMethods, Notifiable, Notifier;
     protected $fillable = [
-
         'name',
         'username',
         'DOB',
@@ -35,6 +34,7 @@ class Vendor extends Authenticatable
         'about(arabic)',
         'cvImage',
         'email',
+        'currency',
 
     ];
     protected $hidden = [
@@ -141,6 +141,4 @@ class Vendor extends Authenticatable
     {
         return $this->belongsTo(Favorities::class);
     }
-
-
 }

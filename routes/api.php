@@ -52,11 +52,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('order/checkAvailability', [AvailabilityController::class, 'checkAvailability']);
     Route::any('forgetuserpassword', [OtpController::class, 'sendopt']);
     Route::any('forgetchangepassword', [OtpController::class, 'forgetchange']);
-    Route::any('currency/store', [VendorController::class, 'updatePreferredCurrency']);
 
 
     Route::group(['middleware' => 'auth:vendor_api'], function () {
-
+        Route::any('currency/store', [VendorController::class, 'updatePreferredCurrency']);
         Route::any('service/store', [ServiceController::class, 'store']);
         Route::any('vendor/online', [VendorController::class, 'offline']);
         Route::any('vendor/update', [VendorController::class, 'edit']);

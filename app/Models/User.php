@@ -27,6 +27,7 @@ class User extends Authenticatable
         'firebase_token',
         'user_type',
         'is_company',
+        'currency',
     ];
 
     /**
@@ -54,8 +55,8 @@ class User extends Authenticatable
     }
     public function setprofilepicAttribute($value)
     {
-        if(is_file($value)){
-            $this->attributes['profilepic'] = ImageHelper::saveImage($value,'images');
+        if (is_file($value)) {
+            $this->attributes['profilepic'] = ImageHelper::saveImage($value, 'images');
         } else {
             $this->attributes['profilepic'] = ImageHelper::saveImageFromApi($value, 'images');
         }
@@ -80,5 +81,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorities::class);
     }
-  
 }

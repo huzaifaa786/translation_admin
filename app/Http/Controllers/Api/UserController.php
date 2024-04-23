@@ -36,4 +36,16 @@ class UserController extends Controller
 
       return Api::setResponse('balance', $user);
    }
+   public function updatePreferredCurrency(Request $request, User $user)
+   {
+      $request->validate([
+         'currency' => 'required|string',
+      ]);
+
+      $user->currency = $request->currency;
+      $user->save();
+
+      // return response()->json(['message' => 'Preferred currency updated successfully'], 200);
+      return Api::setResponse('currency', $user);
+   }
 }

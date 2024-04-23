@@ -74,6 +74,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('vendorforgetchangepassword', [VendorOtpController::class, 'forgetchange']);
 
     Route::group(['middleware' => 'auth:api'], function () {
+        Route::any('user/currency/store', [UserController::class, 'updatePreferredCurrency']);
         Route::any('getcoupon', [CouponController::class, 'coupon']);
         Route::any('balance/get', [UserController::class, 'balanceget']);
         Route::any('balance/add', [VendorController::class, 'addbalance']);

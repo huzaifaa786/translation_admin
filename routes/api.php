@@ -56,6 +56,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
     Route::group(['middleware' => 'auth:vendor_api'], function () {
         Route::any('currency/store', [VendorController::class, 'updatePreferredCurrency']);
+        Route::any('country/store', [VendorController::class, 'setCountry']);
         Route::any('service/store', [ServiceController::class, 'store']);
         Route::any('vendor/online', [VendorController::class, 'offline']);
         Route::any('vendor/update', [VendorController::class, 'edit']);
@@ -75,6 +76,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
     Route::group(['middleware' => 'auth:api'], function () {
         Route::any('user/currency/store', [UserController::class, 'updatePreferredCurrency']);
+        Route::any('user/country/store', [UserController::class, 'setCountry']);
         Route::any('getcoupon', [CouponController::class, 'coupon']);
         Route::any('balance/get', [UserController::class, 'balanceget']);
         Route::any('balance/add', [VendorController::class, 'addbalance']);

@@ -75,11 +75,25 @@ class VendorController extends Controller
             'currency' => 'required|string',
          ]);
          $user = Vendor::find(Auth()->user()->id);
-   
+
          $user->update([
             'currency' => $request->currency
          ]);
-   
+
          return Api::setResponse('user', $user);
+    }
+
+    public function setCountry(Request $request)
+    {
+        $request->validate([
+            'country' => 'required|string',
+         ]);
+         $vendor = Vendor::find(Auth()->user()->id);
+
+        $vendor->update([
+            'country' => $request->country
+         ]);
+
+         return Api::setResponse('vendor', $vendor);
     }
 }

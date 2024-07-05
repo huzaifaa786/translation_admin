@@ -52,13 +52,13 @@ class UserController extends Controller
 
     public function setCountry(Request $request)
     {
-        $request->validate([
+
+        $validatedData = $request->validate([
             'country' => 'required|string',
         ]);
-        $user = User::find(Auth()->user()->id);
-
+        $user = User::find(auth()->user()->id);
         $user->update([
-            'country' => $request->country
+            'country' => $validatedData['country']
         ]);
 
         return Api::setResponse('user', $user);

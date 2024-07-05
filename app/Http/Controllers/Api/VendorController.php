@@ -85,13 +85,13 @@ class VendorController extends Controller
 
     public function setCountry(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'country' => 'required|string',
-         ]);
+        ]);
          $vendor = Vendor::find(Auth()->user()->id);
 
         $vendor->update([
-            'country' => $request->country
+            'country' => $validatedData['country']
          ]);
 
          return Api::setResponse('vendor', $vendor);

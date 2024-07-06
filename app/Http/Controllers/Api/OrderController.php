@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Api;
 use App\Helpers\NotificationHelper;
+use App\Helpers\TimeZoneHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Notification;
@@ -20,7 +21,6 @@ class OrderController extends Controller
 {
     public function order(Request $request)
     {
-
         try {
             $order = Order::create([
                 'user_id' => Auth::user()->id,

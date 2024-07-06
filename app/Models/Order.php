@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\TimeZoneHelper;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -42,4 +44,26 @@ class Order extends Model
     {
         return $this->belongsTo(Notification::class);
     }
+
+    public function setDateAttribute($value)
+    {
+        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
+
+        $this->attributes['date'] = Carbon::parse($value, 'UTC')->setTimezone($timezone);
+    }
+
+    public function setStartTimeAttribute($value)
+    {
+        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
+
+        $this->attributes['starttime'] = Carbon::parse($value, 'UTC')->setTimezone($timezone);
+    }
+
+    public function setEndTimeAttribute($value)
+    {
+        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
+
+        $this->attributes['endtime'] = Carbon::parse($value, 'UTC')->setTimezone($timezone);
+    }
+
 }

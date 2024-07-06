@@ -86,6 +86,12 @@ class Order extends Model
         return Carbon::parse($value, 'UTC')->setTimezone($timezone);
     }
 
+    public function getDateAttribute($value)
+    {
+
+        return Carbon::parse($value)->format('Y-m-d');
+    }
+
     public function getEndTimeAttribute($value)
     {
         $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
@@ -93,9 +99,16 @@ class Order extends Model
         return Carbon::parse($value, 'UTC')->setTimezone($timezone);
     }
 
+    public function setCreatedAtAttribute($value)
+    {
+        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
+
+        $this->attributes['created_at'] = Carbon::parse($value, $timezone)->setTimezone('UTC');
+    }
+
     public function getCreatedAtAttribute($value)
     {
         $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
-        return Carbon::parse($value, 'UTC')->setTimezone($timezone);
+        return Carbon::parse($value, 'UTC')->setTimezone($timezone)->format('Y-m-d');
     }
 }

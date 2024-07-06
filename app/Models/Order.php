@@ -27,6 +27,24 @@ class Order extends Model
         'latitude', 'longitude'
     ];
 
+    public function setSchedualAttribute($value)
+    {
+        $schedule = json_decode($value, true);
+
+        foreach ($schedule as &$daySchedule) {
+            $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
+            $daySchedule['startTime'] = $this->convertToUTC($daySchedule['day'], $daySchedule['startTime'], $timezone );
+            $daySchedule['endTime'] = $this->convertToUTC($daySchedule['day'], $daySchedule['endTime'], $timezone);
+        }
+
+        $this->attributes['schedual'] = json_encode($schedule);
+    }
+
+    private function convertToUTC($day, $time, $timezone)
+    {
+        return Carbon::parse($day . ' ' . $time, $timezone)->utc()->format('H:i');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

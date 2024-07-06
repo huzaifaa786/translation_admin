@@ -24,10 +24,10 @@ class OrderController extends Controller
         try {
             $order = Order::create([
                 'user_id' => Auth::user()->id,
-                'starttime' => Carbon::parse($request->starttime)->format('H:i:s'),
-                'endtime' => Carbon::parse($request->endtime)->format('H:i:s'),
+                'starttime' => Carbon::parse($request->starttime)->setTimezone('UTC')->format('H:i:s'),
+                'endtime' => Carbon::parse($request->endtime)->setTimezone('UTC')->format('H:i:s'),
                 'price' => $request->price,
-                'date' => Carbon::parse($request->date)->toDateString(),
+                'date' => Carbon::parse($request->date)->setTimezone('UTC')->toDateString(),
                 'duration' => $request->duration,
                 'meetingtype' => $request->meetingtype,
                 'servicetype' => $request->servicetype,

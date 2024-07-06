@@ -7,6 +7,7 @@ use App\Helpers\TimeZoneHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Service;
+use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -14,14 +15,12 @@ class AvailabilityController extends Controller
 {
     private function formatDate($date)
     {
-        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
-        return Carbon::parse($date)->setTimezone($timezone)->toDateString();
+        return Carbon::parse($date)->toDateString();
     }
 
     private function formatTime($time)
     {
-        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
-        return Carbon::parse($time)->setTimezone($timezone)->format('H:i:s');
+        return Carbon::parse($time)->format('H:i:s');
     }
 
     private function isDateValid($date)

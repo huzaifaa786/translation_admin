@@ -49,7 +49,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::any('payment/intent', [PaymentController::class, 'createPaymentIntent']);
     Route::any('add/bug', [UserController::class, 'addbug']);
     Route::any('vendor/calrating', [RatingController::class, 'calculate']);
-    Route::any('order/checkAvailability', [AvailabilityController::class, 'checkAvailability']);
     Route::any('forgetuserpassword', [OtpController::class, 'sendopt']);
     Route::any('forgetchangepassword', [OtpController::class, 'forgetchange']);
 
@@ -79,6 +78,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('user/country/store', [UserController::class, 'setCountry']);
         Route::any('getcoupon', [CouponController::class, 'coupon']);
         Route::any('balance/get', [UserController::class, 'balanceget']);
+        Route::any('order/checkAvailability', [AvailabilityController::class, 'checkAvailability']);
         Route::any('balance/add', [VendorController::class, 'addbalance']);
         Route::any('user/get', [UserController::class, 'userget']);
         Route::any('user/order', [OrderController::class, 'order']);

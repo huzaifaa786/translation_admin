@@ -15,12 +15,14 @@ class AvailabilityController extends Controller
 {
     private function formatDate($date)
     {
-        return Carbon::parse($date)->toDateString();
+        // $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
+        return Carbon::parse($date, )->toDateString();
     }
 
     private function formatTime($time)
     {
-        return Carbon::parse($time)->format('H:i:s');
+        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
+        return Carbon::parse($time, $timezone)->setTimezone('UTC')->format('H:i:s');
     }
 
     private function isDateValid($date)
@@ -46,7 +48,7 @@ class AvailabilityController extends Controller
                 if ($slot->day === $dayOfWeek && !$slot->isFrozen) {
                     $slotStartTime = $slot->startTime;
                     $slotEndTime = $slot->endTime;
-
+                        dd($slot->day ,$slotStartTime, $slotEndTime, $startTime, $endTime, $startTime >= $slotStartTime && $endTime <= $slotEndTime);
                     if (!empty($slotStartTime) && !empty($slotEndTime)) {
                         if ($startTime >= $slotStartTime && $endTime <= $slotEndTime) {
                             return true;
@@ -75,6 +77,7 @@ class AvailabilityController extends Controller
                 });
             })
             ->get();
+
         foreach ($existingOrder as $key => $order) {
             if ($order != null) {
                 if ($order->status != 2) {
@@ -89,7 +92,6 @@ class AvailabilityController extends Controller
 
     public function checkAvailability(Request $request)
     {
-
         $startTime = $this->formatTime($request->starttime);
         $endTime = $this->formatTime($request->endtime);
         $date = $this->formatDate($request->date);
@@ -108,6 +110,7 @@ class AvailabilityController extends Controller
         }
 
         $schedule = json_decode($service->schedual);
+
         $dayOfWeek = date('l', strtotime($date));
 
         if (!$this->isTimeWithinSchedule($schedule, $dayOfWeek, $startTime, $endTime)) {

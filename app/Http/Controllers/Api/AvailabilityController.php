@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Api;
+use App\Helpers\TimeZoneHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Service;
@@ -13,12 +14,14 @@ class AvailabilityController extends Controller
 {
     private function formatDate($date)
     {
-        return Carbon::parse($date)->toDateString();
+        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
+        return Carbon::parse($date)->setTimezone($timezone)->toDateString();
     }
 
     private function formatTime($time)
     {
-        return Carbon::parse($time)->format('H:i:s');
+        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
+        return Carbon::parse($time)->setTimezone($timezone)->format('H:i:s');
     }
 
     private function isDateValid($date)

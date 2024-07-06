@@ -63,13 +63,6 @@ class Order extends Model
         return $this->belongsTo(Notification::class);
     }
 
-    public function setDateAttribute($value)
-    {
-        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
-
-        $this->attributes['date'] = Carbon::parse($value, $timezone)->setTimezone('UTC');
-    }
-
     public function setStartTimeAttribute($value)
     {
         $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
@@ -84,13 +77,6 @@ class Order extends Model
 
         $this->attributes['endtime'] = Carbon::parse($value, $timezone)->setTimezone('UTC');
 
-    }
-
-    public function getDateAttribute($value)
-    {
-        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
-
-        return Carbon::parse($value, 'UTC')->setTimezone($timezone);
     }
 
     public function getStartTimeAttribute($value)

@@ -42,7 +42,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
     Route::any('vendor/show', [VendorController::class, 'show']);
     Route::any('service/get', [ServiceController::class, 'serviceget']);
-    Route::any('ratting/get', [OrderController::class, 'orderrating']);
+
 
 
 
@@ -97,6 +97,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         Route::any('user/check', [NotificationController::class, 'usercheck']);
         Route::any('balancesubtract', [AccountController::class, 'subtract']);
         Route::any('usernotification/read', [NotificationController::class, 'userread']);
+        Route::any('ratting/get', [OrderController::class, 'orderrating']);
     });
 
     Route::group(['middleware' => 'or'], function () {

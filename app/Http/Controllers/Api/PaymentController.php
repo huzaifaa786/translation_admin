@@ -9,7 +9,7 @@ use Stripe\StripeClient;
 class PaymentController extends Controller
 {
     public function createPaymentIntent(Request $request){
-        $stripe = new StripeClient('sk_test_51NIouOGymMbhwQk2gFEXvnieRWvcu1qiYYEx3ZqMblb8Fh1XtMdF5oHAmwb1uBPEKcM1BDwMHWajBpSagSJFGqFS00asmwpNUe');
+        $stripe = new StripeClient('sk_test_51NM6X5DLEEzulrUBAjMmKrhfiWCaG26detVGc15yiL6H4VFb5hGhjg4hqud4ATSER3oC7pxLdq7fIMYlqBTiV7wC00UwuE2sPm');
 
         // Use an existing Customer ID if this is a returning customer.
         $customer = $stripe->customers->create();
@@ -20,7 +20,7 @@ class PaymentController extends Controller
         ]);
         $intent = $stripe->paymentIntents->create([
             'amount' => $request->price * 100,
-            'currency' => 'aed',
+            'currency' => $request->currency,
             'customer' => $customer->id,
             'automatic_payment_methods' => [
                 'enabled' => true,
@@ -33,7 +33,7 @@ class PaymentController extends Controller
               'ephemeralKey' => $ephemeralKey->secret,
               'customer' => $customer->id,
               'intent' => $intent,
-              'publishableKey' => 'pk_test_51NIouOGymMbhwQk2cR0e4YSnF0qlR3dWnLW7UpKVnGmJROS0xVhSNh2DQE4VZgn9MzosxPrXHEhGfwig77xJKmng003qpA3ffH'
+              'publishableKey' => 'pk_test_51NM6X5DLEEzulrUBli8t2AqzUxlQ32XHEmZP1M2V1UnF4zSh1jJvGLkCPsOUyenBdP2DsrJt5swIiAYwc8V2MFnW00YshheMTw'
             ]
           );
           return Api::setResponse('intent',$paymentIntent);

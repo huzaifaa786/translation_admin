@@ -35,6 +35,7 @@ class OrderController extends Controller
                 'vendor_id' => $request->vendor_id,
                 'longitude' => $request->longitude,
                 'latitude' => $request->latitude,
+                'currency' => $request->currency,
             ]);
 
             if ($request->servicetype == 'document') {

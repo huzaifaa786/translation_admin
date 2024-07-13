@@ -23,7 +23,7 @@ class Order extends Model
         'duration',
         'scheduletype',
         'meetingtype',
-
+        'currency',
         'latitude', 'longitude'
     ];
 

@@ -35,6 +35,7 @@ class Vendor extends Authenticatable
         'cvImage',
         'email',
         'currency',
+        'bio',
         'country'
 
     ];

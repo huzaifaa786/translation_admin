@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('vendors', function (Blueprint $table) {
-            $table->text('bio');
+            $table->text('bio')->default('Translator with 10 years of experience');
         });
     }
 

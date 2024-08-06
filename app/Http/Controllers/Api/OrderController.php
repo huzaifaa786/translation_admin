@@ -54,8 +54,7 @@ class OrderController extends Controller
 
                 'order_id' => $order->id,
                 'vendor_id' => $request->vendor_id,
-
-
+                'service_type' => $order->servicetype,
                 'user_id' => Auth::user()->id,
                 'title' => 'New order placed',
                 'body' => 'Click to View',
@@ -108,6 +107,7 @@ class OrderController extends Controller
             'vendor_id' => Auth::user()->id,
             'order_id' => $request->id,
             'for_user' => '1',
+            'service_type' => $order->servicetype,
             // 'company_id' => $request->company_id,
             'title' => 'Your order has been accepted',
             'body' => 'Click to View',
@@ -142,6 +142,7 @@ class OrderController extends Controller
             'order_id' => $request->id,
             'vendor_id' => Auth::user()->id,
             'for_user' => '1',
+            'service_type' => $order->servicetype,
             // 'company_id' => $request->company_id,
             'title' => 'Your order has been rejected and order amount was refunded',
             'body' => 'Click to View',
@@ -167,6 +168,7 @@ class OrderController extends Controller
             'order_id' => $request->id,
             'vendor_id' => Auth::user()->id,
             'for_user' => '1',
+            'service_type' => $order->servicetype,
             // 'company_id' => $request->company_id,
             'title' => 'Your order has been completed',
             'body' => 'Click to View',

@@ -24,6 +24,7 @@ class Order extends Model
         'scheduletype',
         'meetingtype',
         'currency',
+        'cancel_reason',
         'latitude', 'longitude'
     ];
 

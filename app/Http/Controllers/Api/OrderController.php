@@ -130,6 +130,7 @@ class OrderController extends Controller
         $order = Order::find($request->id);
 
         $order->status = 2;
+        $order->cancel_reason = $request->cancel_reason;
         $order->save();
 
         // if ($order->paymentmethod === 'wallet') {

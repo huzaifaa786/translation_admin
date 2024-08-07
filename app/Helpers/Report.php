@@ -32,7 +32,7 @@ class Report
     }
     public static function totalSale($month, $year, $vendor)
     {
-        $start = Carbon::createFromDate(2023, 1, 1);
+        $start = Carbon::createFromDate($year, $month, 1);
         $endOfMonth = Carbon::createFromDate($year, $month)->endOfMonth();
         $days = [];
 
@@ -40,13 +40,17 @@ class Report
             $obj = new stdClass();
             $obj->date = Carbon::createMidnightDate($start->year, $start->month, $start->day);
 
-            $amount = DB::table('orders')
-                ->whereDate('created_at', $start)
-                ->whereIn('status', [3,1])
+            // Fetch the sum and currency for the given date
+            $data = DB::table('orders')
+            ->select('currency', DB::raw('SUM(price) as total_amount'))
+            ->whereDate('created_at', $start)
+                ->whereIn('status', [3, 1])
                 ->where('vendor_id', $vendor)
-                ->sum('price');
+                ->groupBy('currency')
+                ->first();
 
-            $obj->amount = intval($amount); // Cast to integer
+            $obj->amount = intval($data->total_amount ?? 0); // Cast to integer
+            $obj->currency = $data->currency ?? 'USD'; // Default to 'USD' if no currency found
 
             $days[] = $obj;
             $start->addDay();
@@ -54,6 +58,7 @@ class Report
 
         return $days;
     }
+
 
 
 

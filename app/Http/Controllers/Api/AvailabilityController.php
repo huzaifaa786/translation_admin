@@ -45,11 +45,11 @@ class AvailabilityController extends Controller
     {
         if ($schedule)
             foreach ($schedule as $slot) {
-        dump($slot, $dayOfWeek);
                 if ($slot->day === $dayOfWeek && !$slot->isFrozen) {
                     $slotStartTime = $slot->startTime;
                     $slotEndTime = $slot->endTime;
                     if (!empty($slotStartTime) && !empty($slotEndTime)) {
+                        dump($startTime, $slotStartTime, $endTime, $slotEndTime);
                         if ($startTime >= $slotStartTime && $endTime <= $slotEndTime) {
                             return true;
                         }

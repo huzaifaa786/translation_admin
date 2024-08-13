@@ -49,7 +49,7 @@ class AvailabilityController extends Controller
                     $slotStartTime = $slot->startTime;
                     $slotEndTime = $slot->endTime;
                     if (!empty($slotStartTime) && !empty($slotEndTime)) {
-                        dump($startTime, $slotStartTime, $endTime, $slotEndTime);
+                        dump($slot->day , $dayOfWeek, $startTime, $slotStartTime, $endTime, $slotEndTime);
                         if ($startTime >= $slotStartTime && $endTime <= $slotEndTime) {
                             return true;
                         }

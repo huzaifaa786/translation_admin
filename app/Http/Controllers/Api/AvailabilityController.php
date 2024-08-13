@@ -21,7 +21,8 @@ class AvailabilityController extends Controller
 
     private function formatTime($time)
     {
-        return Carbon::parse($time)->format('H:i:s');
+        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
+        return Carbon::parse($time, $timezone)->setTimezone('UTC')->format('H:i:s');
     }
 
     private function isDateValid($date)
@@ -94,6 +95,7 @@ class AvailabilityController extends Controller
         $endTime = $this->formatTime($request->endtime);
 
         $date = $this->formatDate($request->date);
+
 
         if (!$this->isDateValid($date)) {
             return Api::setError('Date must be today or in the future');

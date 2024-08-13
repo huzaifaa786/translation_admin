@@ -110,9 +110,8 @@ class AvailabilityController extends Controller
             return Api::setError('Service not found');
         }
 
+        dd($service, $service->raw_schedual);
         $schedule = json_decode($service->raw_schedual);
-
-        dd($schedule);
 
         $dayOfWeek = date('l', strtotime($date));
 

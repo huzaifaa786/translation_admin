@@ -16,13 +16,12 @@ class AvailabilityController extends Controller
     private function formatDate($date)
     {
         // $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
-        return Carbon::parse($date, )->toDateString();
+        return Carbon::parse($date)->toDateString();
     }
 
     private function formatTime($time)
     {
-        $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
-        return Carbon::parse($time, $timezone)->setTimezone('UTC')->format('H:i:s');
+        return Carbon::parse($time)->format('H:i:s');
     }
 
     private function isDateValid($date)
@@ -93,6 +92,7 @@ class AvailabilityController extends Controller
     {
         $startTime = $this->formatTime($request->starttime);
         $endTime = $this->formatTime($request->endtime);
+
         $date = $this->formatDate($request->date);
 
         if (!$this->isDateValid($date)) {

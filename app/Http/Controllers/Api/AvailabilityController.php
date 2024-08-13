@@ -110,7 +110,6 @@ class AvailabilityController extends Controller
         }
 
         $schedule = json_decode($service->schedual);
-        dump($schedule);
 
         $dayOfWeek = date('l', strtotime($date));
 

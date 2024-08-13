@@ -39,9 +39,9 @@ class Service extends Model
         return json_encode($schedule);
     }
 
-    public function getRawSchedualAttribute($value)
+    public function getRawSchedual()
     {
-        return $value;
+        return $this->attributes['schedual'];
     }
 
     private function convertToLocal($day, $time, $timezone)

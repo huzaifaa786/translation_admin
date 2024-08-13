@@ -96,7 +96,6 @@ class AvailabilityController extends Controller
 
         $date = $this->formatDate($request->date);
 
-        dd($startTime, $endTime, $date);
         if (!$this->isDateValid($date)) {
             return Api::setError('Date must be today or in the future');
         }
@@ -111,6 +110,7 @@ class AvailabilityController extends Controller
         }
 
         $schedule = json_decode($service->schedual);
+        dump($schedule);
 
         $dayOfWeek = date('l', strtotime($date));
 

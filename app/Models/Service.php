@@ -39,6 +39,11 @@ class Service extends Model
         return json_encode($schedule);
     }
 
+    public function getRawSchedualAttribute($value)
+    {
+        return $value;
+    }
+
     private function convertToLocal($day, $time, $timezone)
     {
         return Carbon::parse($day . ' ' . $time, 'UTC')->setTimezone($timezone)->format('H:i');

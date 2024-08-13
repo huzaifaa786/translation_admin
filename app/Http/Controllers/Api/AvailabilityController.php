@@ -112,6 +112,8 @@ class AvailabilityController extends Controller
 
         $schedule = json_decode($service->raw_schedual);
 
+        dd($schedule);
+
         $dayOfWeek = date('l', strtotime($date));
 
         if (!$this->isTimeWithinSchedule($schedule, $dayOfWeek, $startTime, $endTime)) {

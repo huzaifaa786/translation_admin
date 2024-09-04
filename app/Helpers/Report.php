@@ -43,7 +43,7 @@ class Report
             $data = DB::table('orders')
                 ->select('currency', DB::raw('SUM(price) as total_amount'))
                 ->whereDate('created_at', $obj->date)
-                ->where('status', 3, 1)
+                ->where('status', 3)
                 ->where('vendor_id', $vendor)
                 ->groupBy('currency')
                 ->first();
@@ -57,6 +57,7 @@ class Report
 
         return $days;
     }
+
 
 
 

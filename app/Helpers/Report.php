@@ -38,19 +38,18 @@ class Report
 
         while ($start <= $endOfMonth) {
             $obj = new \stdClass();
-            $obj->date = $start->toDateString(); // Convert to date string (e.g., '2024-09-01')
+            $obj->date = $start->toDateString();
 
-            // Fetch the sum and currency for the given date
             $data = DB::table('orders')
                 ->select('currency', DB::raw('SUM(price) as total_amount'))
-                ->whereDate('created_at', $obj->date) // Compare only the date part
-                ->where('status', 3) // Use direct comparison for status
+                ->whereDate('created_at', $obj->date)
+                ->where('status', 3, 1)
                 ->where('vendor_id', $vendor)
                 ->groupBy('currency')
                 ->first();
 
-            $obj->amount = intval($data->total_amount ?? 0); // Cast to integer
-            $obj->currency = $data->currency ?? 'USD'; // Default to 'USD' if no currency found
+            $obj->amount = intval($data->total_amount ?? 0);
+            $obj->currency = $data->currency ?? 'USD';
 
             $days[] = $obj;
             $start->addDay();

@@ -85,7 +85,6 @@ class OrderController extends Controller
     public function vendororder(Request $request)
     {
         $vendor = Vendor::where('api_token', $request->api_token)->first();
-
         $data = Order::where('vendor_id', $vendor->id)
             ->with('document')
             ->with('user')

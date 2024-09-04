@@ -27,6 +27,7 @@ class Order extends Model
         'cancel_reason',
         'latitude', 'longitude'
     ];
+    
 
     public function setSchedualAttribute($value)
     {
@@ -64,15 +65,14 @@ class Order extends Model
         return $this->belongsTo(Notification::class);
     }
 
-    public function setStartTimeAttribute($value)
+    public function setStarttimeAttribute($value)
     {
         $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
-
         $this->attributes['starttime'] = Carbon::parse($value, $timezone)->setTimezone('UTC');
 
     }
 
-    public function setEndTimeAttribute($value)
+    public function setEndtimeAttribute($value)
     {
         $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
 
@@ -80,11 +80,10 @@ class Order extends Model
 
     }
 
-    public function getStartTimeAttribute($value)
+    public function getStarttimeAttribute($value)
     {
         $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
-
-        return Carbon::parse($value, 'UTC')->setTimezone($timezone);
+        return Carbon::parse($value, 'UTC')->setTimezone($timezone)->toTimeString();
     }
 
     public function getDateAttribute($value)
@@ -92,11 +91,11 @@ class Order extends Model
         return Carbon::parse($value)->format('Y-m-d');
     }
 
-    public function getEndTimeAttribute($value)
+    public function getEndtimeAttribute($value)
     {
         $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
 
-        return Carbon::parse($value, 'UTC')->setTimezone($timezone);
+        return Carbon::parse($value, 'UTC')->setTimezone($timezone)->toTimeString();
     }
 
     public function setCreatedAtAttribute($value)

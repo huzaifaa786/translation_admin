@@ -37,14 +37,14 @@ class Report
         $days = [];
 
         while ($start <= $endOfMonth) {
-            $obj = new stdClass();
-            $obj->date = Carbon::createMidnightDate($start->year, $start->month, $start->day);
+            $obj = new \stdClass();
+            $obj->date = $start->toDateString(); // Convert to date string (e.g., '2024-09-01')
 
             // Fetch the sum and currency for the given date
             $data = DB::table('orders')
-            ->select('currency', DB::raw('SUM(price) as total_amount'))
-            ->whereDate('created_at', $start)
-                ->whereIn('status', [3])
+                ->select('currency', DB::raw('SUM(price) as total_amount'))
+                ->whereDate('created_at', $obj->date) // Compare only the date part
+                ->where('status', 3) // Use direct comparison for status
                 ->where('vendor_id', $vendor)
                 ->groupBy('currency')
                 ->first();
@@ -58,6 +58,7 @@ class Report
 
         return $days;
     }
+
 
 
 

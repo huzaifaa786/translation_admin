@@ -39,7 +39,30 @@ class Service extends Model
         return json_encode($schedule);
     }
 
+    public function getRawSchedual()
+    {
+        return $this->attributes['schedual'];
+    }
+
     private function convertToLocal($day, $time, $timezone)
+    {
+        return Carbon::parse($day . ' ' . $time, 'UTC')->setTimezone($timezone)->format('H:i');
+    }
+
+    public function setSchedualAttribute($value)
+    {
+        $schedule = json_decode($value, true);
+
+        $timezone = TimeZoneHelper::getUserTimezoneFromCountry($this->vendor()->first()->country);
+        foreach ($schedule as &$daySchedule) {
+            $daySchedule['startTime'] = $this->convertToUTC($daySchedule['day'], $daySchedule['startTime'], $timezone);
+            $daySchedule['endTime'] = $this->convertToUTC($daySchedule['day'], $daySchedule['endTime'], $timezone);
+        }
+
+        $this->attributes['schedual'] = json_encode($schedule);
+    }
+
+    private function convertToUTC($day, $time, $timezone)
     {
         return Carbon::parse($day . ' ' . $time, $timezone)->setTimezone('UTC')->format('H:i');
     }

@@ -18,7 +18,8 @@ class Notification extends Model
         'user_id',
         'read_at',
         'for_user',
-        'for_vendor'
+        'for_vendor',
+        'service_type',
     ];
     public function order()
     {

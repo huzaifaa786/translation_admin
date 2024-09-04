@@ -16,7 +16,7 @@ class AvailabilityController extends Controller
     private function formatDate($date)
     {
         // $timezone = TimeZoneHelper::getUserTimezoneFromCountry(auth()->user()->country);
-        return Carbon::parse($date, )->toDateString();
+        return Carbon::parse($date)->toDateString();
     }
 
     private function formatTime($time)
@@ -93,6 +93,7 @@ class AvailabilityController extends Controller
     {
         $startTime = $this->formatTime($request->starttime);
         $endTime = $this->formatTime($request->endtime);
+
         $date = $this->formatDate($request->date);
 
         if (!$this->isDateValid($date)) {
@@ -108,7 +109,7 @@ class AvailabilityController extends Controller
             return Api::setError('Service not found');
         }
 
-        $schedule = json_decode($service->schedual);
+        $schedule = json_decode($service->getRawSchedual());
 
         $dayOfWeek = date('l', strtotime($date));
 

@@ -42,7 +42,7 @@ class Report
 
             $amount = DB::table('orders')
                 ->whereDate('created_at', $start)
-                ->whereIn('status', [3,1])
+                ->whereIn('status', [3])
                 ->where('vendor_id', $vendor)
                 ->sum('price');
 

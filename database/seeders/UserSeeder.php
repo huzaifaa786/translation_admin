@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'api_token' => Str::random(60),
             'language' => json_encode($faker->randomElements(['English', 'Spanish', 'French'], 2)),
             'rating' => $faker->randomFloat(1, 0, 5),
-            'currency' => 'AED',
+            'currency' => 'USD',
         ]);
 
         Service::create([
